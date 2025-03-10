@@ -149,6 +149,8 @@ namespace W1.Controllers
         }
         */
 
+
+
         public IActionResult Homes()
         {
             List<Member> member = _context.Members.ToList();
