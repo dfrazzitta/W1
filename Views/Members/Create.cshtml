@@ -1,0 +1,234 @@
+﻿﻿
+@model W1.Models.Member
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Create Sale</h4>
+<hr />
+<div class="row">
+    <div class="col-2">
+         
+    </div>
+    <div class="col-md-8">
+        <!--
+        <form asp-action="Create">  -->
+        <form method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LotNo" class="control-label"></label>
+                <input asp-for="LotNo"   class="form-control" />
+                <span asp-validation-for="LotNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgentLastName" class="control-label"></label>
+                <input asp-for="AgentLastName" class="form-control" />
+                <span asp-validation-for="AgentLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgentFirstName" class="control-label"></label>
+                <input asp-for="AgentFirstName" class="form-control" />
+                <span asp-validation-for="AgentFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficePhone" class="control-label"></label>
+                <input asp-for="OfficePhone" class="form-control" />
+                <span asp-validation-for="OfficePhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CellPhone" class="control-label"></label>
+                <input asp-for="CellPhone" class="form-control" />
+                <span asp-validation-for="CellPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgentUrl" class="control-label"></label>
+                <input asp-for="AgentUrl" onfocusout="myFunction()" class="form-control" />
+                <span asp-validation-for="AgentUrl" class="text-danger"></span>
+            </div>
+            <br />
+            <br />
+            <div class="form-group" align="center">
+                <input id="fileclick" value="" class="btn btn-primary" type="file" name="file" />
+            </div>
+            
+            <div style="visibility: hidden" class="form-group">
+                <label asp-for="ImageName" class="control-label"></label>
+                <input id="ImageName1"  asp-for="ImageName" value="" class="form-control" />
+                <span asp-validation-for="ImageName" class="text-danger"></span>
+            </div>
+            <div align="center" class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-2">
+         
+    </div>
+</div>
+
+<div align="center">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+ 
+
+@section Scripts
+{
+    <script>
+                          
+        $( document ).ready(function() {
+        });
+
+        /*
+        function LotNoVerify(function(e)  ({
+            var x = document.getElementById("LotNo");
+            if ( x.value > 0 && x.value < 100 )
+                  return;
+            else
+                  alert('Lot Number must be between 1 and 99')
+                  e.preventDefault();
+        )};  */
+
+
+        function myFunction() {
+            var x = document.getElementById("AgentUrl");
+            x.value = x.value.toUpperCase();
+        }
+
+        function DoAlertClick() {
+            alert('clicked');
+             
+        }
+
+        function DoAlert() {
+            Swal.fire({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success"
+            });
+        }
+
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'maxwidth': 388,
+            'maxheight': 339
+        });
+
+
+
+
+        function jsonDialog12(jsonobj, modes, titleDialog, okcallback, cancelcallback, errorcallback) {
+            // if (jsonobj === undefined || jsonobj === null) {
+            //     if (errorcallback !== undefined)
+            //         errorcallback("JSON Object is not valid");
+            //     return false;
+            // }
+
+            var jsoncontent = document.createElement('div');
+            jsoncontent.id = 'divjson';
+            jsoncontent.style.display = "visible";
+
+            $('#divjson').css('z-index', '100000');
+            document.body.appendChild(jsoncontent);
+
+            var jsoneditor = document.createElement('div');
+            jsoneditor.style.width = '320px';
+            jsoneditor.style.height = '280px';
+
+            jsoncontent.appendChild(jsoneditor);
+
+            if (modes === undefined || modes === null)
+                modes = { mode: 'tree', modes: ['form', 'text', 'tree', 'view'] };
+
+
+            // let img = document.createElement('img');
+            // debugger;
+            // img.src = 'https://media.geeksforgeeks.org/wp-content/uploads/20190529122828/bs21.png';
+
+
+                //  debugger;
+                    jsoneditor.append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLqBq0ilAid0OE2A0Qx94ujF_M9DugbAGVyg&usqp=CAU"  width = "320" height = "280"/>');
+            //  debugger;
+
+
+            //var editor = new JSONEditor(jsoneditor, modes);
+            // editor.set(jsonobj);
+
+            var destroy = function () {
+                //editor.destroy();
+                //jsoneditor.remove();
+                $(jsoncontent).dialog('close');
+                jsoncontent.remove();
+                $('.ui-dialog').remove();
+            };
+            //https://api.jqueryui.com/position/
+            //https://jqueryui.com/position/
+            $(jsoncontent).dialog({
+                height: 320, //560,
+                width: 280,
+                resizable: true,
+                modal: true,
+                //visibility: inherit,
+                // dialogClass: "alert101",
+                draggable: true,
+                closeOnEscape: false,
+
+                title: "Resource: " + titleDialog,
+                position: {
+                    my: "center",
+                    at: "top",
+                    of: window
+                },
+                buttons: [{
+                    text: "OK",
+                    style: "margin-right:40px; color:#3883fa;",
+                    click: function () {
+                        // var result = editor.get();
+                        destroy();
+                        if (okcallback !== undefined)
+                            okcallback(result);
+                        // hideBusyIndicator();
+                    }
+                }, {
+                    text: "Cancel",
+                    style: "color:#EE422E;",
+                    click: function () {
+                        destroy();
+                        if (cancelcallback !== undefined)
+                            cancelcallback();
+                        // hideBusyIndicator();
+                    }
+                }]
+            }).append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLqBq0ilAid0OE2A0Qx94ujF_M9DugbAGVyg&usqp=CAU" width = "100" height = "60"/>  ');
+            $(".ui-dialog-titlebar-close").css('visibility', 'hidden');
+            $("ui-dialog-titlebar").css('background', 'color: blue');
+            $(".ui-dialog").css('border-style', 'solid');
+            $(".ui-dialog").css('z-index', '505');
+            $(".ui-dialog-titlebar").css('visibility', 'hidden');
+            $(".ui-dialog-titlebar").css('background', 'color: red');
+            $(".ui-dialog").css('modal', 'true');
+            $(".ui-dialog").css('text-align', 'center');
+            $(".ui-button").css('width', '100px');
+            $(".ui-button").css('margin-top', '10px');
+            $(".ui-button").css('margin-bottom', '10px');
+            return true;
+        }
+ 
+    </script>
+}
+
+ 

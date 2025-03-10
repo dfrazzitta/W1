@@ -1,0 +1,201 @@
+﻿@model IEnumerable<W1.Models.DynamicHomes>
+
+ 
+
+ 
+
+<br />
+<h2 align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-family: Brush Script MT, cursive;">
+    Homes For Sale
+</h2>
+
+<br />
+<div class="container">
+    @foreach (var item in Model)
+    {
+        @Html.Raw(item.homelist)
+        ;
+
+    }
+</div>
+ 
+
+     <h3 align="center">End of Listings</h3>
+ 
+
+
+@section Scripts
+{
+ 
+    <script>
+
+                        // A $( document ).ready() block.
+                    $( document ).ready(function() {
+          
+
+                    function DoAlert() {
+                      Swal.fire({
+                        title: "Good job!",
+                        text: "You clicked the button!",
+                        icon: "success"
+                      });
+                    }
+
+                   lightbox.option({
+                     'resizeDuration': 200,
+                     'wrapAround': true,
+                     'maxwidth': 388,
+                     'maxheight': 339
+                   });
+
+
+
+
+                 function jsonDialog12(jsonobj, modes, titleDialog, okcallback, cancelcallback, errorcallback) {
+                       // if (jsonobj === undefined || jsonobj === null) {
+                       //     if (errorcallback !== undefined)
+                       //         errorcallback("JSON Object is not valid");
+                       //     return false;
+                       // }
+
+                        var jsoncontent = document.createElement('div');
+                        jsoncontent.id = 'divjson';
+                        jsoncontent.style.display = "visible";
+
+                        $('#divjson').css('z-index', '100000');
+                        document.body.appendChild(jsoncontent);
+
+                        var jsoneditor = document.createElement('div');
+                        jsoneditor.style.width = '320px';
+                        jsoneditor.style.height = '280px';
+
+                        jsoncontent.appendChild(jsoneditor);
+
+                        if (modes === undefined || modes === null)
+                            modes = { mode: 'tree', modes: ['form', 'text', 'tree', 'view'] };
+
+
+                        // let img = document.createElement('img');
+                        // debugger;
+                        // img.src = 'https://media.geeksforgeeks.org/wp-content/uploads/20190529122828/bs21.png';
+
+
+                         //  debugger;
+                                jsoneditor.append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLqBq0ilAid0OE2A0Qx94ujF_M9DugbAGVyg&usqp=CAU"  width = "320" height = "280"/>');
+                       //  debugger;
+
+
+                        //var editor = new JSONEditor(jsoneditor, modes);
+                       // editor.set(jsonobj);
+
+                        var destroy = function () {
+                            //editor.destroy();
+                            //jsoneditor.remove();
+                            $(jsoncontent).dialog('close');
+                            jsoncontent.remove();
+                            $('.ui-dialog').remove();
+                        };
+                        //https://api.jqueryui.com/position/
+                        //https://jqueryui.com/position/
+                        $(jsoncontent).dialog({
+                            height: 320, //560,
+                            width: 280,
+                            resizable: true,
+                            modal: true,
+                            //visibility: inherit,
+                            // dialogClass: "alert101",
+                            draggable: true,
+                            closeOnEscape: false,
+
+                            title: "Resource: " + titleDialog,
+                            position: {
+                                my: "center",
+                                at: "top",
+                                of: window
+                            },
+                            buttons: [{
+                                text: "OK",
+                                style: "margin-right:40px; color:#3883fa;",
+                                click: function () {
+                                   // var result = editor.get();
+                                    destroy();
+                                    if (okcallback !== undefined)
+                                        okcallback(result);
+                                    // hideBusyIndicator();
+                                }
+                            }, {
+                                text: "Cancel",
+                                style: "color:#EE422E;",
+                                click: function () {
+                                    destroy();
+                                    if (cancelcallback !== undefined)
+                                        cancelcallback();
+                                    // hideBusyIndicator();
+                                }
+                            }]
+                        }).append('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLqBq0ilAid0OE2A0Qx94ujF_M9DugbAGVyg&usqp=CAU" width = "100" height = "60"/>  ');
+                        $(".ui-dialog-titlebar-close").css('visibility', 'hidden');
+                        $("ui-dialog-titlebar").css('background', 'color: blue');
+                        $(".ui-dialog").css('border-style', 'solid');
+                        $(".ui-dialog").css('z-index', '505');
+                        $(".ui-dialog-titlebar").css('visibility', 'hidden');
+                        $(".ui-dialog-titlebar").css('background', 'color: red');
+                        $(".ui-dialog").css('modal', 'true');
+                        $(".ui-dialog").css('text-align', 'center');
+                        $(".ui-button").css('width', '100px');
+                        $(".ui-button").css('margin-top', '10px');
+                        $(".ui-button").css('margin-bottom', '10px');
+                        return true;
+                 }
+             
+
+                function myFunctiondiv() {
+                    let element = document.getElementById("div1");
+                    let hidden = element.getAttribute("hidden");
+
+                    if (hidden) {
+                        element.removeAttribute("hidden");
+                        button.innerText = "Hide div";
+                    } else {
+                        element.setAttribute("hidden", "hidden");
+                        button.innerText = "Show div";
+                    }
+                };
+
+
+                function myFunctiondiv1() {
+                    let element = document.getElementById("div1p");
+                    let hidden = element.innerHTML = '';
+
+                };
+
+                function myFunctiondiv11() {
+                    let element = document.getElementById("div1p");
+                    let hidden = element.innerHTML = "bullshit this ia  real length vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv" + '\crlf'
+                    "and i dont like the end";
+                };
+
+                //{"name":"John Member", "age":30, "Lot": 60}
+
+
+                function myFunctiondiv111() {
+                   // alert('bla myFunctiondiv111');
+                   /* swal("Sample Data for Homes for Sale",
+
+                        ' {"name":"John Member", "age":30, "Lot": 60},
+                                  { "name": "John Member", "age": 30, "Lot": 60 }',
+                        "error")
+                        */
+
+
+                    var modes = { mode: 'tree', modes: ['form', 'text', 'tree'] };
+                    var okcallback = null;
+                    var cancelcallback = null;
+                    var errorcallback = null;
+
+                    jsonDialog12('{"name":"John", "age":30, "car":null}', modes, 'GetAllResources', okcallback, cancelcallback, errorcallback);
+
+                };
+
+    </script>
+}

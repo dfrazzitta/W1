@@ -1,0 +1,148 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+<div style="padding:0px 10px;">
+    @Html.Raw(ViewBag.HtmlStr)
+</div>
+
+
+
+<div style="padding:0px 10px;">
+    <!--Sub Header-->
+    <br />
+    <!--
+    <h2 align="center" style="margin:5px 0px; padding:0px 0px;">
+        Park Rules
+
+    </h2>
+    <p align="left">
+        Lake Placid Park is a beautiful quiet friendly 55+ resident owned community and we are located, in Largo, central Pinellas County, Florida.  Our 99 unit mobile home retirement community surrounds a 3-acre spring-fed lake, excellent for fishing and watching our feathered friends.
+    </p>
+    <p align="left">
+        The Board of Directors uses professional management and maintenance companies to provide a safe, well run and affordable place to live.  Lake Placid Park is a member of the ROC Forum (Resident Owned Community) and CAI (Community Association Institute).
+    </p>
+    <p align="left">
+        Our residents enjoy:
+        <ul>
+            <li>Beautiful clubhouse with a lending library, bingo, billiards table, live music, resident artwork and Wi-Fi. </li>
+            <li>Activities including, shuffleboard and bocce tournaments, weekly coffee hour, exercise program, Saturday brunch, game nights, monthly dinners, picnics, lunch outings, and weekly Bible study.</li>
+        </ul>
+    </p>
+    -->
+    <hr>
+
+
+    <div class="align-content-center" style="text-align: center;">
+        <p>
+            <strong>Download Placid Park Rules</strong>
+        </p>
+        <a href="~/Info/Rules.pdf" download="Rules">
+            <img src="~/Rules9.jpeg" alt="Placid Park Rules" class="align-content-center" width="104" height="142">
+        </a>
+    </div>
+
+</div>
+<div  class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div id="loginForm" hidden class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Login</h4>
+                </div>
+                <div   class="card-body">
+                    <form target="_blank" asp-controller="Members" asp-action="VerifyUser">
+                        <label for="Email">First name:</label><br>
+                        <input type="text" id="Email" name="Email" value="" style="width: 100%"><br>
+                        <label for="Code">Code:</label><br>
+                        <input type="text" id="Code" name="Code" value="" style="width: 100%"><br><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        // A $( document ).ready() block.
+        $(document).ready(function () {
+            function showAlert1() {
+                alert("AA was pressed!");
+            }
+        });
+
+        function showAlert() {
+            alert("A was pressed!");
+        }
+
+        let keysPressed = {};
+        document.addEventListener('keydown', (event) => {
+           keysPressed[event.key] = true;
+
+           if (keysPressed['Control'] && event.key == 'a') {
+               //alert(event.key);
+               // event.preventDefault();
+                var myLog = document.getElementById("loginForm");
+               // logEmail = document.getElementById("Code");
+               // logElement = document.getElementById("email");
+                myLog.hidden = !myLog.hidden;
+               // myLog.onclick( ); //        .onclick();
+               event.preventDefault();
+                      
+           }
+
+           if (event.keyCode ===  27 ) {
+               //alert(event.key);
+               // event.preventDefault();
+                var myLog = document.getElementById("loginForm");
+               // logEmail = document.getElementById("Code");
+               // logElement = document.getElementById("email");
+                myLog.hidden = !myLog.hidden;
+               // myLog.onclick( ); //        .onclick();
+               event.preventDefault();
+
+           }
+        });
+
+        document.addEventListener('keyup', (event) => {
+           delete keysPressed[event.key];
+        });
+
+
+
+        /*
+
+        document
+            .addEventListener("keydown",
+                function (event) {
+                    
+                    if (event.key === ".") {
+                        event.preventDefault();
+                        // debugger;
+                        //showAlert();
+                        var myLog = document.getElementById("loginForm");
+                        logEmail = document.getElementById("Code");
+                     
+
+                        logElement = document.getElementById("email");
+                        
+
+
+                        myLog.hidden = !myLog.hidden;
+                         
+                    }
+                });  */
+    </script>
+
+}
+
+
+
+
