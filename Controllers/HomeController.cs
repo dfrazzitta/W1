@@ -12,7 +12,7 @@ using W1.Models;
     4454MyHOus3!23
     /.,Lpp99   4454MyH0us3!23 is the ftp password.
   
-
+   //5   
    ssh -p 443 -R0:localhost:5151 a.pinggy.io
 
 
