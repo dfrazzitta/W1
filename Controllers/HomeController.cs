@@ -91,8 +91,19 @@ using W1.Models;
             });
             jQuery.ajaxSetup({ async: true });
         }
-
+<ExcludeFoldersFromDeployment>cs;de;es;fr;he;hi;it;ja;ko;nl;pl;pt;ru;tr-TR;zh-Hans;zh-Hant</ExcludeFoldersFromDeployment>
         1024x682 300px inch  3.41x2.27
+
+ <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
+    <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>    
+    <AspNetCoreHostingModel>inprocess</AspNetCoreHostingModel>
+    <Nullable>enable</Nullable>
+    <ExcludeFoldersFromDeployment>cs;de;es;fr;he;hi;it;ja;ko;nl;pl;pt;ru;tr-TR;zh-Hans;zh-Hant</ExcludeFoldersFromDeployment>
+  </PropertyGroup>
+
+
  */
 
 namespace W1.Controllers
@@ -111,16 +122,19 @@ namespace W1.Controllers
             _logger = logger;
             _appEnvironment = appEnvironment;
             _context = context;
+            PlacidSingleton.Instance.SetPlacid(false);
         }
 
 
         public IActionResult Index()
         {
+            PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
         public IActionResult ParkPlan()
         {
+            PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
@@ -128,16 +142,19 @@ namespace W1.Controllers
 
         public IActionResult Location()
         {
+            PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
         public IActionResult Rules()
         {
+            PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
         public IActionResult ResidentOwner()
         {
+            PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
@@ -153,6 +170,8 @@ namespace W1.Controllers
 
         public IActionResult Homes()
         {
+            PlacidSingleton.Instance.SetPlacid(false);
+
             List<Member> member = _context.Members.ToList();
 
             int ct = member.Count();
@@ -196,6 +215,7 @@ namespace W1.Controllers
  
         public IActionResult Privacy()
         {
+            PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 

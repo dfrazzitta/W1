@@ -57,6 +57,13 @@ namespace W1.Controllers
         {
 
             string finalLot = null;
+
+            if (PlacidSingleton.Instance.GetPlacid() == false)
+            {
+                return RedirectToAction(nameof(Index), "Home");
+            }
+
+
             String OfficePhone1 = OfficePhone.Insert(3, "-");
             string OfficeFinal = OfficePhone1.Insert(7, "-");
 
@@ -116,6 +123,8 @@ namespace W1.Controllers
             string path = "";
             bool iscopied = false;
 
+
+            
             try
             {
                 if (file.Length > 0)
@@ -160,7 +169,7 @@ namespace W1.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            if (!PlacidSingleton.Instance.GetPlacid())
+            if (PlacidSingleton.Instance.GetPlacid() == false)
             {
                 return RedirectToAction(nameof(Index), "Home");
             }
@@ -172,7 +181,7 @@ namespace W1.Controllers
         // GET: Members/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (!PlacidSingleton.Instance.GetPlacid())
+            if (PlacidSingleton.Instance.GetPlacid() == false)
             {
                 return RedirectToAction(nameof(Index), "Home");
             }
@@ -189,14 +198,14 @@ namespace W1.Controllers
             {
                 return NotFound();
             }
-
+            PlacidSingleton.Instance.SetPlacid(false);
             return View(member);
         }
 
         // GET: Members/Create
         public IActionResult Create()
         {
-            if (!PlacidSingleton.Instance.GetPlacid())
+            if (PlacidSingleton.Instance.GetPlacid() == false)
             {
                 return RedirectToAction(nameof(Index), "Home");
             }
@@ -232,6 +241,7 @@ namespace W1.Controllers
             {
                 return NotFound();
             }
+            PlacidSingleton.Instance.SetPlacid(false);
             return View(member);
         }
 
@@ -290,7 +300,7 @@ namespace W1.Controllers
             {
                 return NotFound();
             }
-
+            PlacidSingleton.Instance.SetPlacid(false);
             return View(member);
         }
 
@@ -312,6 +322,9 @@ namespace W1.Controllers
             }
 
             await _context.SaveChangesAsync();
+
+            PlacidSingleton.Instance.SetPlacid(false);
+
             return RedirectToAction(nameof(Index));
         }
 
