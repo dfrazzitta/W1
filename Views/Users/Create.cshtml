@@ -1,14 +1,16 @@
 ﻿@model W1.Models.User
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Member";
 }
 
-<h1>Create</h1>
+<h1 align="center" Create Member</h1>
 
-<h4>User</h4>
+<h4 align="center">Member</h4>
 <hr />
 <div class="row">
+    <div class="col-2">
+    </div>
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -45,8 +47,13 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a align="center"  asp-action="Index">Back to List</a>
+</div>   
+<div class="col-2">
+       
+    
 </div>
+
 
 @section Scripts
 {

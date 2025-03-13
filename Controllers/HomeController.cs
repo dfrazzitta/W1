@@ -122,19 +122,20 @@ namespace W1.Controllers
             _logger = logger;
             _appEnvironment = appEnvironment;
             _context = context;
-            PlacidSingleton.Instance.SetPlacid(false);
+          //  PlacidSingleton.Instance.SetPlacid(false);
         }
 
 
         public IActionResult Index()
         {
-            PlacidSingleton.Instance.SetPlacid(false);
+            var user = HttpContext.User.Identity.IsAuthenticated;
+           // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
         public IActionResult ParkPlan()
         {
-            PlacidSingleton.Instance.SetPlacid(false);
+           // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
@@ -142,19 +143,19 @@ namespace W1.Controllers
 
         public IActionResult Location()
         {
-            PlacidSingleton.Instance.SetPlacid(false);
+           // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
         public IActionResult Rules()
         {
-            PlacidSingleton.Instance.SetPlacid(false);
+           // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
         public IActionResult ResidentOwner()
         {
-            PlacidSingleton.Instance.SetPlacid(false);
+           // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
@@ -170,7 +171,7 @@ namespace W1.Controllers
 
         public IActionResult Homes()
         {
-            PlacidSingleton.Instance.SetPlacid(false);
+           // PlacidSingleton.Instance.SetPlacid(false);
 
             List<Member> member = _context.Members.ToList();
 
@@ -215,7 +216,7 @@ namespace W1.Controllers
  
         public IActionResult Privacy()
         {
-            PlacidSingleton.Instance.SetPlacid(false);
+           // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 

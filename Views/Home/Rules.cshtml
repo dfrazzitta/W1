@@ -1,9 +1,16 @@
-﻿@*
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 
 }
+
+
 
 <div style="padding:0px 10px;">
     @Html.Raw(ViewBag.HtmlStr)
@@ -46,10 +53,40 @@
     </div>
 
 </div>
+ 
+<hr />
+<br />
+<hr />
+ 
+ 
 <div  class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <div id="loginForm" hidden class="card">
+                <ul class="navbar-nav">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+                        </li>
+                        <li class="nav-item">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                    }
+                </ul>
+
+                @*
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0">Login</h4>
                 </div>
@@ -63,6 +100,7 @@
                     </form>
                      
                 </div>
+                *@
             </div>
         </div>
     </div>
@@ -83,10 +121,42 @@
         }
 
         let keysPressed = {};
+
+        document.onkeyup = function(e) {
+          if (e.which == 85) {
+               if (e.ctrlKey && e.altKey && e.shiftKey && e.which == 85) {
+                //alert("Ctrl + Alt + Shift + U shortcut combination was pressed");
+                   var myLog = document.getElementById("loginForm");
+                   // logEmail = document.getElementById("Code");
+                   // logElement = document.getElementById("email");
+                    myLog.hidden = !myLog.hidden;
+                   // myLog.onclick( ); //        .onclick();
+                   e.preventDefault();
+               }
+          }
+          
+          if (e.keyCode ===  27 ) {
+               //alert(event.key);
+               // event.preventDefault();
+                var myLog = document.getElementById("loginForm");
+               // logEmail = document.getElementById("Code");
+               // logElement = document.getElementById("email");
+                myLog.hidden = !myLog.hidden;
+               // myLog.onclick( ); //        .onclick();
+               e.preventDefault();
+
+          }   
+        };
+
+
+
+
+
+        /*
         document.addEventListener('keydown', (event) => {
            keysPressed[event.key] = true;
-
-           if (keysPressed['Control'] && event.key == 'a') {
+           // debugger;
+           if (keysPressed['Control'] && event.key == 'o') {
                //alert(event.key);
                // event.preventDefault();
                 var myLog = document.getElementById("loginForm");
@@ -114,31 +184,9 @@
         document.addEventListener('keyup', (event) => {
            delete keysPressed[event.key];
         });
+        */
 
-
-
-        /*
-
-        document
-            .addEventListener("keydown",
-                function (event) {
-                    
-                    if (event.key === ".") {
-                        event.preventDefault();
-                        // debugger;
-                        //showAlert();
-                        var myLog = document.getElementById("loginForm");
-                        logEmail = document.getElementById("Code");
-                     
-
-                        logElement = document.getElementById("email");
-                        
-
-
-                        myLog.hidden = !myLog.hidden;
-                         
-                    }
-                });  */
+ 
     </script>
 
 }

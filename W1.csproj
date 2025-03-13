@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ExcludeFoldersFromDeployment>cs;de;es;fr;he;hi;it;ja;ko;nl;pl;pt;ru;tr-TR;zh-Hans;zh-Hant</ExcludeFoldersFromDeployment>
     <UserSecretsId>aspnet-W1-2919ffd0-984a-4e26-af2f-0da386ed2e23</UserSecretsId>
   </PropertyGroup>
 

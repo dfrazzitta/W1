@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<W1.Models.User>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Placid Members";
 }
 
-<h1>Index</h1>
+<h1 align="center">Members</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p align="center">
+    <a align="center" asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -57,7 +57,12 @@
 }
     </tbody>
 </table>
-
+<br />
+<div>
+    <i class="fa-solid fa-arrow-right"></i>
+    <a href="@Url.Action("Index", "Members")" style="color:blue;" class="menubar"
+       data-toggle="tooltip" data-html="true" title="Home Sales">Placid Home Sales</a>
+</div>
 
 
 @section Scripts

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using W1.Models;
 
 namespace W1.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly PlacidDBContext _context;
@@ -22,12 +24,25 @@ namespace W1.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
+            /*
+            if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+            {
+                return RedirectToAction(nameof(Index), "home");
+            }
+            */
             return View(await _context.Users.ToListAsync());
         }
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            /*
+         if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+         {
+             return RedirectToAction(nameof(Index), "home");
+         }
+         */
+
             if (id == null)
             {
                 return NotFound();
@@ -46,6 +61,13 @@ namespace W1.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
+            /*
+         if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+         {
+             return RedirectToAction(nameof(Index), "home");
+         }
+         */
+
             return View();
         }
 
@@ -56,6 +78,13 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,FullName,LotNo,Cell")] User user)
         {
+            /*
+         if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+         {
+             return RedirectToAction(nameof(Index), "home");
+         }
+         */
+
             if (ModelState.IsValid)
             {
                 _context.Add(user);
@@ -68,6 +97,13 @@ namespace W1.Controllers
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            /*
+        if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+        {
+            return RedirectToAction(nameof(Index), "home");
+        }
+        */
+
             if (id == null)
             {
                 return NotFound();
@@ -88,6 +124,14 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,FullName,LotNo,Cell")] User user)
         {
+            /*
+        if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+        {
+            return RedirectToAction(nameof(Index), "home");
+        }
+        */
+
+
             if (id != user.Id)
             {
                 return NotFound();
@@ -119,6 +163,14 @@ namespace W1.Controllers
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            /*
+         if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+         {
+             return RedirectToAction(nameof(Index), "home");
+         }
+         */
+
+
             if (id == null)
             {
                 return NotFound();
@@ -139,6 +191,14 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            /*
+         if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+         {
+             return RedirectToAction(nameof(Index), "home");
+         }
+         */
+
+
             var user = await _context.Users.FindAsync(id);
             if (user != null)
             {

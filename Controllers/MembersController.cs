@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,38 +11,63 @@ using W1.Models;
 
 namespace W1.Controllers
 {
+    [Authorize]
     public class MembersController : Controller
     {
         private readonly PlacidDBContext _context;
-        
+        private readonly ApplicationDbContext _appcontext;
+        private readonly IScopedService _scopedService;
+
+
         private readonly IWebHostEnvironment _appEnvironment;
 
-        public MembersController(PlacidDBContext context, IWebHostEnvironment appEnvironment)
+        public MembersController(ApplicationDbContext appcontext, PlacidDBContext context, IWebHostEnvironment appEnvironment, IScopedService scopedService)
         {
             _context = context;
             _appEnvironment = appEnvironment;
+            _scopedService = scopedService;
+            _appcontext = appcontext;
         }
 
         [HttpPost]
         public async Task<IActionResult> VerifyUser(string email, string Code)
         {
-            PlacidSingleton.Instance.SetPlacid(false);
 
-            if (String.Compare("Placid", email) == 0 && String.Compare("23456", Code) == 0)
+            //_transientService.SetPlacidUser(email);
+            //_transientService.SetPlacid(true);
+            //PlacidSingleton.Instance.SetPlacid(false);
+
+            //PlacidSingleton.Instance.SetPlacidUser(email);
+
+             
+            if (String.Compare("placiduser@xyztt.com", email) == 0 && String.Compare("23456", Code) == 0)
             {
-                PlacidSingleton.Instance.SetPlacid(true);
-            }
- 
-            if (PlacidSingleton.Instance.GetPlacid())
-            {
+                _scopedService.SetPlacidUser(email);
+                _scopedService.SetPlacid(true);
                 return RedirectToAction(nameof(Index));
             }
             else
             {
                 PlacidSingleton.Instance.SetPlacid(false);
-
+                PlacidSingleton.Instance.SetPlacidUser("");
                 return RedirectToAction(nameof(Index), "home");
             }
+
+            /*
+            if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") == 0)
+            {
+                PlacidSingleton.Instance.SetPlacid(true);
+                PlacidSingleton.Instance.SetPlacidUser(email);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                PlacidSingleton.Instance.SetPlacid(false);
+                PlacidSingleton.Instance.SetPlacidUser("");
+                return RedirectToAction(nameof(Index), "home");
+            }   
+            */
+            return RedirectToAction(nameof(Index), "home");
         }
 
  
@@ -58,10 +84,11 @@ namespace W1.Controllers
 
             string finalLot = null;
 
-            if (PlacidSingleton.Instance.GetPlacid() == false)
+             
+            if (String.Compare(_scopedService.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
             {
-                return RedirectToAction(nameof(Index), "Home");
-            }
+                return RedirectToAction(nameof(Index), "home");
+            } 
 
 
             String OfficePhone1 = OfficePhone.Insert(3, "-");
@@ -123,8 +150,8 @@ namespace W1.Controllers
             string path = "";
             bool iscopied = false;
 
+ 
 
-            
             try
             {
                 if (file.Length > 0)
@@ -169,10 +196,11 @@ namespace W1.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            if (PlacidSingleton.Instance.GetPlacid() == false)
-            {
-                return RedirectToAction(nameof(Index), "Home");
-            }
+          //  if (String.Compare(_scopedService.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+          //  {
+          //      return RedirectToAction(nameof(Index), "home");
+          //  }
+
 
 
             return View(await _context.Members.ToListAsync());
@@ -181,10 +209,11 @@ namespace W1.Controllers
         // GET: Members/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (PlacidSingleton.Instance.GetPlacid() == false)
-            {
-                return RedirectToAction(nameof(Index), "Home");
-            }
+            /*
+           if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+           {
+               return RedirectToAction(nameof(Index), "home");
+           }*/
 
 
             if (id == null)
@@ -198,17 +227,18 @@ namespace W1.Controllers
             {
                 return NotFound();
             }
-            PlacidSingleton.Instance.SetPlacid(false);
+            //PlacidSingleton.Instance.SetPlacid(false);
             return View(member);
         }
 
         // GET: Members/Create
         public IActionResult Create()
         {
-            if (PlacidSingleton.Instance.GetPlacid() == false)
+            /*
+            if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
             {
-                return RedirectToAction(nameof(Index), "Home");
-            }
+                return RedirectToAction(nameof(Index), "home");
+            }*/
             return View();
         }
 
@@ -219,6 +249,12 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,LotNo,Price,AgentLastName,AgentFirstName,Email,OfficePhone,CellPhone,AgentUrl,ImageName")] Member member)
         {
+            /*
+            if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+            {
+                return RedirectToAction(nameof(Index), "home");
+            }*/
+
             if (ModelState.IsValid)
             {
                 _context.Add(member);
@@ -231,6 +267,12 @@ namespace W1.Controllers
         // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            /*
+           if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+           {
+               return RedirectToAction(nameof(Index), "home");
+           }*/
+
             if (id == null)
             {
                 return NotFound();
@@ -241,7 +283,7 @@ namespace W1.Controllers
             {
                 return NotFound();
             }
-            PlacidSingleton.Instance.SetPlacid(false);
+           // PlacidSingleton.Instance.SetPlacid(false);
             return View(member);
         }
 
@@ -252,6 +294,12 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,LotNo,Price,AgentLastName,AgentFirstName,Email,OfficePhone,CellPhone,AgentUrl,ImageName")] Member member)
         {
+            /*
+           if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+           {
+               return RedirectToAction(nameof(Index), "home");
+           }*/
+
             if (id != member.ID)
             {
                 return NotFound();
@@ -283,10 +331,11 @@ namespace W1.Controllers
         // GET: Members/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (!PlacidSingleton.Instance.GetPlacid())
+            /*
+            if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
             {
-                return RedirectToAction(nameof(Index), "Home");
-            }
+                return RedirectToAction(nameof(Index), "home");
+            }*/
 
 
             if (id == null)
@@ -300,7 +349,7 @@ namespace W1.Controllers
             {
                 return NotFound();
             }
-            PlacidSingleton.Instance.SetPlacid(false);
+           // PlacidSingleton.Instance.SetPlacid(false);
             return View(member);
         }
 
@@ -309,10 +358,11 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (!PlacidSingleton.Instance.GetPlacid())
+            /*
+            if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
             {
-                return RedirectToAction(nameof(Index), "Home");
-            }
+                return RedirectToAction(nameof(Index), "home");
+            }*/
 
 
             var member = await _context.Members.FindAsync(id);
@@ -323,7 +373,7 @@ namespace W1.Controllers
 
             await _context.SaveChangesAsync();
 
-            PlacidSingleton.Instance.SetPlacid(false);
+            //PlacidSingleton.Instance.SetPlacid(false);
 
             return RedirectToAction(nameof(Index));
         }
