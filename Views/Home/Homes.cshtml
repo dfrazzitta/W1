@@ -21,11 +21,20 @@
         </div>
         <div class="col-sm-10 " width:100%; style="text-align: center;  font-size: 20pt; margin:1px 1px; padding:0px 0px; font-family: Brush Script MT, cursive;">
             <div class="justify-content-center">
+                @{
 
+                    if (item.homelist == null || item.homelist.Count() == 0 || item.homelist == null)
+                    {
+                        <p class="text-danger">No listings available at this time.</p>
+                    }
+                    else
+                    {
+                        @Html.Raw(item.homelist)
+                    };
+                }
 
-                @Html.Raw(item.homelist)
                 @*
-                item.homelist);
+                @Html.Raw(item.homelist)
                     *@
             </div>
         </div>

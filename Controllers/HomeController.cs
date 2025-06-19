@@ -221,7 +221,7 @@ namespace W1.Controllers
                sb1.Replace("407-674-0220", m.CellPhone.ToString());
                sb1.Replace("407-479-8789", m.OfficePhone.ToString());
 
-                sb1.Replace("/Images/platmap.jpg", "/Images/Lake_Placid_Map1.jpg"); // + m.LotNo.ToString() + ".jpg");
+                sb1.Replace("/Images/platmap.jpg", "/Images/lpm" + m.LotNo.ToString() + ".jpg");
 
                 sb1.Replace("Kathryn Valentine", m.AgentFirstName.Trim() + " " + m.AgentLastName.Trim());
                 //sb.Replace("Kathryn", m.FirstName);  Listing
