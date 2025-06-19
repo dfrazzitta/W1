@@ -1,0 +1,328 @@
+﻿@model W1.Models.Member
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<style>
+    .centerSave {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+
+<h1 align="center">Edit</h1>
+
+<h4 align="center">Member</h4>
+<hr />
+<div class="row">
+    <div class="col-3 w-25 p-3">
+    </div>
+    <div class="col-md-6">
+        <form id="target" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+
+            @*
+                <input id="TypeSell" name="TypeSell"
+                       asp-for="TypeSell" data-html="true" list="examplefsbo" value=""
+                       data-html="true"
+                       class="form-control w-2 p-2 mx-auto d-flex" />
+
+                <datalist id="examplefsbo">
+                    <option value="Agent" />
+                    <option value="FSBO" />
+                </datalist>
+                <span asp-validation-for="TypeSell" class="text-danger"></span>
+                *@
+
+            <div class="form-group">
+                <label asp-for="TypeSell" class="control-label"></label>
+                <input asp-for="TypeSell" id="test" class="form-control" />
+
+                <span asp-validation-for="TypeSell" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="LotNo" class="control-label"></label>
+                <input id="LotNo" asp-for="LotNo" class="form-control" readonly />
+
+                <span asp-validation-for="LotNo" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" maxlength="15" style="width:110px; " class="form-control  mx-auto d-flex" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgentLastName" class="control-label"></label>
+                <input asp-for="AgentLastName" class="form-control" />
+                <span asp-validation-for="AgentLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgentFirstName" class="control-label"></label>
+                <input asp-for="AgentFirstName" class="form-control" />
+                <span asp-validation-for="AgentFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficePhone" class="control-label"></label>
+                <input asp-for="OfficePhone" class="form-control" />
+                <span asp-validation-for="OfficePhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CellPhone" class="control-label"></label>
+                <input asp-for="CellPhone" class="form-control" />
+                <span asp-validation-for="CellPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgentUrl" class="control-label"></label>
+                <input asp-for="AgentUrl" class="form-control" />
+                <span asp-validation-for="AgentUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageName" class="control-label"></label>
+                <input asp-for="ImageName" class="form-control" readonly />
+                <span asp-validation-for="ImageName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary centerSave" />
+            </div>
+
+        </form>
+    </div>
+    <div class="col-3 w-25 p-3">
+    </div>
+</div>
+
+<div align="center">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts
+{
+    <script>
+
+                window.onload = function() {
+                  // Code to be executed after the page has fully loaded
+                  alert("Page loaded successfully!");
+
+
+
+                  // You can manipulate DOM elements here, e.g.,
+                  // document.getElementById("myElement").textContent = "Content loaded!";
+                };
+
+
+                $(document).ready(function() {
+
+
+
+
+                    /*
+                $( "form" ).on( "submit", function( event ) {
+
+                    var ty = document.getElementById('LotNo').value;
+                    if (ty != null) {
+                        alert(ty);
+                        return;
+                    }
+
+
+                  $( "span" ).text( "Not valid!" ).show().fadeOut( 1000 );
+                         event.preventDefault();
+                });
+                    */
+        /*
+                    $( "#target" ).on( "submit", function( event ) {
+                      alert( "Handler for `submit` called." );
+                     // event.preventDefault();
+                      const formData = $(this).serialize();
+                      alert(formData);
+
+                   //   $( "#target" ).trigger( "submit" );
+                           console.log(formData);
+                            $.ajax({
+
+                              url: '/members/edit',
+                              method: 'POST',
+                              data: formData,
+                              success: function(response) {
+                                console.log('Form submitted successfully');
+                              }
+                            });
+                  //  });
+                  */
+                });
+
+
+                /*
+                window.onload = function() {
+                    let x = document.getElementById("test");
+
+                  // Your code here will execute after the page is fully loaded
+                    alert( x.value);
+
+                };  */
+
+
+    </script>
+}
+
+
+
+
+
+
+@*
+@model W1.Models.Member
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+ 
+
+
+
+<h4>Member</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="target" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="TypeSell" class="control-label"></label>
+                <input asp-for="TypeSell" id="test" class="form-control" disabled />
+                
+                <span asp-validation-for="TypeSell" class="text-danger"></span>
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="LotNo" class="control-label"></label>
+                <input id="LotNo" asp-for="LotNo" class="form-control" />
+                
+                <span asp-validation-for="LotNo" class="text-danger"></span>
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" maxlength="15" style="width:110px; " class="form-control  mx-auto d-flex" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgentLastName" class="control-label"></label>
+                <input asp-for="AgentLastName"   class="form-control" />
+                <span asp-validation-for="AgentLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgentFirstName" class="control-label"></label>
+                <input asp-for="AgentFirstName"   class="form-control" />
+                <span asp-validation-for="AgentFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email"   class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfficePhone" class="control-label"></label>
+                <input asp-for="OfficePhone"   class="form-control" />
+                <span asp-validation-for="OfficePhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CellPhone" class="control-label"></label>
+                <input asp-for="CellPhone"   class="form-control" />
+                <span asp-validation-for="CellPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AgentUrl" class="control-label"></label>
+                <input asp-for="AgentUrl"   class="form-control" />
+                <span asp-validation-for="AgentUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageName" class="control-label"></label>
+                <input asp-for="ImageName"   class="form-control" />
+                <span asp-validation-for="ImageName" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+             
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        $(document).ready(function() {
+            /*
+        $( "form" ).on( "submit", function( event ) {
+
+            var ty = document.getElementById('LotNo').value;
+            if (ty != null) {
+                alert(ty);
+                return;
+            }
+       
+
+          $( "span" ).text( "Not valid!" ).show().fadeOut( 1000 );
+                 event.preventDefault();
+        });
+            */
+/*
+            $( "#target" ).on( "submit", function( event ) {
+              alert( "Handler for `submit` called." );
+             // event.preventDefault();
+              const formData = $(this).serialize();
+              alert(formData);
+
+           //   $( "#target" ).trigger( "submit" );
+                   console.log(formData);
+                    $.ajax({
+                      
+                      url: '/members/edit',
+                      method: 'POST',
+                      data: formData,
+                      success: function(response) {
+                        console.log('Form submitted successfully');
+                      }
+                    });
+          //  });
+          */
+        });
+
+        
+        /*
+        window.onload = function() {
+            let x = document.getElementById("test");
+            
+          // Your code here will execute after the page is fully loaded
+            alert( x.value);
+
+        };  */
+
+
+    </script>
+}
+ 
+*@

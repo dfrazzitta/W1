@@ -1,0 +1,144 @@
+﻿@model IEnumerable<W1.Models.Member>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+ 
+
+<br />
+<div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
+    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <p align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-size: 20pt; font-family: Brush Script MT, cursive;">
+        Homes Listed
+    </p>
+    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+</div>
+
+
+<p align="center">
+    <a asp-action="Create">Create New Listing</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeSell)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LotNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgentLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgentFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OfficePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CellPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgentUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+             
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeSell)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LotNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgentLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgentFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OfficePhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CellPhone)
+                </td>
+                <td>
+                    @*
+                @Html.DisplayFor(modelItem => item.AgentUrl)
+                *@
+                    @{
+                        var url = item.AgentUrl;
+                        var yu = 0;
+                        <a href=@Html.DisplayFor(modelItem => item.AgentUrl)>RE Home Listing</a>
+                }
+                </td>
+                <td>
+                    @*
+                    @Html.DisplayFor(modelItem => item.ImageName)
+                    *@
+                        <a href=@Html.DisplayFor(modelItem => item.ImageName)>Image</a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |   
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+<br />
+@*
+<br />
+<div>
+    
+    <i class="fa-solid fa-arrow-right"></i>
+    <a href="@Url.Action("Email", "Members")" style="color:blue;" class="menubar"
+       data-toggle="tooltip" data-html="true" title="Placid Email">Placid Email</a>
+    <br />
+    
+<i class="fa-solid fa-arrow-right"></i>
+<a href="@Url.Action("Index", "Users")" style="color:blue;" class="menubar"
+   data-toggle="tooltip" data-html="true" title="Placid Lot Owners">Placid Lot Owners</a>
+    
+</div>
+ *@
+
+<div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
+    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <p align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-size: 20pt; font-family: Brush Script MT, cursive;">
+        End Homes Listed
+    </p>
+    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+</div>
+
+
+
+@section Scripts
+{
+    <script>
+
+
+    </script>
+}

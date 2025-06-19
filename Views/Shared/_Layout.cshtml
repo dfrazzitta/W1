@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Lake Placid Park</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" >
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.2/jsoneditor.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.min.css" rel="stylesheet">
+    
+    @*
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+
+    <link rel="stylesheet" href="~/W1.styles.css" asp-append-version="true">
+
+    <link rel='stylesheet' id='theme-link'>
+    <link rel='stylesheet' id='iconlib-link'>
+    *@
+
+    <style type="text/css">
+        #jsoneditor {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+
+    <script type="text/javascript">   
+        var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-16477161-1']);  _gaq.push(['_trackPageview']);  
+        (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';   
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })(); 
+    </script>
+
+</head>
+<body>
+
+    <div class="container-fluid" style="background-color: aqua;">
+        <div class="spinner-wrapper">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <main role="main" class="pb-3">
+           
+            <div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
+                <div class="col p-1 align-content-center" style="background-color: aqua; opacity: 1.0">
+                    <img src="~/Images/Lake_Placid_Trans.png" class="img-fluid d-block align-content-center " alt="Lake Placid Banner" border="0"
+                         style="width:100%; height:100%;">
+                </div>
+            </div>
+
+ 
+
+            <div class="row">
+                <div class="col rounded-2" style="background-color:indianred;  width:100%; max-width: 180px; min-width: 50px;">
+                    <div class="rows p-3 mb-2 bg-info mx-auto center text-purple">
+                        <h2 id="effect" align="center" style="margin:0px 1px; padding:0px 0px; ">
+                            <a href="@Url.Action("ResidentOwner", "home")" style="color:antiquewhite;font-size:15px;" class="menubar"
+                               data-toggle="tooltip" data-html="true" title="Click for More Information">55+ Resident Owned</a>
+                            <!--
+                                55+ Resident Owned   -->
+                        </h2>
+                    </div>
+
+                    <p>
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <a href="@Url.Action("Index", "home")" style="color:antiquewhite;" class="menubar"
+                           data-toggle="tooltip" data-html="true" title="Home Page">Home</a>
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <a href="@Url.Action("Location", "home")" style="color:antiquewhite;" class="menubar"
+                           data-toggle="tooltip" data-html="true" title="Lake Placid Location">Location</a>
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <a href="@Url.Action("ParkPlan", "home")" style="color:antiquewhite;" class="menubar"
+                           data-toggle="tooltip" data-html="true" title="Lake Placid Park Plan">ParkPlan</a>
+                    </p>
+                     
+                    <p>
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <a href="@Url.Action("Homes", "home")" style="color:antiquewhite;" class="menubar"
+                           data-toggle="tooltip" data-html="true" title="Homes For Sale">ForSale</a>
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <a href="@Url.Action("Rules", "home")" style="color:antiquewhite;" class="menubar"
+                           data-toggle="tooltip" data-html="true" title="Download Rules">Rules</a>
+                    </p>
+                    <hr>
+
+                    <p>
+                        <strong style="font-size:23pt">Lake Placid Park Inc.</strong>
+                    </p>
+                    <p style="font-size:15pt">
+
+                        980 7th St. NW
+
+                        Largo, FL 33770
+                    </p>
+                    <hr />
+                    <p style="font-size:15pt">
+                        <a class="menubar" style="font-size:18px;" href="mailto:lakeplacidpark@gmail.com">Email</a>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </p>
+                    <hr />
+                    <br>
+                    <hr />
+                    
+                    <br />
+                    <br />
+                </div>
+
+                <div class="col w-75" style="background-color: aqua;">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        </div>
+
+                        <div class="carousel-inner mx-auto">
+                            <div class="carousel-item active mx-auto">
+                                <img src="~/Images/Slideshow/1_b.jpg" class="d-block img-h" style="width:100%;height:30%;" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Images/Slideshow/6_b.jpg" class="d-block img-h w-150 mx-auto" style="width:100%;height:30%;" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Images/Slideshow/3_b.jpg" class="d-block img-h w-150 mx-auto" style="width:100%;height:50%;" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Images/Slideshow/4_b.jpg" class="d-block img-h w-150 mx-auto" style="width:100%;height:30%;" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Images/Slideshow/8_b.jpg" class="d-block img-h w-150 mx-auto" style="width:100%;height:50%;" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+
+                    </div>
+                    @RenderBody()
+                    <hr />
+                    
+                    <a class="weatherwidget-io" href="https://forecast7.com/en/27d91n82d79/largo/?unit=us" data-label_1="Largo Florida" data-label_2="WEATHER" data-theme="original">Largo Weather</a>
+                    <hr />
+                    <hr />
+                    <hr />
+                   
+                </div>
+            </div>
+        </main>
+    </div>
+ 
+    <footer class="border-top footer text-muted">
+        
+        <div class="container-fluid" style="background-color: aqua;">
+            &copy; 1978 - LPP, Inc. - <a asp-area="" asp-controller="Home" asp-action="Index">Lake Placid Park Inc.</a>
+        </div>
+         
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.14.0/src-noconflict/ace.js"></script>
+    @*
+    <script src="~/js/assign.js"></script>
+    *@
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
+    @*
+    <script src="~/js/ajv-validator.js"></script>
+    *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.all.min.js"></script>
+   
+    <script src="~/js/site.js" asp-append-version="true"></script>
+ 
+    <script>
+ 
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+ 
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: true)
+</body>
+</html>

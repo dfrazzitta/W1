@@ -1,0 +1,797 @@
+﻿@model W1.Models.Member
+
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create";
+}
+
+
+
+
+
+<div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
+    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <p align="center">Create Lot For Sale</p>
+    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+</div>
+<hr />
+<div class="row d-flex justify-content-center">
+    <div class="col-3 w-25 p-3">
+    </div>
+    <div id="formId" class="col-md-6 w-25 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+
+        <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="createForm" onsubmit="return validateForm()">
+
+            <div class="form-group text-center">
+                <label asp-for="TypeSell" class="control-label"><b>Type</b></label>
+                <input id="TypeSell" name="TypeSell"
+                       asp-for="TypeSell" data-html="true" list="examplefsbo" value=""
+                       data-html="true"
+                       class="form-control w-2 p-2 mx-auto d-flex" />
+
+                <datalist id="examplefsbo">
+                    <option value="Agent" />
+                    <option value="FSBO" />
+                </datalist>
+                <span asp-validation-for="TypeSell" class="text-danger"></span>
+
+            </div>
+
+            <div class="text-center">
+                <label asp-for="LotNo" class="control-label"><b>Lot Number</b></label>
+                <input id="lotnumber" asp-for="LotNo" list="exampleList" value="" name="lotnumber"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Lot Number from dropdown"
+                       data-html="true" maxlength="2" size="4"
+                       class="form-control w-2 p-2 mx-auto d-flex  " />
+
+                <datalist id="exampleList">
+                    <option value="1A" />
+                    <option value="1" />
+                    <option value="2" />
+                    <option value="3" />
+                    <option value="4" />
+                    <option value="5" />
+                    <option value="6" />
+                    <option value="7" />
+                    <option value="8" />
+                    <option value="10" />
+                    <option value="11" />
+                    <option value="12" />
+                    <option value="13" />
+                    <option value="14" />
+                    <option value="15" />
+                    <option value="16" />
+                    <option value="17" />
+                    <option value="18" />
+                    <option value="19" />
+                    <option value="20" />
+                    <option value="21" />
+                    <option value="22" />
+                    <option value="23" />
+                    <option value="24" />
+                    <option value="25" />
+                    <option value="26" />
+                    <option value="27" />
+                    <option value="28" />
+                    <option value="29" />
+                    <option value="30" />
+                    <option value="31" />
+                    <option value="32" />
+                    <option value="33" />
+                    <option value="34" />
+                    <option value="35" />
+                    <option value="36" />
+                    <option value="37" />
+                    <option value="38" />
+                    <option value="39" />
+                    <option value="40" />
+
+                    <option value="41" />
+                    <option value="42" />
+                    <option value="43" />
+                    <option value="44" />
+                    <option value="45" />
+                    <option value="46" />
+                    <option value="47" />
+                    <option value="48" />
+                    <option value="49" />
+                    <option value="50" />
+                    <option value="51" />
+                    <option value="52" />
+                    <option value="53" />
+                    <option value="54" />
+                    <option value="55" />
+                    <option value="56" />
+                    <option value="57" />
+                    <option value="58" />
+                    <option value="59" />
+                    <option value="60" />
+                    <option value="61" />
+                    <option value="62" />
+                    <option value="63" />
+                    <option value="64" />
+                    <option value="65" />
+                    <option value="66" />
+                    <option value="67" />
+                    <option value="68" />
+                    <option value="69" />
+                    <option value="70" />
+                    <option value="71" />
+                    <option value="72" />
+                    <option value="73" />
+                    <option value="74" />
+                    <option value="75" />
+                    <option value="76" />
+                    <option value="77" />
+                    <option value="78" />
+                    <option value="79" />
+                    <option value="80" />
+
+                    <option value="81" />
+                    <option value="82" />
+                    <option value="83" />
+                    <option value="84" />
+                    <option value="85" />
+                    <option value="86" />
+                    <option value="87" />
+                    <option value="88" />
+                    <option value="89" />
+                    <option value="90" />
+
+                    <option value="91" />
+                    <option value="92" />
+                    <option value="93" />
+                    <option value="94" />
+                    <option value="95" />
+                    <option value="96" />
+                    <option value="97" />
+                    <option value="98" />
+                </datalist>
+            </div>
+
+            @*
+                https://www.geeksforgeeks.org/us-currency-validation-using-regular-expressions/
+                https://codepen.io/559wade/pen/LRzEjj
+            *@
+            <div class="text-center">
+                <label asp-for="Price" class="control-label"><b>Unit Price </b></label><br />
+                <input id="currency-field" type='text' pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value=""
+                       data-type="currency" name="Price"
+                       class="form-control w-2 p-2 mx-auto d-flex"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter Price in decimal format" />
+
+            </div>
+
+
+            <div class="text-center">
+                <label asp-for="AgentLastName" class="control-label"><b>Last Name</b></label><br />
+                <input id="LastName" type='text' name="AgentLastName" value=""
+                       class="form-control w-2 p-2 mx-auto d-flex" />
+            </div>
+
+
+
+            <div class="text-center">
+                <label asp-for="AgentFirstName" class="control-label"><b>First Name</b></label><br />
+                <input id="FirstName" type='text' name="AgentFirstName" value=""
+                       class="form-control w-2 p-2 mx-auto d-flex" />
+            </div>
+
+
+
+            <div class="text-center">
+                <label asp-for="Email" class="control-label"><b>Email</b></label><br />
+                <input id="Email" type='text' name="Email" value=""
+                       class="form-control w-2 p-2 mx-auto d-flex"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter email of RE Agent or Seller" />
+            </div>
+
+            <div class="text-center">
+                <label asp-for="OfficePhone" class="control-label"><b>Primary Phone</b></label><br />
+                <input id="OfficePhone" type='text' name="OfficePhone" value=""
+                       class="form-control w-2 p-2 mx-auto d-flex" onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter of office phone of RE Agent" />
+            </div>
+
+            <div class="text-center">
+                <label asp-for="CellPhone" class="control-label"><b>Secondary Phone</b></label><br />
+                <input id="CellPhone" type='text' name="CellPhone" value="" onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')"
+                       class="form-control w-2 p-2 mx-auto d-flex"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter the Cellphone of RE Agent/seller" />
+
+            </div>
+
+            <div class="text-center">
+                <label asp-for="AgentUrl" class="control-label"><b>URL</b></label><br />
+                <input id="AgentUrl" type='text' name="AgentUrl"
+                       class="form-control w-2 p-2 mx-auto d-flex"
+                       value="" />
+
+            </div>
+
+            <div class="text-center">
+                <label asp-for="ImageName" class="control-label"><b>Home Image</b></label><br />
+
+                <input id="fileclick" value="" title="Choose Image file" type="file" name="file" class="form-control text-center w-2 p-2 mx-auto d-flex" />
+            </div>
+            <br />
+
+            <input type="submit" value="Submit" style="text-align: center;">
+        </form>
+
+    </div>
+
+    <div class="col-3  w-25  text-center">
+        <br />
+        <br />
+
+        <button class="btn btn-primary" id="button1" onclick="HelpTypeSellInfo()">Help Type</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button1" onclick="HelpLotNumberInfo()">Help LotNumber</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button1" onclick="HelpUnitPriceInfo()">Help Unit Price</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button1" onclick="HelpAgentURLInfo()">Help Agent URL</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button1" onclick="HelpHomeImageInfo()">Help Home Image</button>
+
+        <br />
+
+    </div>
+</div>
+
+ 
+@*
+<div class="text-center">
+    <button id="button1" onclick="Testswal1()">Swal demo</button>
+    <button id="button2" onclick="swal2()">Swal2 demo</button>
+    <button id="button2" onclick="LotNumberInfo()">Lot Number Help demo</button>
+</div>
+ *@
+
+<div align="center">
+    <a asp-action="Index">Back to List</a>
+</div>
+<br />
+<hr />
+<div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
+    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <p align="center">End Create Lot For Sale</p>
+    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+</div>
+<hr />
+
+
+@section Scripts
+{
+
+    <script>
+
+         $(document).ready(function() {
+
+
+                $("#clearlot").click(function() {
+                   // alert('clearlot');
+                    $("#lotnumber").val("1A");
+                });
+
+                function TypeSell1()
+                {
+                     var TypeS = document.getElementById("TypeSell");
+                     TypeS.style.backgroundColor = "red";
+                }
+               // $('#button1').submit(function(e) {  TypeSell
+               //     alert('submit override');
+               //     debugger;
+               //   e.preventDefault();
+                  //var requestData = $('#some-form, #more-inputs :input').serialize();
+                  //console.log(requestData);
+               // });
+         });
+
+     
+
+        function validateForm() {
+          //  debugger;
+          let ts = document.forms["createForm"]["TypeSell"].value;
+          if (ts == "") {
+           // alert("TypeSell must have a value - Please choose from dropdown list");
+               const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'TypeSell can not be blank - Please choose from dropdown combo'
+                                    ,
+                              icon:
+                              "info"
+                            });
+                return false;
+          }
+
+
+          let ln = document.forms["createForm"]["lotnumber"].value;
+          if (ln == "") {
+
+               const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'LotNumber can not be blank - Please choose from dropdown combo'
+                                    ,
+                              icon:
+                              "info"
+                            });
+                return false;
+          }
+
+          let pr = document.forms["createForm"]["Price"].value;
+          if (pr == "") {
+
+               const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'Price can not be blank - Please enter a value'
+                                    ,
+                              icon:
+                              "info"
+                            });
+                return false;
+          }
+
+          let aln = document.forms["createForm"]["AgentLastName"].value;
+          if (aln == "") {
+
+               const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'Last Name can not be blank - Please enter a value'
+                                    ,
+                              icon:
+                              "info"
+                            });
+                return false;
+          }
+
+          let afn = document.forms["createForm"]["AgentFirstName"].value;
+          if (afn == "") {
+
+               const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'First Name can not be blank - Please enter a value'
+                                    ,
+                              icon:
+                              "info"
+                            });
+                return false;
+          }
+
+          let em = document.forms["createForm"]["Email"].value;
+          if (em == "") {
+
+               const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'Email can not be blank - Please enter a value'
+                                    ,
+                              icon:
+                              "info"
+                            });
+                return false;
+          }
+
+
+          let pp = document.forms["createForm"]["OfficePhone"].value;
+          if (pp == "") {
+
+               const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'Primary Phone can not be blank - Please enter a value'
+                                    ,
+                              icon:
+                              "info"
+                            });
+                return false;
+          }
+
+          let sp = document.forms["createForm"]["CellPhone"].value;
+          if (sp == "") {
+
+               const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'Secondary Phone can not be blank - Please enter a value'
+                                    ,
+                              icon:
+                              "info"
+                            });
+                return false;
+          }
+
+          let aurl = document.forms["createForm"]["AgentUrl"].value;
+          if (aurl == "") {
+
+               const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'If FSBO please enter LakePlacidPark.com - If Agent please enter agent URL- Please enter a value'
+                                    ,
+                              icon:
+                              "info"
+                            });
+                return false;
+          }
+
+
+          let fc = document.forms["createForm"]["fileclick"].value;
+          if (fc == "") {
+
+               const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'Please enter Image to display L- Please choose a image'
+                                    ,
+                              icon:
+                              "info"
+                            });
+                return false;
+          }
+
+
+        }
+ 
+
+        // general help dialogs
+
+        function HelpHomeImageInfo()
+             {
+                     const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'Please choose the Image File that is the picture of the home for sale'
+                                    ,
+                              icon:
+                              "info"
+                            });
+
+             }
+
+        function HelpUnitPriceInfo()
+             {
+                     const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'Please enter the Sale Price - it is auto formatting'
+                                    ,
+                              icon:
+                              "info"
+                            });
+
+             }
+
+         function HelpAgentURLInfo()
+             {
+                 const doubleCheckIcon =
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                 Swal.fire({
+                              title: "Information",
+                              text: "Please Enter Agent URL however chek the URL for accuracy first",
+                              icon: "info"
+                            });
+             }
+
+
+         function HelpTypeSellInfo()
+             {
+                     const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'TYPE is the type of sale - it can be either a RealEstate Listing thru a RE Agent or it can be a FSBO (For Sale by Owner)'
+                                    ,
+                              icon:
+                              "info"
+                            });
+
+             }
+
+         function HelpLotNumberInfo()
+             {
+                 const doubleCheckIcon =
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                 Swal.fire({
+                              title: "Information",
+                              text: "Please use the dropdown combo to choose Lot Number",
+                              icon: "info"
+                            });
+             }
+
+             // end general help dialogs
+
+
+
+         // begin currency javascript routines
+
+         $("input[data-type='currency']").on({
+            keyup: function() {
+              formatCurrency($(this));
+            },
+            blur: function() {
+              formatCurrency($(this), "blur");
+            }
+        });
+
+
+        function formatNumber(n) {
+          // format number 1000000 to 1,234,567
+          return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        }
+
+
+        function formatCurrency(input, blur) {
+          // appends $ to value, validates decimal side
+          // and puts cursor back in right position.
+
+          // get input value
+          var input_val = input.val();
+
+          // don't validate empty input
+          if (input_val === "") { return; }
+
+          // original length
+          var original_len = input_val.length;
+
+          // initial caret position
+          var caret_pos = input.prop("selectionStart");
+
+          // check for decimal
+          if (input_val.indexOf(".") >= 0) {
+
+            // get position of first decimal
+            // this prevents multiple decimals from
+            // being entered
+            var decimal_pos = input_val.indexOf(".");
+
+            // split number by decimal point
+            var left_side = input_val.substring(0, decimal_pos);
+            var right_side = input_val.substring(decimal_pos);
+
+            // add commas to left side of number
+            left_side = formatNumber(left_side);
+
+            // validate right side
+            right_side = formatNumber(right_side);
+
+            // On blur make sure 2 numbers after decimal
+            if (blur === "blur") {
+              right_side += "00";
+            }
+
+            // Limit decimal to only 2 digits
+            right_side = right_side.substring(0, 2);
+
+            // join number by .
+            input_val = "$" + left_side + "." + right_side;
+
+          } else {
+            // no decimal entered
+            // add commas to number
+            // remove all non-digits
+            input_val = formatNumber(input_val);
+            input_val = "$" + input_val;
+
+            // final formatting
+            if (blur === "blur") {
+              input_val += ".00";
+            }
+          }
+
+          // send updated string to input
+          input.val(input_val);
+
+          // put caret back in the right position
+          var updated_len = input_val.length;
+          caret_pos = updated_len - original_len + caret_pos;
+          input[0].setSelectionRange(caret_pos, caret_pos);
+        }
+        // end javascript currency routines
+
+
+
+        function ajaxSend()
+        {
+
+                /*
+                id=TypeSell
+            id="lotnumber"
+            id="Price"
+            id="AgentLastName"
+            id="AgentFirstName"
+            id="Email"
+            id="OfficePhone"
+            id="CellPhone"
+            id="AgentUrl"
+            id="fileclick"
+
+
+
+            Swal.fire({
+                title: "Good job!",
+                text: "You clicked the button!",
+                icon: "success"
+            });
+            https://www.google.com/search?q=javascript+serialize+a+form+iformfile+example&rlz=1C1RXQR_enUS1102US1102&oq=javascript+seralize+a+form+IFormfile&gs_lcrp=EgZjaHJvbWUqCQgCECEYChigATIGCAAQRRg5MgkIARAhGAoYoAEyCQgCECEYChigATIJCAMQIRgKGKAB0gEJMzEzMDlqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8
+            const form = document.getElementById('yourFormId'); // Replace 'yourFormId' with the actual ID of your form
+            const formData = new FormData(form);
+            */
+
+
+            Swal.fire({
+                title: "Information!",
+                text: "Please choose a Lot Number",
+                icon: "failure"
+            });
+
+            debugger;
+            var fileVal = $("#fileclick").val();
+            debugger;
+
+            var lotnum = $("#lotnumber").val();
+            if (isNullOrEmpty(lotnum))
+                {
+                    alert('Please enter a value in Lot Number')
+
+                }
+            if (lotnum === '1A' || (lotnum <= 99 && lotnum >= 1) )
+            {
+
+                    var  queryString = $('#ajaxSend').serialize();
+
+                    alert(queryString);
+
+                    $.ajax({
+                        url: '@Url.Action("FileUpload1")',
+                        type: "POST",
+                        data: queryString,
+                        success: function(data, status){
+                        // Handle the response
+                        console.log("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+
+            }
+        }
+
+
+
+        function isNullOrEmpty(str) {
+          return str === null || str === "";
+        }
+
+
+        function checkImage()
+        {
+          //  jsonDialog12(jsonobj, modes, titleDialog, okcallback, cancelcallback, errorcallback)
+
+            // jsonDialog12(jsonobj, modes, titleDialog, okcallback, cancelcallback, errorcallback)
+
+          //  alert("image check");
+        }
+
+        function rSize()
+
+        {
+
+             let imgInput = document.getElementById('fileclick');
+            imgInput.addEventListener('change', function (e) {
+                if (e.target.files) {
+                    let imageFile = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = document.createElement("img");
+                        img.onload = function (event) {
+                            // Dynamically create a canvas element
+                            var canvas = document.createElement("canvas");
+
+                            // var canvas = document.getElementById("canvas");
+                            var ctx = canvas.getContext("2d");
+
+                            // Actual resizing
+                            ctx.drawImage(img, 0, 0, 1024, 682);
+
+                            // Show resized image in preview element
+                            var dataurl = canvas.toDataURL(imageFile.type);
+                            document.getElementById("preview").src = dataurl;
+                        }
+                        img.src = e.target.result;
+                    }
+                    reader.readAsDataURL(imageFile);
+                }
+        });
+        }
+
+
+
+        function resizeImage(image, width, height) {
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(image, 0, 0, width, height);
+          return canvas.toDataURL('image/jpeg');
+        }
+
+
+        /*
+        function LotNoVerify(function(e)  ({
+            var x = document.getElementById("LotNo");
+            if ( x.value > 0 && x.value < 100 )
+                  return;
+            else
+                  alert('Lot Number must be between 1 and 99')
+                  e.preventDefault();
+        )};  */
+
+
+        function myFunction() {
+            alert('Agent URL');
+            var x = document.getElementById("AgentUrl");
+            x.value = x.value.toUpperCase();
+        }
+
+        function DoAlertClick() {
+            alert('clicked');
+
+        }
+
+        function DoAlert() {
+            Swal.fire({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success"
+            });
+        }
+
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'maxwidth': 388,
+            'maxheight': 339
+        });
+
+
+
+
+
+
+    </script>
+}

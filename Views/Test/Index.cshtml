@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model UserModel
+
+<h1>Test Index</h1>
+ 
+
+<h1>Html.DisplayFor Example</h1>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <span>Enter Your Name:</span> @Html.TextBoxFor(m => m.UserName)
+    <br />
+    <span>Enter Your Age: </span> @Html.TextBoxFor(m => m.Age)
+    <br />
+    <span>Enter Your City: </span>
+
+    @Html.TextBoxFor(m => m.City)
+    <br />
+
+    <input id="Submit" type="submit" value="submit" />
+}
+
+<hr />
+
+<strong>User Name: </strong> @Html.DisplayFor(m => m.UserName)
+<br />
+<strong>User Age: </strong> @Html.DisplayFor(m => m.Age)
+<br />
+<strong>User City: </strong> @Html.DisplayFor(m => m.City)
+<br />
+
+@section Scripts
+{
+    <script>
+        
+    </script>
+
+}
