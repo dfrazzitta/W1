@@ -9,11 +9,19 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.2/jsoneditor.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.css" rel="stylesheet">
+   
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.min.css" rel="stylesheet">
-    
-    @*
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
 
+    
+
+    
+    <link href="~/css/site1.css" rel="stylesheet" />
+    @*
+   
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    *@
+
+    @*
     <link rel="stylesheet" href="~/W1.styles.css" asp-append-version="true">
 
     <link rel='stylesheet' id='theme-link'>
@@ -158,7 +166,7 @@
                     @RenderBody()
                     <hr />
                     
-                    <a class="weatherwidget-io" href="https://forecast7.com/en/27d91n82d79/largo/?unit=us" data-label_1="Largo Florida" data-label_2="WEATHER" data-theme="original">Largo Weather</a>
+                    <a class="weatherwidget-io weather-widget-container" href="https://forecast7.com/en/27d91n82d79/largo/?unit=us" data-label_1="Largo Florida" data-label_2="WEATHER" data-theme="original">Largo Weather</a>
                     <hr />
                     <hr />
                     <hr />
@@ -166,15 +174,18 @@
                 </div>
             </div>
         </main>
-    </div>
+    
  
-    <footer class="border-top footer text-muted">
+        <footer class="border-top footer text-muted">
         
-        <div class="container-fluid" style="background-color: aqua;">
-            &copy; 1978 - LPP, Inc. - <a asp-area="" asp-controller="Home" asp-action="Index">Lake Placid Park Inc.</a>
-        </div>
+            <div class="container-fluid" style="background-color: aqua;">
+                &copy; 1978 - LPP, Inc. - <a asp-area="" asp-controller="Home" asp-action="Index">Lake Placid Park Inc.</a>
+            </div>
          
-    </footer>
+        </footer>
+    </div>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
      
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -190,11 +201,15 @@
     @*
     <script src="~/js/ajv-validator.js"></script>
     *@
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.all.min.js"></script>
    
+      
     <script src="~/js/site.js" asp-append-version="true"></script>
- 
+       
     <script>
  
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');

@@ -114,6 +114,8 @@ namespace W1.Controllers
                 {
                     finalLot1 = LotNo.ToString();
                 }  */
+                // check the file 
+                 
                 await UploadFile(file, LotNo);
                 Member member0 = new Member();
                 member0.TypeSell = TypeSell;
@@ -277,10 +279,7 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,LotNo,Price,AgentLastName,AgentFirstName,Email,OfficePhone,CellPhone,AgentUrl,ImageName")] Member member)
         {
-            /*
-            
-                   check if record exists ???  notify if a fail 
-            }*/
+            return NotFound();
 
             if (ModelState.IsValid)
             {
