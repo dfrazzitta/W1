@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.HttpOverrides;
 var builder = WebApplication.CreateBuilder(args);
 
 
+SingletonClass s1 = SingletonClass.Instance;
+
 var folder = Environment.SpecialFolder.LocalApplicationData;
 var path = Environment.GetFolderPath(folder);
 string? DbPath = System.IO.Path.Join(path, "info.db");

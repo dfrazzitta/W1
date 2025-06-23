@@ -133,12 +133,58 @@
     <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
 </div>
 
-
-
+ <br />
+<button class="btn btn-primary" onclick="activate()"><i class="bi bi-arrow-up-circle-fill"></i> Activate Homes for Sale</button>
+<button class="btn btn-primary" onclick="deactivate()"><i class="bi bi-arrow-down-square-fill"></i> De Activate Homes for Sale</button>
 @section Scripts
 {
     <script>
 
+        function activate()
+        {
+            alert('activate');
+            $.ajax({
+              url: "/home/setforsale", // The URL to send the request to
+              method: "POST", // HTTP method (e.g., GET, POST, PUT, DELETE)
+              dataType: "json", // Expected data type of the server response (e.g., "json", "xml", "html")
+              data: {},
+              success: function(response) {
+                // Function to execute on successful request
+                console.log("Success:", response);
+              },
+              error: function(xhr, status, error) {
+                // Function to execute on request failure
+                console.error("Error:", status, error);
+              },
+              complete: function() {
+                // Function to execute regardless of success or failure
+                console.log("Request complete.");
+              }
+            });
+        }
 
+
+        function deactivate()
+        {
+            alert('deactivate');
+            $.ajax({
+              url: "/home/unsetforsale", // The URL to send the request to
+              method: "POST", // HTTP method (e.g., GET, POST, PUT, DELETE)
+              dataType: "json", // Expected data type of the server response (e.g., "json", "xml", "html")
+              data: {},
+              success: function(response) {
+                // Function to execute on successful request
+                console.log("Success:", response);
+              },
+              error: function(xhr, status, error) {
+                // Function to execute on request failure
+                console.error("Error:", status, error);
+              },
+              complete: function() {
+                // Function to execute regardless of success or failure
+                console.log("Request complete.");
+              }
+            });
+        }
     </script>
 }

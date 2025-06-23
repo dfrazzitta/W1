@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using W1.Data;
 using W1.Models;
+using System.IO;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
 /*
  * 
@@ -140,7 +142,9 @@ namespace W1.Controllers
             _logger = logger;
             _appEnvironment = appEnvironment;
             _context = context;
-          //  PlacidSingleton.Instance.SetPlacid(false);
+            //  PlacidSingleton.Instance.SetPlacid(false);
+
+          //  bool lp = System.IO.File.Exists("http://localhost:5000/wwwroot/forsale.txt");
         }
 
 
@@ -261,5 +265,28 @@ namespace W1.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+       
+        
+        [HttpPost]
+        public bool unsetforsale()
+        {
+            // Fix for CS0119 and CS0642:
+            // Correctly open the file for appending and ensure the StreamWriter is properly used.
+             
+            string logFilePath = Path.Combine(_appEnvironment.WebRootPath, "forsale.txt");
+            System.IO.File.Delete(logFilePath);
+ 
+            return true;
+        }
+
+        [HttpPost]
+        public bool setforsale()
+        {
+            string logFilePath = Path.Combine(_appEnvironment.WebRootPath, "forsale.txt");
+            System.IO.File.Create(logFilePath);
+            return true;
+        }
+
     }
 }
