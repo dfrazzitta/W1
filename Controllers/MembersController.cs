@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Linq;
+using System.Threading.Tasks;
 using W1.Data;
 using W1.Models;
 
@@ -83,7 +85,10 @@ namespace W1.Controllers
             string OfficePhone, string CellPhone, string AgentUrl)
         {
 
-            string finalLot = null;
+
+          //  return Ok(new { message = "Data retrieved successfully!" });
+
+            // string finalLot = null;
 
 
             //if (String.Compare(_scopedService.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
@@ -105,15 +110,7 @@ namespace W1.Controllers
             {
                 string finalLot1 = null;
 
-                /*
-                if (LotNo > 0 || LotNo <= 9)
-                {
-                    finalLot1 = "0" + LotNo.ToString();
-                }
-                else
-                {
-                    finalLot1 = LotNo.ToString();
-                }  */
+ 
                 // check the file 
                  
                 await UploadFile(file, LotNo);
@@ -369,6 +366,7 @@ namespace W1.Controllers
                 return NotFound();
             }
 
+
             var member = await _context.Members
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (member == null)
@@ -385,13 +383,39 @@ namespace W1.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var member = await _context.Members.FindAsync(id);
-         
+
+            try
+            {
+
+                if (member != null)
+                {
+                    var path = _appEnvironment.WebRootPath;
+
+                    // Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "Upload"));
+                    var imagepath = path + "\\" + member.ImageName;
+                    if (System.IO.File.Exists(imagepath))
+                    {
+                        System.IO.File.Delete(imagepath);
+                        _context.Members.Remove(member);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                return NotFound();
+
+            }
+            /*
+  
             if (member != null)
             {
                 _context.Members.Remove(member);
             }
-
+ 
             await _context.SaveChangesAsync();
+            */
+
 
             return RedirectToAction(nameof(Index));
         }

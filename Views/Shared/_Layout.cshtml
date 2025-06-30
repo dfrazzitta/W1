@@ -53,7 +53,8 @@
         </div>
 
         <main role="main" class="pb-3">
-           
+            <span class="AntiForge"> @Html.AntiForgeryToken() </span>
+
             <div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
                 <div class="col p-1 align-content-center" style="background-color: aqua; opacity: 1.0">
                     <img src="~/Images/Lake_Placid_Trans.png" class="img-fluid d-block align-content-center " alt="Lake Placid Banner" border="0"
@@ -92,11 +93,12 @@
                     </p>
                      
                     
-                        <p>
-                            <i class="fa-solid fa-arrow-right"></i>
-                            <a href="@Url.Action("Homes", "home")" style="color:antiquewhite;" class="menubar"
-                            data-toggle="tooltip" data-html="true" title="Homes For Sale">ForSale</a>
-                        </p>
+                    <p>
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <a href="@Url.Action("Homes", "home")" style="color:antiquewhite;" class="menubar"
+                        data-toggle="tooltip" data-html="true" title="Homes For Sale">ForSale</a>
+ 
+                    </p>
                      
                     <p>
                         <i class="fa-solid fa-arrow-right"></i>

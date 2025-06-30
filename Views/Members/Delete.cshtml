@@ -80,32 +80,123 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form id="formDelete" asp-action="Delete">
         <input type="hidden" asp-for="ID" />
-        <input type="submit" onclick="return deletefile()" value="Delete" class="btn btn-danger" /> 
+        @*
+        <input type="submit" onclick="return deletefile()" value="Delete" class="btn btn-danger" />
+        *@
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        @*
         <br />
         <a asp-action="Index" class="centerDelete">Back to List</a>
+        *@
     </form>
-    
+    <br />
+    <a asp-action="Index" class="centerDelete">Back to List</a>
 </div>
  
 
 @section Scripts
 {
     <script>
+
+
+         $('#formDelete').submit(function (e) {
+            e.preventDefault(); // Prevent default form submission
+            debugger;
+            $.ajax({
+                url: '@Url.Action("Delete", "Members")', // Replace with your controller action
+                type: 'POST',
+                data: $(this).serialize(), // Serialize form data
+               
+                success: function (response) {
+                  //  if (response.success) { // Assuming your controller returns a success property
+                        // Display success message using JavaScript
+                        console.log("Success:", response); // Log the response data
+                         
+
+                        // window.location.href = "http://localhost:5000/members/index.cshtml";
+                        // window.location.origin  https://www.example.com).
+                        // window.location.hostname
+
+                        var currentUrl1 =  window.location.origin;
+                        console.log(currentUrl1);
+
+                        var currentUrl2 = window.location.hostname;
+                        console.log(currentUrl2);
+
+
+                        var currentUrl = window.location.href;
+                        console.log(currentUrl);
+                        ShowUpdate(currentUrl1);
+                   // } else {
+                        // Handle error or display error message
+                   //     alert('Error error error: ' + response.responseText);
+                  //  }
+                },
+                error: function (xhr, status, error) {
+                                           // Handle error or display error message
+                        alert('(xhr, status, error: ');
+
+
+                }
+            });
+        });
         function deletefile(){
             
            // Swal.fire("SweetAlert2 is working!");
            // debugger;
-            var r = confirm("Are you sure you want to delete this?");
-            if (r == true) {
-                //return true;
-               
-                return true;
-            } else {
-                return false;
-            }
+
+            Swal.fire({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                );
+                // Add your code here to perform the action after confirmation
+              } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                  'Cancelled',
+                  'Your imaginary file is safe :)',
+                  'error'
+                );
+                // Add your code here if the user cancels the action
+              }
+            });
+     
         }
     </script>
 
 }
+
+
+
+     @*
+        if ( Swal({text: 'Are you sure you want to delete this Sale Info?', buttons: true}))
+        {
+             return true;
+        }
+        else
+             return false;
+
+             
+            var r = confirm("Are you sure you want to delete this?");
+            if (r == true) {
+                //return true;
+
+                return true;
+            } else {
+                return false;
+            }
+
+              
+     *@

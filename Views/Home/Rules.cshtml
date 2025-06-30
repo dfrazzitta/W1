@@ -159,7 +159,7 @@
             Largo, FL 33770
         </h2>
     </p>
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <img id="clicker" class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
 </div>
  
 
@@ -178,7 +178,55 @@
         }
 
 
-         
+        let clickCount = 0;
+        let lastClickTime = 0;
+        const TRIPLE_CLICK_THRESHOLD = 300; // milliseconds
+        let keysPressed = {};
+        let  isVisiable = false;
+
+        const myElement = document.getElementById('clicker');
+
+        myElement.addEventListener('mousedown', (event) => {
+            const currentTime = new Date().getTime();
+
+            if (currentTime - lastClickTime < TRIPLE_CLICK_THRESHOLD) {
+                clickCount++;
+                 
+            } else {
+                clickCount = 1; // Start a new click sequence
+            }
+
+            lastClickTime = currentTime;
+
+            if (clickCount === 3) {
+                console.log('Triple-click down detected!');
+                // Perform your desired action here
+                clickCount = 0; // Reset for the next sequence
+                var myLog = document.getElementById("loginForm");
+
+                myLog.hidden = !myLog.hidden;
+                isVisiable = true;
+
+               // e.preventDefault();
+            }
+        });
+
+        document.onkeyup = function(e) {
+
+          if (e.keyCode ===  27 && isVisiable) {
+
+                var myLog = document.getElementById("loginForm");
+
+                myLog.hidden = !myLog.hidden;
+                isVisiable = false;
+
+               e.preventDefault();
+
+          }
+        };
+
+
+         /*
         let keysPressed = {};
 
         document.onkeyup = function(e) {
@@ -186,28 +234,24 @@
                if (e.ctrlKey && e.shiftKey  ) {
                 //alert("Ctrl + Alt + Shift + U shortcut combination was pressed");
                    var myLog = document.getElementById("loginForm");
-                   //var mybutt = document.getElementById("b1");
-                   // logEmail = document.getElementById("Code");
-                   // logElement = document.getElementById("email");
-                   // mybutt.style="visibility:visible;"
+                   
                     myLog.hidden = !myLog.hidden;
-                   // myLog.onclick( ); //        .onclick();
+                   
                    e.preventDefault();
                }
           }
           
           if (e.keyCode ===  27 && !keysPressed) {
-               //alert(event.key);
-               // event.preventDefault();
+               
                 var myLog = document.getElementById("loginForm");
-               // logEmail = document.getElementById("Code");
-               // logElement = document.getElementById("email");
+                
                 myLog.hidden = !myLog.hidden;
-               // myLog.onclick( ); //        .onclick();
+               
                e.preventDefault();
 
           }   
         };
+        */
        
         /*
         document.addEventListener('keydown', (event) => {
