@@ -206,3 +206,27 @@ imgpalms {
 .weather-widget-container {
     border-radius: 15px;
 }
+
+
+
+/*  LOADING SPINNER  */
+.loadingDiv-parent9 {
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    z-index: 999998;
+}
+
+.loadingDiv9 {
+    position: fixed;
+    text-align: center;
+    top: 40%;
+    left: 45%;
+    z-index: 999999;
+}
+
+.loadingDiv9 .loading-image9 {
+    display: block;
+    margin: 25px 75px;
+}

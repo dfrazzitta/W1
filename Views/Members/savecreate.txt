@@ -1,6 +1,4 @@
-﻿﻿
-
-@model W1.Models.Member
+﻿@model W1.Models.Member
 
 
 @{
@@ -23,7 +21,7 @@
     </div>
     <div id="formId" class="col-md-6 w-25 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
 
-        <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="createForm">
+        <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="createForm"  >
 
             <div class="form-group text-center">
                 <label asp-for="TypeSell" class="control-label"><b>Type</b></label>
@@ -214,15 +212,16 @@
 
             <div class="text-center">
                 <label asp-for="ImageName" class="control-label"><b>Home Image</b></label><br />
-
-                <input id="fileclick" value="" title="Choose Image file" type="file" name="file" class="form-control text-center w-2 p-2 mx-auto d-flex" />
+                <input  type="file" title="Choose Image file" value=""  name="file" class="form-control text-center w-2 p-2 mx-auto d-flex" />
             </div>
-            <br />
+            <br /> 
 
             <input type="submit" value="Submit" style="text-align: center;">
         </form>
 
     </div>
+
+ 
 
     <div class="col-3  w-25  text-center">
         <br />
@@ -274,19 +273,37 @@
 
     <script>
 
-        $('#formId').submit(function (e) {
-             validateForm();
+        $('#ajaxSend').submit(function (e) {
+            /*
+            if (!validateForm())
+            {
+                const doubleCheckIcon =
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                Swal.fire({
+                    title: "Information",
+                    text: 'Validation Failed - please check input data',
+                    icon:
+                    "info"
+                 });
+                 return false;
+            }
+            */
+
+            var jk = $('#ajaxSend').serialize();
+            alert(jk);
+
+
             e.preventDefault(); // Prevent default form submission
-           // debugger;
+            debugger;
             $.ajax({
                 url: '@Url.Action("FileUpload1", "Members")', // Replace with your controller action
                 type: 'POST',
-                data: $(this).serialize(), // Serialize form data
+                data: $('#ajaxSend').serialize(), // Serialize form data
                 success: function (response) {
                   //  if (response.success) { // Assuming your controller returns a success property
                         // Display success message using JavaScript
                         console.log("Success:", response); // Log the response data
-                        HelpHomeImageInfo();
+                       // HelpHomeImageInfo();
                          
                         // window.location.href = "http://localhost:5000/members/index.cshtml";
                         // window.location.origin  https://www.example.com).
@@ -339,7 +356,7 @@
          });
 
  
-          function ShowUpdate(string msg) {
+          function ShowUpdate( ) {
 
 
               alert('this is an alert');
@@ -350,7 +367,7 @@
                              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
                 Swal.fire({
                     title: "Information",
-                    text: msg,
+                    text: 'boo',
                     icon:
                     "info"
                 });
@@ -362,9 +379,7 @@
           
 
         function validateForm() {
-          //  debugger;
-         function validateForm() {
-
+          
             console.log('in validate form');
 
           let ts = document.forms["createForm"]["TypeSell"].value;
@@ -380,7 +395,7 @@
                               icon:
                               "info"
                             });
-
+                            
                 console.log('typesell error');
                 return false;
           }
@@ -544,164 +559,171 @@
          console.log('return true');
           return true;
         }
+ 
 
-        return true;
-    }
+        // general help dialogs
+
+        function HelpHomeImageInfo()
+             {
+                     const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'Please choose the Image File that is the picture of the home for sale'
+                                    ,
+                              icon:
+                              "info"
+                            });
+
+             }
+
+        function HelpUnitPriceInfo()
+             {
+                     const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'Please enter the Sale Price - it is auto formatting'
+                                    ,
+                              icon:
+                              "info"
+                            });
+
+             }
+
+         function HelpAgentURLInfo()
+             {
+                 const doubleCheckIcon =
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                 Swal.fire({
+                              title: "Information",
+                              text: "Please Enter Agent URL however chek the URL for accuracy first",
+                              icon: "info"
+                            });
+             }
+
+
+         function HelpTypeSellInfo()
+             {
+                     const doubleCheckIcon =
+
+                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                              title: "Information",
+                              html: 'TYPE is the type of sale - it can be either a RealEstate Listing thru a RE Agent or it can be a FSBO (For Sale by Owner)'
+                                    ,
+                              icon:
+                              "info"
+                            });
+
+             }
+
+         function HelpLotNumberInfo()
+             {
+                 const doubleCheckIcon =
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                 Swal.fire({
+                              title: "Information",
+                              text: "Please use the dropdown combo to choose Lot Number",
+                              icon: "info"
+                            });
+             }
+
+             // end general help dialogs
 
 
 
+         // begin currency javascript routines
 
-
-
-
-
-    function HelpUnitPriceInfo()
-            {
-                    const doubleCheckIcon =
-
-                            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                        Swal.fire({
-                            title: "Information",
-                            html: 'Please enter the Sale Price - it is auto formatting'
-                                ,
-                            icon:
-                            "info"
-                        });
-
+         $("input[data-type='currency']").on({
+            keyup: function() {
+              formatCurrency($(this));
+            },
+            blur: function() {
+              formatCurrency($(this), "blur");
             }
-
-    function HelpAgentURLInfo()
-            {
-                const doubleCheckIcon =
-                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                Swal.fire({
-                            title: "Information",
-                            text: "Please Enter Agent URL however chek the URL for accuracy first",
-                            icon: "info"
-                        });
-            }
+        });
 
 
-    function HelpTypeSellInfo()
-            {
-                    const doubleCheckIcon =
-
-                            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                        Swal.fire({
-                            title: "Information",
-                            html: 'TYPE is the type of sale - it can be either a RealEstate Listing thru a RE Agent or it can be a FSBO (For Sale by Owner)'
-                                ,
-                            icon:
-                            "info"
-                        });
-
-            }
-
-    function HelpLotNumberInfo()
-            {
-                const doubleCheckIcon =
-                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                Swal.fire({
-                            title: "Information",
-                            text: "Please use the dropdown combo to choose Lot Number",
-                            icon: "info"
-                        });
-            }
-
-            // end general help dialogs
-
-
-
-        // begin currency javascript routines
-
-    $("input[data-type='currency']").on({
-        keyup: function() {
-            formatCurrency($(this));
-        },
-        blur: function() {
-            formatCurrency($(this), "blur");
-        }
-    });
-
-
-    function formatNumber(n) {
-        // format number 1000000 to 1,234,567
-        return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    }
-
-
-    function formatCurrency(input, blur) {
-        // appends $ to value, validates decimal side
-        // and puts cursor back in right position.
-
-        // get input value
-        var input_val = input.val();
-
-        // don't validate empty input
-        if (input_val === "") { return; }
-
-        // original length
-        var original_len = input_val.length;
-
-        // initial caret position
-        var caret_pos = input.prop("selectionStart");
-
-        // check for decimal
-        if (input_val.indexOf(".") >= 0) {
-
-        // get position of first decimal
-        // this prevents multiple decimals from
-        // being entered
-        var decimal_pos = input_val.indexOf(".");
-
-        // split number by decimal point
-        var left_side = input_val.substring(0, decimal_pos);
-        var right_side = input_val.substring(decimal_pos);
-
-        // add commas to left side of number
-        left_side = formatNumber(left_side);
-
-        // validate right side
-        right_side = formatNumber(right_side);
-
-        // On blur make sure 2 numbers after decimal
-        if (blur === "blur") {
-            right_side += "00";
+        function formatNumber(n) {
+          // format number 1000000 to 1,234,567
+          return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         }
 
-        // Limit decimal to only 2 digits
-        right_side = right_side.substring(0, 2);
 
-        // join number by .
-        input_val = "$" + left_side + "." + right_side;
+        function formatCurrency(input, blur) {
+          // appends $ to value, validates decimal side
+          // and puts cursor back in right position.
 
-        } else {
-        // no decimal entered
-        // add commas to number
-        // remove all non-digits
-        input_val = formatNumber(input_val);
-        input_val = "$" + input_val;
+          // get input value
+          var input_val = input.val();
 
-        // final formatting
-        if (blur === "blur") {
-            input_val += ".00";
+          // don't validate empty input
+          if (input_val === "") { return; }
+
+          // original length
+          var original_len = input_val.length;
+
+          // initial caret position
+          var caret_pos = input.prop("selectionStart");
+
+          // check for decimal
+          if (input_val.indexOf(".") >= 0) {
+
+            // get position of first decimal
+            // this prevents multiple decimals from
+            // being entered
+            var decimal_pos = input_val.indexOf(".");
+
+            // split number by decimal point
+            var left_side = input_val.substring(0, decimal_pos);
+            var right_side = input_val.substring(decimal_pos);
+
+            // add commas to left side of number
+            left_side = formatNumber(left_side);
+
+            // validate right side
+            right_side = formatNumber(right_side);
+
+            // On blur make sure 2 numbers after decimal
+            if (blur === "blur") {
+              right_side += "00";
+            }
+
+            // Limit decimal to only 2 digits
+            right_side = right_side.substring(0, 2);
+
+            // join number by .
+            input_val = "$" + left_side + "." + right_side;
+
+          } else {
+            // no decimal entered
+            // add commas to number
+            // remove all non-digits
+            input_val = formatNumber(input_val);
+            input_val = "$" + input_val;
+
+            // final formatting
+            if (blur === "blur") {
+              input_val += ".00";
+            }
+          }
+
+          // send updated string to input
+          input.val(input_val);
+
+          // put caret back in the right position
+          var updated_len = input_val.length;
+          caret_pos = updated_len - original_len + caret_pos;
+          input[0].setSelectionRange(caret_pos, caret_pos);
         }
-        }
-
-        // send updated string to input
-        input.val(input_val);
-
-        // put caret back in the right position
-        var updated_len = input_val.length;
-        caret_pos = updated_len - original_len + caret_pos;
-        input[0].setSelectionRange(caret_pos, caret_pos);
-    }
-    // end javascript currency routines
+        // end javascript currency routines
 
 
 
-        
-
+   
 
 
         function isNullOrEmpty(str) {
@@ -711,18 +733,14 @@
 
         function checkImage()
         {
-          //  jsonDialog12(jsonobj, modes, titleDialog, okcallback, cancelcallback, errorcallback)
-
-            // jsonDialog12(jsonobj, modes, titleDialog, okcallback, cancelcallback, errorcallback)
-
-          //  alert("image check");
+         
         }
 
         function rSize()
 
         {
 
-             let imgInput = document.getElementById('fileclick');
+            let imgInput = document.getElementById('fileclick');
             imgInput.addEventListener('change', function (e) {
                 if (e.target.files) {
                     let imageFile = e.target.files[0];
@@ -747,7 +765,7 @@
                     }
                     reader.readAsDataURL(imageFile);
                 }
-        });
+            });
         }
 
 
@@ -762,16 +780,7 @@
         }
 
 
-        /*
-        function LotNoVerify(function(e)  ({
-            var x = document.getElementById("LotNo");
-            if ( x.value > 0 && x.value < 100 )
-                  return;
-            else
-                  alert('Lot Number must be between 1 and 99')
-                  e.preventDefault();
-        )};  */
-
+         
 
         function myFunction() {
             alert('Agent URL');
@@ -806,3 +815,71 @@
 
     </script>
 }
+
+
+
+
+
+ function ajaxSend()
+        {
+
+                /*
+                id=TypeSell
+            id="lotnumber"
+            id="Price"
+            id="AgentLastName"
+            id="AgentFirstName"
+            id="Email"
+            id="OfficePhone"
+            id="CellPhone"
+            id="AgentUrl"
+            id="fileclick"
+
+
+
+            Swal.fire({
+                title: "Good job!",
+                text: "You clicked the button!",
+                icon: "success"
+            });
+            https://www.google.com/search?q=javascript+serialize+a+form+iformfile+example&rlz=1C1RXQR_enUS1102US1102&oq=javascript+seralize+a+form+IFormfile&gs_lcrp=EgZjaHJvbWUqCQgCECEYChigATIGCAAQRRg5MgkIARAhGAoYoAEyCQgCECEYChigATIJCAMQIRgKGKAB0gEJMzEzMDlqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8
+            const form = document.getElementById('yourFormId'); // Replace 'yourFormId' with the actual ID of your form
+            const formData = new FormData(form);
+            */
+
+
+            Swal.fire({
+                title: "Information!",
+                text: "Please choose a Lot Number",
+                icon: "failure"
+            });
+
+            debugger;
+            var fileVal = $("#fileclick").val();
+            debugger;
+
+            var lotnum = $("#lotnumber").val();
+            if (isNullOrEmpty(lotnum))
+                {
+                    alert('Please enter a value in Lot Number')
+
+                }
+            if (lotnum === '1A' || (lotnum <= 99 && lotnum >= 1) )
+            {
+
+                    var  queryString = $('#ajaxSend').serialize();
+
+                    alert(queryString);
+
+                    $.ajax({
+                        url: '@Url.Action("FileUpload1")',
+                        type: "POST",
+                        data: queryString,
+                        success: function(data, status){
+                        // Handle the response
+                        console.log("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+
+            }
+        }

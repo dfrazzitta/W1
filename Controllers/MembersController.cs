@@ -86,7 +86,7 @@ namespace W1.Controllers
         {
 
 
-          //  return Ok(new { message = "Data retrieved successfully!" });
+             return Ok(new { message = "Data retrieved successfully!" });
 
             // string finalLot = null;
 
@@ -112,7 +112,7 @@ namespace W1.Controllers
 
  
                 // check the file 
-                 
+                 // try a no await 
                 await UploadFile(file, LotNo);
                 Member member0 = new Member();
                 member0.TypeSell = TypeSell;
