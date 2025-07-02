@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -31,18 +32,11 @@ namespace W1.Controllers
             _appcontext = appcontext;
         }
  
-
+        /*
         [HttpPost]
         public async Task<IActionResult> VerifyUser(string email, string Code)
         {
-
-            //_transientService.SetPlacidUser(email);
-            //_transientService.SetPlacid(true);
-            //PlacidSingleton.Instance.SetPlacid(false);
-
-            //PlacidSingleton.Instance.SetPlacidUser(email);
-
-             
+           
             if (String.Compare("placiduser@xyztt.com", email) == 0 && String.Compare("23456", Code) == 0)
             {
                 _scopedService.SetPlacidUser(email);
@@ -55,23 +49,10 @@ namespace W1.Controllers
                 PlacidSingleton.Instance.SetPlacidUser("");
                 return RedirectToAction(nameof(Index), "home");
             }
-
-            /*
-            if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") == 0)
-            {
-                PlacidSingleton.Instance.SetPlacid(true);
-                PlacidSingleton.Instance.SetPlacidUser(email);
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                PlacidSingleton.Instance.SetPlacid(false);
-                PlacidSingleton.Instance.SetPlacidUser("");
-                return RedirectToAction(nameof(Index), "home");
-            }   
-            */
+   
             return RedirectToAction(nameof(Index), "home");
         }
+        */
 
  
         /// <summary>
@@ -86,7 +67,7 @@ namespace W1.Controllers
         {
 
 
-             return Ok(new { message = "Data retrieved successfully!" });
+            // return Ok(new { message = "Data retrieved successfully!" });
 
             // string finalLot = null;
 
@@ -95,20 +76,19 @@ namespace W1.Controllers
             //{
             //    return RedirectToAction(nameof(Index), "home");
             //} 
-            // return RedirectToAction(nameof(Index), "home");
-
-            String OfficePhone1 = OfficePhone.Insert(3, "-");
-            string OfficeFinal = OfficePhone1.Insert(7, "-");
-
-            String CellPhone1 = CellPhone.Insert(3, "-");
-            string CellPhoneFinal = CellPhone1.Insert(7, "-");
-
-
-            string currency = "$" +  Price;
+            // return RedirectToAction(nameof(Index), "home"); if (ModelState.IsValid)
 
             if (ModelState.IsValid)
             {
-                string finalLot1 = null;
+                
+                String OfficePhone1 = OfficePhone.Insert(3, "-");
+                string OfficeFinal = OfficePhone1.Insert(7, "-");
+
+                String CellPhone1 = CellPhone.Insert(3, "-");
+                string CellPhoneFinal = CellPhone1.Insert(7, "-");
+                string currency = "$" +  Price;
+          
+               // string finalLot1 = null;
 
  
                 // check the file 
@@ -133,15 +113,16 @@ namespace W1.Controllers
             else
             {
                 Member member1 = new Member();
-                member1.TypeSell = TypeSell;
-                member1.LotNo = LotNo;
-                member1.Price = Price;
-                member1.AgentLastName = AgentLastName;
-                member1.AgentFirstName = AgentFirstName;
-                member1.Email = Email;
-                member1.OfficePhone = OfficePhone;
-                member1.CellPhone = CellPhone;
-                member1.ImageName =  file.FileName;
+                 
+                member1.TypeSell = "";
+                member1.LotNo = "";
+                member1.Price = "";
+                member1.AgentLastName = "";
+                member1.AgentFirstName = "";
+                member1.Email = "";
+                member1.OfficePhone = "";
+                member1.CellPhone = "";
+                member1.ImageName =  "";
                 return View(member1);
             }
  
@@ -182,11 +163,8 @@ namespace W1.Controllers
         }
 
 
-
-        /// <summary>
-        /// /////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// </summary>
-        // GET: Members
+        /*
+  
         [HttpPost]
         public async Task<IActionResult> EmailXXX(int lot, string namex)
         {
@@ -199,7 +177,7 @@ namespace W1.Controllers
 
             return View(await _context.Users.ToListAsync());
         }
-
+        */
 
 
 

@@ -19,9 +19,25 @@
 </div>
 <hr />
 <div class="row d-flex justify-content-center">
-    <div class="col-3 w-25 p-3">
+    <div class="col-2 w-25 p-3">
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button1" onclick="activateTooltips()">Turn on ToolTips</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button1" onclick="stopTooltips()">Turn off ToolTips</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button13" >Verify URL</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button14" onclick="checkImageSize()">Check Image Size</button>
+        <br />
+        <br />
+        <input type="file" id="fileInput" style="display: none;">
+
     </div>
-    <div id="formId" class="col-md-6 w-25 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+    <div id="formId" class="col-md-8 w-25 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
 
         <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="createForm">
 
@@ -29,7 +45,8 @@
                 <label asp-for="TypeSell" class="control-label"><b>Type</b></label>
                 <input id="TypeSell" name="TypeSell"
                        asp-for="TypeSell" data-html="true" list="examplefsbo" value=""
-                       data-html="true"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Choose Type of listing"
+                       data-html="true" maxlength="5" size="5"
                        class="form-control w-2 p-2 mx-auto d-flex" />
 
                 <datalist id="examplefsbo">
@@ -160,7 +177,7 @@
                 <label asp-for="Price" class="control-label"><b>Unit Price </b></label><br />
                 <input id="currency-field" type='text' pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value=""
                        data-type="currency" name="Price"
-                       class="form-control w-2 p-2 mx-auto d-flex"
+                       class="form-control w-2 p-2 mx-auto d-flex" autocomplete="off"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter Price in decimal format" />
 
             </div>
@@ -168,7 +185,7 @@
 
             <div class="text-center">
                 <label asp-for="AgentLastName" class="control-label"><b>Last Name</b></label><br />
-                <input id="LastName" type='text' name="AgentLastName" value=""
+                <input id="LastName" type='text' name="AgentLastName" value="" autocomplete="off"
                        class="form-control w-2 p-2 mx-auto d-flex" />
             </div>
 
@@ -176,7 +193,7 @@
 
             <div class="text-center">
                 <label asp-for="AgentFirstName" class="control-label"><b>First Name</b></label><br />
-                <input id="FirstName" type='text' name="AgentFirstName" value=""
+                <input id="FirstName" type='text' name="AgentFirstName" value="" autocomplete="off"
                        class="form-control w-2 p-2 mx-auto d-flex" />
             </div>
 
@@ -185,46 +202,51 @@
             <div class="text-center">
                 <label asp-for="Email" class="control-label"><b>Email</b></label><br />
                 <input id="Email" type='text' name="Email" value=""
-                       class="form-control w-2 p-2 mx-auto d-flex"
+                       class="form-control w-2 p-2 mx-auto d-flex" autocomplete="off"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter email of RE Agent or Seller" />
             </div>
 
             <div class="text-center">
                 <label asp-for="OfficePhone" class="control-label"><b>Primary Phone</b></label><br />
-                <input id="OfficePhone" type='text' name="OfficePhone" value=""
+                <input id="OfficePhone" type='text' name="OfficePhone" value="" autocomplete="off"
                        class="form-control w-2 p-2 mx-auto d-flex" onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')"
-                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter of office phone of RE Agent" />
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter of office phone of RE Agent - NO DASHES" />
             </div>
 
             <div class="text-center">
                 <label asp-for="CellPhone" class="control-label"><b>Secondary Phone</b></label><br />
                 <input id="CellPhone" type='text' name="CellPhone" value="" onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')"
-                       class="form-control w-2 p-2 mx-auto d-flex"
-                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter the Cellphone of RE Agent/seller" />
+                       class="form-control w-2 p-2 mx-auto d-flex" autocomplete="off"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter the Cellphone of RE Agent/seller - NO DASHES" />
 
             </div>
-
+            <hr />
             <div class="text-center">
                 <label asp-for="AgentUrl" class="control-label"><b>URL</b></label><br />
-                <input id="AgentUrl" type='text' name="AgentUrl"
-                       class="form-control w-2 p-2 mx-auto d-flex"
-                       value="" />
-
+                <input id="AgentUrl" type='text' name="AgentUrl" autocomplete="off"
+                       value=""
+                       class="form-control w-2 p-2 mx-auto d-flex" 
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please verify URL is viable" />
+                  
             </div>
-
+         
+            <hr />
             <div class="text-center">
                 <label asp-for="ImageName" class="control-label"><b>Home Image</b></label><br />
 
-                <input id="fileclick" value="" title="Choose Image file" type="file" name="file" class="form-control text-center w-2 p-2 mx-auto d-flex" />
+                <input id="fileclick" value="" title="Choose Image file" type="file" 
+                    name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title ="Choose"/>
+                
             </div>
-            <br />
-
+  
+            <hr />
             <input type="submit" value="Submit" style="text-align: center;">
         </form>
 
     </div>
 
-    <div class="col-3  w-25  text-center">
+    <div class="col-2  w-25  text-center">
         <br />
         <br />
 
@@ -273,6 +295,34 @@
 {
 
     <script>
+         
+
+            function verifyURLbyChrome() {
+
+                alert('verifyURL');
+            }
+        
+
+
+
+        function stopTooltips() {
+            console.log('called turn off tooltips');
+            const tooltipTriggerList = [].slice.call(
+              document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+              const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                const tooltip = new bootstrap.Tooltip(tooltipTriggerEl)
+                tooltip.disable()
+                return tooltip;
+            })
+        }
+
+
+        function activateTooltips() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+              return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        }
 
         $('#formId').submit(function (e) {
              validateForm();
@@ -301,7 +351,7 @@
 
                         var currentUrl = window.location.href;
                         console.log(currentUrl);
-                        ShowUpdate(currentUrl1);
+                       // ShowUpdate(currentUrl1);
                    // } else {
                         // Handle error or display error message
                    //     alert('Error error error: ' + response.responseText);
@@ -309,16 +359,15 @@
                 },
                 error: function (xhr, status, error) {
                                            // Handle error or display error message
-                        alert('(xhr, status, error: ');
-                        
-
+                       // alert('(xhr, status, error: ');
+                            ajaxError();
                 }
             });
         });
 
          $(document).ready(function() {
 
-
+             /*
                 $("#clearlot").click(function() {
                    // alert('clearlot');
                     $("#lotnumber").val("1A");
@@ -329,6 +378,10 @@
                      var TypeS = document.getElementById("TypeSell");
                      TypeS.style.backgroundColor = "red";
                 }
+
+                */
+
+
                // $('#button1').submit(function(e) {  TypeSell
                //     alert('submit override');
                //     debugger;
@@ -336,13 +389,114 @@
                   //var requestData = $('#some-form, #more-inputs :input').serialize();
                   //console.log(requestData);
                // });
+
+                   
          });
 
+        document.getElementById('button13').addEventListener('click', function() {
+              var file = document.getElementById('fileInput').click();
+                           
+
+                /*
+                let imgInput = document.getElementById('fileclick');
+                imgInput.addEventListener('change', function (e) {
+                    if (e.target.files) {
+                        let imageFile = e.target.files[0];
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var img = document.createElement("img");
+                            img.onload = function (event) {
+                                // Dynamically create a canvas element
+                                var canvas = document.createElement("canvas");
+
+                                // var canvas = document.getElementById("canvas");
+                                var ctx = canvas.getContext("2d");
+
+                                // Actual resizing
+                                ctx.drawImage(img, 0, 0, 1024, 682);
+
+                                // Show resized image in preview element
+                                var dataurl = canvas.toDataURL(imageFile.type);
+                                document.getElementById("preview").src = dataurl;
+                            }
+                            img.src = e.target.result;
+                        }
+                        reader.readAsDataURL(imageFile);
+                    }
+                });
+                */
  
-          function ShowUpdate(string msg) {
+            });
 
 
-              alert('this is an alert');
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            let selectedFiles = event.target.files;
+            if (selectedFiles.length > 0) {
+                debugger;
+                     let imageFile = event.target.files[0];
+                     var reader = new FileReader();
+                     reader.onload = function (e) {
+                         var img = document.createElement("img");
+                         img.onload = function (event) {
+                             // Dynamically create a canvas element
+                             var canvas = document.createElement("canvas");
+
+                             // var canvas = document.getElementById("canvas");
+                             var ctx = canvas.getContext("2d");
+
+                             // Actual resizing
+                             ctx.drawImage(img, 0, 0, 1024, 682);
+
+                             // Show resized image in preview element
+                             var dataurl = canvas.toDataURL(imageFile.type);
+                             document.getElementById("preview").src = dataurl;
+                         }
+                         img.src = e.target.result;
+                     }
+                     reader.readAsDataURL(imageFile);
+
+                // debugger;
+            }
+        });
+
+
+
+        function formatUSPhoneNumber(phoneNumber) {
+            // Remove all non-digit characters
+            const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+            const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+            if (match) {
+                return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+            }
+            return phoneNumber; // Return original if no match
+        }
+
+
+             function ajaxError() {
+
+
+                 // alert('this is an alert');
+
+
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                    Swal.fire({
+                        title: "Information",
+                        text: "A error when Updating Sale Data",
+                        icon:
+                        "Error"
+                    });
+
+
+                    return true;
+              }
+
+ 
+          function ShowUpdate() {
+
+
+             // alert('this is an alert');
                
  
                const doubleCheckIcon =
@@ -350,7 +504,7 @@
                              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
                 Swal.fire({
                     title: "Information",
-                    text: msg,
+                    text: "you have updated the database",
                     icon:
                     "info"
                 });
@@ -722,7 +876,7 @@
 
         {
 
-             let imgInput = document.getElementById('fileclick');
+            let imgInput = document.getElementById('fileclick');
             imgInput.addEventListener('change', function (e) {
                 if (e.target.files) {
                     let imageFile = e.target.files[0];
@@ -747,7 +901,7 @@
                     }
                     reader.readAsDataURL(imageFile);
                 }
-        });
+            });
         }
 
 

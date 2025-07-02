@@ -14,13 +14,13 @@
     </div>
     <div class="col-md-6 align-content-center" style="text-align: center;  font-size: 16pt; margin:1px 1px; padding:0px 0px; font-family:Arial !important;">
         <h1 >Lake Placid Login</h1>
-        @*
+        
         <div id="spin" class="spinner-wrapper">
             <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>  
-        *@
+        
         <section>
             <form id="account" method="post">
                 
@@ -70,12 +70,33 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        /*
-        window.addEventListener("load", function() {
-             
-            $("#spin").hide(); // Hide the spinner
-            console.log("Page and all resources are loaded!");
-        }); */
+
+        const myForm = document.getElementById('account');
+        myForm.addEventListener('submit', function(event) {
+          // Prevent the default form submission
+          event.preventDefault();
+           
+               // Code to execute after the entire page and all resources are loaded
+          $("#spin").show(); // Hide the spinner
+              
+
+          // Your custom logic here:
+          // For example, you can perform client-side validation,
+          // send the data via AJAX, or modify form data before submission.
+
+         // const formData = new FormData(myForm); // Get form data
+         // console.log('Form data:', Object.fromEntries(formData.entries()));
+
+          // If validation passes or AJAX request is successful,
+          // you might then manually submit the form if needed:
+            myForm.submit(); // Only if you want to proceed with a traditional submission after your logic
+        });
+
+
+        window.addEventListener('load', function() {
+                // Your code to execute after the page and all resources are loaded
+                 $("#spin").hide(); // Hide the spinner
+            });
 
     </script>
 }

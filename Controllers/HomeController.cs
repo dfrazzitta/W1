@@ -1,11 +1,13 @@
-using System.Diagnostics;
-using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
 using W1.Data;
 using W1.Models;
-using System.IO;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+ 
 
 /*
  * 
@@ -147,14 +149,14 @@ namespace W1.Controllers
           //  bool lp = System.IO.File.Exists("http://localhost:5000/wwwroot/forsale.txt");
         }
 
-
+        [OutputCache(Duration = 1440)]
         public IActionResult Index()
         {
             var user = HttpContext.User.Identity.IsAuthenticated;
            // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
-
+        [OutputCache(Duration = 1440)]
         public IActionResult ParkPlan()
         {
            // PlacidSingleton.Instance.SetPlacid(false);
@@ -162,7 +164,7 @@ namespace W1.Controllers
         }
 
 
-
+        [OutputCache(Duration = 1440)]
         public IActionResult Location()
         {
            // PlacidSingleton.Instance.SetPlacid(false);
@@ -174,43 +176,18 @@ namespace W1.Controllers
            // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
-
+        [OutputCache(Duration = 1440)]
         public IActionResult ResidentOwner()
         {
            // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
-
-        /*
+        [OutputCache(Duration = 720)]
         public IActionResult Homes()
         {
-            return View();
-        }
-        */
-
-
-
-        public IActionResult Homes()
-        {
-            // PlacidSingleton.Instance.SetPlacid(false);
-
-            string logFilePath = Path.Combine(_appEnvironment.WebRootPath, "HomeVisible.txt");
-
-            if ( System.IO.File.Exists(logFilePath))
-            {
-                _logger.LogDebug("Homes: " + "file does not  " + logFilePath);
-              //  return View(new List<DynamicHomes>());
-            }
-
-
-
-
-            List<Member> member = _context.Members.ToList();
-
-            _logger.LogDebug("Homes: " + "this is after context " + member.Count().ToString());
-            int ct = member.Count();
-
+        
+            List<Member> member =   _context.Members.ToList();
 
              
             string newHomes = "<div class=\"row\">\r\n <div class=\"col-sm-1\">\r\n </div>\r\n<div class=\"col-sm-10\" width:100%;>\r\n <div class=\"d-flex justify-content-center\">\r\n <table align=\"center\" mx-auto border=\"1\" cellpadding=\"4\" cellspacing=\"0\" width=\"100%\">\r\n <tbody>\r\n <tr>\r\n <td colspan=\"3\" align=\"center\" class=\"BG_Light_Blue\"> <a name=\"L88\" id=\"L88\"></a> <strong> Lot # 5 </strong></td>\r\n\r\n </tr>\r\n <tr>\r\n <td colspan=\"5\">\r\n <div align=\"center\"> <img src=\"6.jpg\" class=\"img-fluid auto\" alt=\"Lot # 5\" name=\"Main_05\" id=\"Main_05\" height=\"auto\" width=\"auto\">  \r\n <a id=\"abcd0\"  class=\"example-image-link\" href=\"/Images/platmap.jpg\" width='388px' height='339px' data-lightbox=\"example-1\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Image Expanded\">\r\n\r\n\r\n&nbspLocation\r\n </a>\r\n </div>\r\n </td>\r\n </tr>\r\n\r\n <tr>\r\n <td colspan=\"4\">\r\n <div align=\"center\"> <strong>Property Specifics:</strong> </div align=\"center\">\r\n <table align=\"center\" border=\"3\" cellpadding=\"1\" cellspacing=\"0\" width=\"55%\">\r\n  <tbody><tr>\r\n <td width=\"20%\"> <strong>TypeSell: </strong> </td>\r\n <td width=\"80%\">FSBO</td>\r\n  </tr>\r\n  </tr>\r\n\r\n <tr>\r\n <td width=\"20%\"> <strong>Price: </strong> </td>\r\n <td width=\"80%\"> $110,000.00 </td>\r\n  </tr>\r\n <tr>\r\n <td valign=\"top\"> <strong>Contact:</strong> </td>\r\n <td> Kathryn Valentine   <br /> Ph: 407-674-0220  <br />Ph: 407-479-8789 <br /><a style=\"font-size:16px;\" href=\"mailto:lakeplacidpark@gmail.com\">Email</a> <br /><a href=\"LINKTOWEB\" target=\"_blank\">Listing</a></td>\r\n </tr>\r\n </table>\r\n </td>\r\n </tr>\r\n </tbody>\r\n </table>\r\n </div>  </div>  <div class=\"col-sm-1\">\r\n </div> </div><br />";
@@ -218,11 +195,10 @@ namespace W1.Controllers
             //good
             // string newHomes = "<div class=\"row\">\r\n <div class=\"col-sm-1\">\r\n </div>\r\n<div class=\"col-sm-10\" width:100%;>\r\n <div class=\"d-flex justify-content-center\">\r\n <table align=\"center\" mx-auto border=\"1\" cellpadding=\"4\" cellspacing=\"0\" width=\"100%\">\r\n <tbody>\r\n <tr>\r\n <td colspan=\"3\" align=\"center\" class=\"BG_Light_Blue\"> <a name=\"L88\" id=\"L88\"></a> <strong> Lot # 5 </strong></td>\r\n\r\n </tr>\r\n <tr>\r\n <td colspan=\"5\">\r\n <div align=\"center\"> <img src=\"6.jpg\" class=\"img-fluid auto\" alt=\"Lot # 5\" name=\"Main_05\" id=\"Main_05\" height=\"auto\" width=\"auto\">  \r\n <a id=\"abcd0\"  class=\"example-image-link\" href=\"/Images/platmap.jpg\" width='388px' height='339px' data-lightbox=\"example-1\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Image Expanded\">\r\n\r\n\r\n&nbspLocation\r\n </a>\r\n </div>\r\n </td>\r\n </tr>\r\n\r\n <tr>\r\n <td colspan=\"4\">\r\n <div align=\"center\"> <strong>Property Specifics:</strong> </div align=\"center\">\r\n <table align=\"center\" border=\"3\" cellpadding=\"1\" cellspacing=\"0\" width=\"55%\">\r\n  <tbody><tr>\r\n <td width=\"20%\"> <strong>TypeSell: </strong> </td>\r\n <td width=\"80%\">FSBO</td>\r\n  </tr>\r\n  </tr>\r\n\r\n <tr>\r\n <td width=\"20%\"> <strong>Price: </strong> </td>\r\n <td width=\"80%\"> $110,000.00 </td>\r\n  </tr>\r\n <tr>\r\n <td valign=\"top\"> <strong>Contact:</strong> </td>\r\n <td> Kathryn Valentine   <br /> Ph: 407-674-0220  <br />Ph: 407-479-8789 <br /><a href=\"LINKTOWEB\" target=\"_blank\">Listing</a></td>\r\n </tr>\r\n </table>\r\n </td>\r\n </tr>\r\n </tbody>\r\n </table>\r\n </div>  </div>  <div class=\"col-sm-1\">\r\n </div> </div><br />";
 
-
-
             List<DynamicHomes> dh = new List<DynamicHomes>();
+            int ct = member.Count();
 
-           foreach (Member m in member)
+            foreach (Member m in member)
            {
                DynamicHomes dh1 = new DynamicHomes();
 
@@ -262,10 +238,13 @@ namespace W1.Controllers
            }
 
             // ct = 0;
+            
            if (ct > 0)
                return View(dh);
            else
                return View("HomeEmpty"); // return empty list if no members found
+             
+            
         }
  
         public IActionResult Privacy()
