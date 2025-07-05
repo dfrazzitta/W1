@@ -8,32 +8,32 @@ using W1.Data;
 
 namespace W1.Models
 {
-  
+
     public sealed class SingletonClass
     {
-         
+
         private static SingletonClass instance = null;
         private static readonly object padlock = new object();
- 
-        
 
 
-        SingletonClass( )
+
+
+        SingletonClass()
         {
-            
-             
+
+
         }
 
         public static SingletonClass Instance
         {
-            
+
             get
             {
                 lock (padlock)
                 {
                     if (instance == null)
                     {
-                        instance = new SingletonClass( );
+                        instance = new SingletonClass();
                     }
                     return instance;
                 }
@@ -42,15 +42,17 @@ namespace W1.Models
 
 
 
-         
-        public void GetforSale() {
 
-            
-
-
+        public void SetVisible()
+        {
 
         }
 
+
+        public void SetInVisible()
+        {
+
+        }
 
     }
 }

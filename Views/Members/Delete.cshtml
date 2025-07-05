@@ -7,7 +7,7 @@
 
 <h1 align="center"> Delete</h1>
 
-<h2 align="center" class="blink-h2">Are you sure you want to delete this?</h2>
+<h2 id="blink" align="center" style="color: #be2d2d;">Are you sure you want to delete this?</h2>
  
  
 <div>
@@ -92,7 +92,9 @@
         *@
     </form>
     <br />
-    <a asp-action="Index" align="center" class="centerDelete justify-content-center">Back to List</a>
+    <div align="center">
+      <a asp-action="Index" align="center" class="centerDelete justify-content-center">Back to List</a>
+    </div>
 </div>
  
 
@@ -100,6 +102,15 @@
 {
     <script>
 
+          $(document).ready(function() {
+           
+              var blink = document.getElementById('blink');
+                setInterval(function() {
+                    blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
+                }, 500);
+             
+          });
+           
 
          $('#formDelete').submit(function (e) {
             e.preventDefault(); // Prevent default form submission
@@ -142,6 +153,9 @@
                 }
             });
         });
+
+
+
         function deletefile(){
             
            // Swal.fire("SweetAlert2 is working!");
@@ -157,6 +171,7 @@
               confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
               if (result.isConfirmed) {
+
                 Swal.fire(
                   'Deleted!',
                   'Your file has been deleted.',

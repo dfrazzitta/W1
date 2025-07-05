@@ -1,5 +1,4 @@
-﻿﻿
-
+﻿
 @model W1.Models.Member
 
 
@@ -7,10 +6,6 @@
     Layout = "/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Create";
 }
-
-
-
-
 
 <div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
     <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
@@ -28,18 +23,40 @@
         <button class="btn btn-primary" id="button1" onclick="stopTooltips()">Turn off ToolTips</button>
         <br />
         <br />
-        <button class="btn btn-primary" id="button13" >Verify URL</button>
-        <br />
-        <br />
-        <button class="btn btn-primary" id="button14" onclick="checkImageSize()">Check Image Size</button>
-        <br />
-        <br />
-        <input type="file" id="fileInput" style="display: none;">
+        <div class="text-center">
+            <label for="html">Verify URL</label><br>
+            <input type="url" id="urlx" name="Url" value="" 
+                   data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please copy paste URL" />
 
+            <button class="btn btn-primary" id="button13" onclick="verifyUrl()">Verify URL</button>
+        </div>
+        
+        <br />
+        <br />
+        @*
+        <button class="btn btn-primary" id="button14" onclick="checkImageSize()">Check Image Size</button>
+        *@
+        <br />
+        <br />
+        <form id="checkfile1" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="checkfile" name="checkfile1">
+
+            <hr />
+            <div class="text-center">
+                <label asp-for="ImageName" class="control-label"><b>Check Image</b></label><br />
+
+                <input id="fileclick1" value="" title="Choose Image file" type="file"
+                       name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Choose Image to check for dimensions" />
+
+            </div>
+            <input type="submit" value="Submit" style="text-align: center">
+        </form>
     </div>
+
+
     <div id="formId" class="col-md-8 w-25 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
 
-        <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="createForm">
+        <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="form">
 
             <div class="form-group text-center">
                 <label asp-for="TypeSell" class="control-label"><b>Type</b></label>
@@ -182,14 +199,11 @@
 
             </div>
 
-
             <div class="text-center">
                 <label asp-for="AgentLastName" class="control-label"><b>Last Name</b></label><br />
                 <input id="LastName" type='text' name="AgentLastName" value="" autocomplete="off"
                        class="form-control w-2 p-2 mx-auto d-flex" />
             </div>
-
-
 
             <div class="text-center">
                 <label asp-for="AgentFirstName" class="control-label"><b>First Name</b></label><br />
@@ -197,25 +211,23 @@
                        class="form-control w-2 p-2 mx-auto d-flex" />
             </div>
 
-
-
             <div class="text-center">
                 <label asp-for="Email" class="control-label"><b>Email</b></label><br />
-                <input id="Email" type='text' name="Email" value=""
+                <input id="Email" type="email" name="Email" value=""
                        class="form-control w-2 p-2 mx-auto d-flex" autocomplete="off"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter email of RE Agent or Seller" />
             </div>
 
             <div class="text-center">
                 <label asp-for="OfficePhone" class="control-label"><b>Primary Phone</b></label><br />
-                <input id="OfficePhone" type='text' name="OfficePhone" value="" autocomplete="off"
+                <input id="OfficePhone" type="number" name="OfficePhone" value="" autocomplete="off"
                        class="form-control w-2 p-2 mx-auto d-flex" onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter of office phone of RE Agent - NO DASHES" />
             </div>
 
             <div class="text-center">
                 <label asp-for="CellPhone" class="control-label"><b>Secondary Phone</b></label><br />
-                <input id="CellPhone" type='text' name="CellPhone" value="" onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')"
+                <input id="CellPhone"   type="number" name="CellPhone" value="" onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')"
                        class="form-control w-2 p-2 mx-auto d-flex" autocomplete="off"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter the Cellphone of RE Agent/seller - NO DASHES" />
 
@@ -223,27 +235,31 @@
             <hr />
             <div class="text-center">
                 <label asp-for="AgentUrl" class="control-label"><b>URL</b></label><br />
-                <input id="AgentUrl" type='text' name="AgentUrl" autocomplete="off"
+                <input id="AgentUrl" type="url" name="AgentUrl" autocomplete="off"
                        value=""
-                       class="form-control w-2 p-2 mx-auto d-flex" 
+                       class="form-control w-2 p-2 mx-auto d-flex"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please verify URL is viable" />
-                  
             </div>
-         
+
             <hr />
             <div class="text-center">
                 <label asp-for="ImageName" class="control-label"><b>Home Image</b></label><br />
 
-                <input id="fileclick" value="" title="Choose Image file" type="file" 
-                    name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
-                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title ="Choose"/>
-                
+                <input id="fileclick" value="" title="Choose Image file" type="file"
+                       name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Choose" />
             </div>
-  
-            <hr />
-            <input type="submit" value="Submit" style="text-align: center;">
-        </form>
 
+            <hr />
+ 
+            <input type="submit" value="Submit" style="text-align: center;">
+             
+        </form>
+        <br />
+        @*
+        <button class="btn btn-primary" id="button1" style="text-align: center;" onclick="testsubmit()">Send Submit</button>
+        *@
+        <br />
     </div>
 
     <div class="col-2  w-25  text-center">
@@ -269,7 +285,7 @@
     </div>
 </div>
 
- 
+
 @*
 <div class="text-center">
     <button id="button1" onclick="Testswal1()">Swal demo</button>
@@ -295,141 +311,631 @@
 {
 
     <script>
-         
+                
+            const inputElement = document.getElementById('Email');
 
-            function verifyURLbyChrome() {
-
-                alert('verifyURL');
-            }
-        
-
-
-
-        function stopTooltips() {
-            console.log('called turn off tooltips');
-            const tooltipTriggerList = [].slice.call(
-              document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-              const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                const tooltip = new bootstrap.Tooltip(tooltipTriggerEl)
-                tooltip.disable()
-                return tooltip;
-            })
-        }
-
-
-        function activateTooltips() {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-              return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
-        }
-
-        $('#formId').submit(function (e) {
-             validateForm();
-            e.preventDefault(); // Prevent default form submission
-           // debugger;
-            $.ajax({
-                url: '@Url.Action("FileUpload1", "Members")', // Replace with your controller action
-                type: 'POST',
-                data: $(this).serialize(), // Serialize form data
-                success: function (response) {
-                  //  if (response.success) { // Assuming your controller returns a success property
-                        // Display success message using JavaScript
-                        console.log("Success:", response); // Log the response data
-                        HelpHomeImageInfo();
-                         
-                        // window.location.href = "http://localhost:5000/members/index.cshtml";
-                        // window.location.origin  https://www.example.com).
-                        // window.location.hostname
-
-                        var currentUrl1 =  window.location.origin;
-                        console.log(currentUrl1);
-
-                        var currentUrl2 = window.location.hostname;
-                        console.log(currentUrl2);
-
-
-                        var currentUrl = window.location.href;
-                        console.log(currentUrl);
-                       // ShowUpdate(currentUrl1);
-                   // } else {
-                        // Handle error or display error message
-                   //     alert('Error error error: ' + response.responseText);
-                  //  }
-                },
-                error: function (xhr, status, error) {
-                                           // Handle error or display error message
-                       // alert('(xhr, status, error: ');
-                            ajaxError();
-                }
+            // Add an event listener for the focusout event
+            inputElement.addEventListener('focusout', function(e) {
+              // Code to execute when the input field loses focus
+              alert('Input field lost focus!');
             });
+
+            @*
+            function testsubmit()
+            {
+                alert('second submit');
+                var form=$("#ajaxSend");
+                var vb = form.serialize();
+                debugger;
+                 $.ajax({
+                        url: '@Url.Action("FileUpload1", "Members")', // Example API endpoint
+                        method: "POST", // HTTP method (GET, POST, PUT, DELETE, etc.)
+                        data: new FormData$('#ajaxSend').serialize(),  // Expected data type of the response
+                        success: function(response) {
+                            // This function is executed if the request is successful
+                             console.log("Success:", response); // Log the response data
+                            // HelpHomeImageInfo();
+
+                            // window.location.href = "http://localhost:5000/members/index.cshtml";
+                            // window.location.origin  https://www.example.com).
+                            // window.location.hostname
+
+                            var currentUrl1 =  window.location.origin;
+                            console.log(currentUrl1);
+
+                            var currentUrl2 = window.location.hostname;
+                            console.log(currentUrl2);
+
+
+                            var currentUrl = window.location.href;
+                            console.log(currentUrl);
+                        },
+                        error: function(xhr, status, error) {
+                            // This function is executed if an error occurs
+                            console.error("AJAX Error:", status, error);
+                             ajaxError();
+                        }
+                    });
+            }
+            *@
+
+            function verifyUrl() {
+                //urlx
+
+                const urlx = document.getElementById('urlx').value;
+
+                if (urlx === null || urlx.length === 0) {
+                    const doubleCheckIcon =
+
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                                title: "Information",
+                                text: "Please enter a URL in the input **",
+                                icon:
+                                "Error"
+                            });
+                            return true;
+                }
+                else {
+
+
+                    const newWindow = window.open(urlx, '_blank');
+
+                    if (newWindow === null) {
+                       // newWindow.onerror = (message, source, lineno, colno, error) => {
+                           const doubleCheckIcon =
+
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                                title: "Information",
+                                text: "Url Appears to be good",
+                                icon:
+                                "Noice"
+                            });
+                            return true; // Prevents default error handling in the new window
+                       // };
+                    }
+                    else {
+
+                         newWindow.onerror = (message, source, lineno, colno, error) => {
+                            console.error('Error in new window:', message, source, lineno, colno, error);
+                            // You can also send this error information back to the opener window
+                            // using postMessage or by accessing properties if same-origin.
+                             const doubleCheckIcon =
+
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                                title: "Information",
+                                text: message + " " + source + " " + lineno + " " + colno + " " + error,
+                                icon:
+                                "Error"
+                            });
+                            
+                            return true; // Prevents default error handling in the new window
+                        };
+                         
+                    }
+                  }
+            }
+            // #region tooltips
+
+            function stopTooltips() {
+                console.log('called turn off tooltips');
+                const tooltipTriggerList = [].slice.call(
+                  document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                  const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    const tooltip = new bootstrap.Tooltip(tooltipTriggerEl)
+                    tooltip.disable()
+                    return tooltip;
+                })
+            }
+
+
+            function activateTooltips() {
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                  return new bootstrap.Tooltip(tooltipTriggerEl)
+                })
+            }
+
+            //#endregion
+
+              $(document).ready(function() {
+
+             });
+
+            $('#ajaxSend').submit(function (e) {
+               
+                   // e.preventDefault(); // Prevent default form submission
+                    
+                    $.ajax({
+                        url: '@Url.Action("FileUpload1", "Members")', // Example API endpoint
+                        method: "POST", // HTTP method (GET, POST, PUT, DELETE, etc.)
+                        data: $(this).serialize(),  // Expected data type of the response
+                        success: function(response) {
+                            // This function is executed if the request is successful
+                             console.log("Success:", response); // Log the response data
+                            // HelpHomeImageInfo();
+
+                            // window.location.href = "http://localhost:5000/members/index.cshtml";
+                            // window.location.origin  https://www.example.com).
+                            // window.location.hostname
+
+                            var currentUrl1 =  window.location.origin;
+                            console.log(currentUrl1);
+
+                            var currentUrl2 = window.location.hostname;
+                            console.log(currentUrl2);
+
+
+                            var currentUrl = window.location.href;
+                            console.log(currentUrl);
+                        },
+                        error: function(xhr, status, error) {
+                            // This function is executed if an error occurs
+                            console.error("AJAX Error:", status, error);
+                             ajaxError();
+                        }
+                    });
+    
+            });
+        
+                    
+
+            function formatUSPhoneNumber(phoneNumber) {
+                // Remove all non-digit characters
+                const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+                const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+                if (match) {
+                    return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+                }
+                return phoneNumber; // Return original if no match
+            }
+
+            function ajaxError() {
+                 const doubleCheckIcon =
+
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                Swal.fire({
+                    title: "Information",
+                    text: "A error when Updating Sale Data",
+                    icon:
+                    "Error"
+                });
+                 return true;
+            }
+
+            function ShowUpdate() {
+
+                       const doubleCheckIcon =
+                                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                        Swal.fire({
+                            title: "Information",
+                            text: "you have updated the database",
+                            icon:
+                            "info"
+                        });
+                        return true;
+            }
+
+        function validateForm() {
+
+            return true;
+
+
+
+
+              let ts = document.forms["createForm"]["TypeSell"].value;
+              if (ts == "") {
+          
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'TypeSell can not be blank - Please choose from dropdown combo'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+
+                    console.log('typesell error');
+                    return false;
+              }
+
+              let ln = document.forms["createForm"]["lotnumber"].value;
+              if (ln == "") {
+
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'LotNumber can not be blank - Please choose from dropdown combo'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+                     console.log('lotnumber error');
+                    return false;
+              }
+
+              let pr = document.forms["createForm"]["Price"].value;
+              if (pr == "") {
+
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'Price can not be blank - Please enter a value'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+                     console.log('price error');
+                    return false;
+              }
+
+              let aln = document.forms["createForm"]["AgentLastName"].value;
+              if (aln == "") {
+
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'Last Name can not be blank - Please enter a value'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+                    console.log('AgentLastName error');
+                    return false;
+              }
+
+              let afn = document.forms["createForm"]["AgentFirstName"].value;
+              if (afn == "") {
+
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'First Name can not be blank - Please enter a value'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+                    console.log('AgentFirstName error');
+                    return false;
+              }
+
+              let em = document.forms["createForm"]["Email"].value;
+              if (em == "") {
+
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'Email can not be blank - Please enter a value'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+                    console.log('Email error');
+                    return false;
+              }
+
+
+              let pp = document.forms["createForm"]["OfficePhone"].value;
+              if (pp == "") {
+
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'Primary Phone can not be blank - Please enter a value'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+                    console.log('OfficePhone error');
+                    return false;
+              }
+
+              let sp = document.forms["createForm"]["CellPhone"].value;
+              if (sp == "") {
+
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'Secondary Phone can not be blank - Please enter a value'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+                    console.log('CellPhone error');
+                    return false;
+              }
+
+              let aurl = document.forms["createForm"]["AgentUrl"].value;
+              if (aurl == "") {
+
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'If FSBO please enter LakePlacidPark.com - If Agent please enter agent URL- Please enter a value'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+                    console.log('AgentURL error');
+                    return false;
+              }
+
+
+              let fc = document.forms["createForm"]["fileclick"].value;
+              if (fc == "") {
+
+                   const doubleCheckIcon =
+
+                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'Please enter Image to display L- Please choose a image'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+                    console.log('fileclick error');
+                    return false;
+              }
+
+            return true;
+        }
+
+        //#region HelpButtons
+
+        function HelpUnitPriceInfo()
+                {
+                        const doubleCheckIcon =
+
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                                title: "Information",
+                                html: 'Please enter the Sale Price - it is auto formatting'
+                                    ,
+                                icon:
+                                "info"
+                            });
+
+                }
+
+        function HelpAgentURLInfo()
+                {
+                    const doubleCheckIcon =
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                    Swal.fire({
+                                title: "Information",
+                                text: "Please Enter Agent URL however chek the URL for accuracy first",
+                                icon: "info"
+                            });
+                }
+
+        function HelpHomeImageInfo()
+                {
+                    const doubleCheckIcon =
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                    Swal.fire({
+                                title: "Information",
+                                text: "Please assure Home name prefix is the same as lot number (ie: 8.jpg equals lot number 8",
+                                icon: "info"
+                            });
+                }
+
+
+        function HelpTypeSellInfo()
+                {
+                        const doubleCheckIcon =
+
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                                title: "Information",
+                                html: 'TYPE is the type of sale - it can be either a RealEstate Listing thru a RE Agent or it can be a FSBO (For Sale by Owner)'
+                                    ,
+                                icon:
+                                "info"
+                            });
+
+                }
+
+        function HelpLotNumberInfo()
+                {
+                    const doubleCheckIcon =
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                    Swal.fire({
+                                title: "Information",
+                                text: "Please use the dropdown combo to choose Lot Number",
+                                icon: "info"
+                            });
+                }
+
+        //#endregion
+
+         //#region currencyFormatting
+
+        $("input[data-type='currency']").on({
+            keyup: function() {
+                formatCurrency($(this));
+            },
+            blur: function() {
+                formatCurrency($(this), "blur");
+            }
         });
 
-         $(document).ready(function() {
+        function formatNumber(n) {
+            // format number 1000000 to 1,234,567
+            return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        }
 
-             /*
-                $("#clearlot").click(function() {
-                   // alert('clearlot');
-                    $("#lotnumber").val("1A");
-                });
+        function formatCurrency(input, blur) {
+            // appends $ to value, validates decimal side
+            // and puts cursor back in right position.
 
-                function TypeSell1()
-                {
-                     var TypeS = document.getElementById("TypeSell");
-                     TypeS.style.backgroundColor = "red";
-                }
+            // get input value
+            var input_val = input.val();
 
-                */
+            // don't validate empty input
+            if (input_val === "") { return; }
 
+            // original length
+            var original_len = input_val.length;
 
-               // $('#button1').submit(function(e) {  TypeSell
-               //     alert('submit override');
-               //     debugger;
-               //   e.preventDefault();
-                  //var requestData = $('#some-form, #more-inputs :input').serialize();
-                  //console.log(requestData);
-               // });
+            // initial caret position
+            var caret_pos = input.prop("selectionStart");
 
-                   
-         });
+            // check for decimal
+            if (input_val.indexOf(".") >= 0) {
 
-        document.getElementById('button13').addEventListener('click', function() {
-              var file = document.getElementById('fileInput').click();
-                           
+            // get position of first decimal
+            // this prevents multiple decimals from
+            // being entered
+            var decimal_pos = input_val.indexOf(".");
 
-                /*
-                let imgInput = document.getElementById('fileclick');
-                imgInput.addEventListener('change', function (e) {
-                    if (e.target.files) {
-                        let imageFile = e.target.files[0];
-                        var reader = new FileReader();
-                        reader.onload = function (e) {
-                            var img = document.createElement("img");
-                            img.onload = function (event) {
-                                // Dynamically create a canvas element
-                                var canvas = document.createElement("canvas");
+            // split number by decimal point
+            var left_side = input_val.substring(0, decimal_pos);
+            var right_side = input_val.substring(decimal_pos);
 
-                                // var canvas = document.getElementById("canvas");
-                                var ctx = canvas.getContext("2d");
+            // add commas to left side of number
+            left_side = formatNumber(left_side);
 
-                                // Actual resizing
-                                ctx.drawImage(img, 0, 0, 1024, 682);
+            // validate right side
+            right_side = formatNumber(right_side);
 
-                                // Show resized image in preview element
-                                var dataurl = canvas.toDataURL(imageFile.type);
-                                document.getElementById("preview").src = dataurl;
-                            }
-                            img.src = e.target.result;
+            // On blur make sure 2 numbers after decimal
+            if (blur === "blur") {
+                right_side += "00";
+            }
+
+            // Limit decimal to only 2 digits
+            right_side = right_side.substring(0, 2);
+
+            // join number by .
+            input_val = "$" + left_side + "." + right_side;
+
+            } else {
+            // no decimal entered
+            // add commas to number
+            // remove all non-digits
+            input_val = formatNumber(input_val);
+            input_val = "$" + input_val;
+
+            // final formatting
+            if (blur === "blur") {
+                input_val += ".00";
+            }
+            }
+
+            // send updated string to input
+            input.val(input_val);
+
+            // put caret back in the right position
+            var updated_len = input_val.length;
+            caret_pos = updated_len - original_len + caret_pos;
+            input[0].setSelectionRange(caret_pos, caret_pos);
+        }
+        // end javascript currency routines
+
+            function isNullOrEmpty(str) {
+              return str === null || str === "";
+            }
+
+        //#endregion
+
+        function rSize()
+        {
+            let imgInput = document.getElementById('fileclick');
+            imgInput.addEventListener('change', function (e) {
+                if (e.target.files) {
+                    let imageFile = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = document.createElement("img");
+                        img.onload = function (event) {
+                            // Dynamically create a canvas element
+                            var canvas = document.createElement("canvas");
+
+                            // var canvas = document.getElementById("canvas");
+                            var ctx = canvas.getContext("2d");
+
+                            // Actual resizing
+                            ctx.drawImage(img, 0, 0, 1024, 682);
+
+                            // Show resized image in preview element
+                            var dataurl = canvas.toDataURL(imageFile.type);
+                            document.getElementById("preview").src = dataurl;
                         }
-                        reader.readAsDataURL(imageFile);
+                        img.src = e.target.result;
                     }
-                });
-                */
- 
+                    reader.readAsDataURL(imageFile);
+                }
             });
+        }
+
+        function resizeImage(image, width, height) {
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(image, 0, 0, width, height);
+          return canvas.toDataURL('image/jpeg');
+        }
+
+        /*
+
+        function myFunction() {
+            alert('Agent URL');
+            var x = document.getElementById("AgentUrl");
+            x.value = x.value.toUpperCase();
+        }
+
+        function DoAlertClick() {
+            alert('clicked');
+
+        }
+
+        function DoAlert() {
+            Swal.fire({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success"
+            });
+        }
+
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'maxwidth': 388,
+            'maxheight': 339
+        });
+        */
+
+    </script>
+}
 
 
-        document.getElementById('fileInput').addEventListener('change', function(event) {
+
+@*
+
+
+  document.getElementById('fileInput').addEventListener('change', function(event) {
             let selectedFiles = event.target.files;
             if (selectedFiles.length > 0) {
                 debugger;
@@ -459,504 +965,39 @@
             }
         });
 
-
-
-        function formatUSPhoneNumber(phoneNumber) {
-            // Remove all non-digit characters
-            const cleaned = ('' + phoneNumber).replace(/\D/g, '');
-            const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-            if (match) {
-                return '(' + match[1] + ') ' + match[2] + '-' + match[3];
-            }
-            return phoneNumber; // Return original if no match
-        }
-
-
-             function ajaxError() {
-
-
-                 // alert('this is an alert');
-
-
-                   const doubleCheckIcon =
-
-                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                    Swal.fire({
-                        title: "Information",
-                        text: "A error when Updating Sale Data",
-                        icon:
-                        "Error"
-                    });
-
-
-                    return true;
-              }
-
- 
-          function ShowUpdate() {
-
-
-             // alert('this is an alert');
-               
- 
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                Swal.fire({
-                    title: "Information",
-                    text: "you have updated the database",
-                    icon:
-                    "info"
-                });
-
-                
-                return true;
-          }
-
-          
-
-        function validateForm() {
-          //  debugger;
-         function validateForm() {
-
-            console.log('in validate form');
-
-          let ts = document.forms["createForm"]["TypeSell"].value;
-          if (ts == "") {
-           // alert("TypeSell must have a value - Please choose from dropdown list");
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                              title: "Information",
-                              html: 'TypeSell can not be blank - Please choose from dropdown combo'
-                                    ,
-                              icon:
-                              "info"
-                            });
-
-                console.log('typesell error');
-                return false;
-          }
-
-
-          let ln = document.forms["createForm"]["lotnumber"].value;
-          if (ln == "") {
-
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                              title: "Information",
-                              html: 'LotNumber can not be blank - Please choose from dropdown combo'
-                                    ,
-                              icon:
-                              "info"
-                            });
-                 console.log('lotnumber error');
-                return false;
-          }
-
-          let pr = document.forms["createForm"]["Price"].value;
-          if (pr == "") {
-
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                              title: "Information",
-                              html: 'Price can not be blank - Please enter a value'
-                                    ,
-                              icon:
-                              "info"
-                            });
-                 console.log('price error');
-                return false;
-          }
-
-          let aln = document.forms["createForm"]["AgentLastName"].value;
-          if (aln == "") {
-
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                              title: "Information",
-                              html: 'Last Name can not be blank - Please enter a value'
-                                    ,
-                              icon:
-                              "info"
-                            });
-                console.log('AgentLastName error');
-                return false;
-          }
-
-          let afn = document.forms["createForm"]["AgentFirstName"].value;
-          if (afn == "") {
-
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                              title: "Information",
-                              html: 'First Name can not be blank - Please enter a value'
-                                    ,
-                              icon:
-                              "info"
-                            });
-                console.log('AgentFirstName error');
-                return false;
-          }
-
-          let em = document.forms["createForm"]["Email"].value;
-          if (em == "") {
-
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                              title: "Information",
-                              html: 'Email can not be blank - Please enter a value'
-                                    ,
-                              icon:
-                              "info"
-                            });
-                console.log('Email error');
-                return false;
-          }
-
-
-          let pp = document.forms["createForm"]["OfficePhone"].value;
-          if (pp == "") {
-
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                              title: "Information",
-                              html: 'Primary Phone can not be blank - Please enter a value'
-                                    ,
-                              icon:
-                              "info"
-                            });
-                console.log('OfficePhone error');
-                return false;
-          }
-
-          let sp = document.forms["createForm"]["CellPhone"].value;
-          if (sp == "") {
-
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                              title: "Information",
-                              html: 'Secondary Phone can not be blank - Please enter a value'
-                                    ,
-                              icon:
-                              "info"
-                            });
-                console.log('CellPhone error');
-                return false;
-          }
-
-          let aurl = document.forms["createForm"]["AgentUrl"].value;
-          if (aurl == "") {
-
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                              title: "Information",
-                              html: 'If FSBO please enter LakePlacidPark.com - If Agent please enter agent URL- Please enter a value'
-                                    ,
-                              icon:
-                              "info"
-                            });
-                console.log('AgentURL error');
-                return false;
-          }
-
-
-          let fc = document.forms["createForm"]["fileclick"].value;
-          if (fc == "") {
-
-               const doubleCheckIcon =
-
-                             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                              title: "Information",
-                              html: 'Please enter Image to display L- Please choose a image'
-                                    ,
-                              icon:
-                              "info"
-                            });
-                console.log('fileclick error');
-                return false;
-          }
-
-         console.log('return true');
-          return true;
-        }
-
-        return true;
-    }
-
-
-
-
-
-
-
-
-    function HelpUnitPriceInfo()
-            {
-                    const doubleCheckIcon =
-
-                            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                        Swal.fire({
-                            title: "Information",
-                            html: 'Please enter the Sale Price - it is auto formatting'
-                                ,
-                            icon:
-                            "info"
-                        });
-
-            }
-
-    function HelpAgentURLInfo()
-            {
-                const doubleCheckIcon =
-                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                Swal.fire({
-                            title: "Information",
-                            text: "Please Enter Agent URL however chek the URL for accuracy first",
-                            icon: "info"
-                        });
-            }
-
-
-    function HelpTypeSellInfo()
-            {
-                    const doubleCheckIcon =
-
-                            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                        Swal.fire({
-                            title: "Information",
-                            html: 'TYPE is the type of sale - it can be either a RealEstate Listing thru a RE Agent or it can be a FSBO (For Sale by Owner)'
-                                ,
-                            icon:
-                            "info"
-                        });
-
-            }
-
-    function HelpLotNumberInfo()
-            {
-                const doubleCheckIcon =
-                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                Swal.fire({
-                            title: "Information",
-                            text: "Please use the dropdown combo to choose Lot Number",
-                            icon: "info"
-                        });
-            }
-
-            // end general help dialogs
-
-
-
-        // begin currency javascript routines
-
-    $("input[data-type='currency']").on({
-        keyup: function() {
-            formatCurrency($(this));
-        },
-        blur: function() {
-            formatCurrency($(this), "blur");
-        }
-    });
-
-
-    function formatNumber(n) {
-        // format number 1000000 to 1,234,567
-        return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    }
-
-
-    function formatCurrency(input, blur) {
-        // appends $ to value, validates decimal side
-        // and puts cursor back in right position.
-
-        // get input value
-        var input_val = input.val();
-
-        // don't validate empty input
-        if (input_val === "") { return; }
-
-        // original length
-        var original_len = input_val.length;
-
-        // initial caret position
-        var caret_pos = input.prop("selectionStart");
-
-        // check for decimal
-        if (input_val.indexOf(".") >= 0) {
-
-        // get position of first decimal
-        // this prevents multiple decimals from
-        // being entered
-        var decimal_pos = input_val.indexOf(".");
-
-        // split number by decimal point
-        var left_side = input_val.substring(0, decimal_pos);
-        var right_side = input_val.substring(decimal_pos);
-
-        // add commas to left side of number
-        left_side = formatNumber(left_side);
-
-        // validate right side
-        right_side = formatNumber(right_side);
-
-        // On blur make sure 2 numbers after decimal
-        if (blur === "blur") {
-            right_side += "00";
-        }
-
-        // Limit decimal to only 2 digits
-        right_side = right_side.substring(0, 2);
-
-        // join number by .
-        input_val = "$" + left_side + "." + right_side;
-
-        } else {
-        // no decimal entered
-        // add commas to number
-        // remove all non-digits
-        input_val = formatNumber(input_val);
-        input_val = "$" + input_val;
-
-        // final formatting
-        if (blur === "blur") {
-            input_val += ".00";
-        }
-        }
-
-        // send updated string to input
-        input.val(input_val);
-
-        // put caret back in the right position
-        var updated_len = input_val.length;
-        caret_pos = updated_len - original_len + caret_pos;
-        input[0].setSelectionRange(caret_pos, caret_pos);
-    }
-    // end javascript currency routines
-
-
-
-        
-
-
-
-        function isNullOrEmpty(str) {
-          return str === null || str === "";
-        }
-
-
-        function checkImage()
-        {
-          //  jsonDialog12(jsonobj, modes, titleDialog, okcallback, cancelcallback, errorcallback)
-
-            // jsonDialog12(jsonobj, modes, titleDialog, okcallback, cancelcallback, errorcallback)
-
-          //  alert("image check");
-        }
-
-        function rSize()
-
-        {
-
-            let imgInput = document.getElementById('fileclick');
-            imgInput.addEventListener('change', function (e) {
-                if (e.target.files) {
-                    let imageFile = e.target.files[0];
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        var img = document.createElement("img");
-                        img.onload = function (event) {
-                            // Dynamically create a canvas element
-                            var canvas = document.createElement("canvas");
-
-                            // var canvas = document.getElementById("canvas");
-                            var ctx = canvas.getContext("2d");
-
-                            // Actual resizing
-                            ctx.drawImage(img, 0, 0, 1024, 682);
-
-                            // Show resized image in preview element
-                            var dataurl = canvas.toDataURL(imageFile.type);
-                            document.getElementById("preview").src = dataurl;
+        document.getElementById('button13').addEventListener('click', function() {
+              var file = document.getElementById('fileInput').click();
+
+                console.log(file.
+
+                /*
+                let imgInput = document.getElementById('fileclick');
+                imgInput.addEventListener('change', function (e) {
+                    if (e.target.files) {
+                        let imageFile = e.target.files[0];
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var img = document.createElement("img");
+                            img.onload = function (event) {
+                                // Dynamically create a canvas element
+                                var canvas = document.createElement("canvas");
+
+                                // var canvas = document.getElementById("canvas");
+                                var ctx = canvas.getContext("2d");
+
+                                // Actual resizing
+                                ctx.drawImage(img, 0, 0, 1024, 682);
+
+                                // Show resized image in preview element
+                                var dataurl = canvas.toDataURL(imageFile.type);
+                                document.getElementById("preview").src = dataurl;
+                            }
+                            img.src = e.target.result;
                         }
-                        img.src = e.target.result;
+                        reader.readAsDataURL(imageFile);
                     }
-                    reader.readAsDataURL(imageFile);
-                }
+                });
+                */
+
             });
-        }
-
-
-
-        function resizeImage(image, width, height) {
-          const canvas = document.createElement('canvas');
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(image, 0, 0, width, height);
-          return canvas.toDataURL('image/jpeg');
-        }
-
-
-        /*
-        function LotNoVerify(function(e)  ({
-            var x = document.getElementById("LotNo");
-            if ( x.value > 0 && x.value < 100 )
-                  return;
-            else
-                  alert('Lot Number must be between 1 and 99')
-                  e.preventDefault();
-        )};  */
-
-
-        function myFunction() {
-            alert('Agent URL');
-            var x = document.getElementById("AgentUrl");
-            x.value = x.value.toUpperCase();
-        }
-
-        function DoAlertClick() {
-            alert('clicked');
-
-        }
-
-        function DoAlert() {
-            Swal.fire({
-            title: "Good job!",
-            text: "You clicked the button!",
-            icon: "success"
-            });
-        }
-
-        lightbox.option({
-            'resizeDuration': 200,
-            'wrapAround': true,
-            'maxwidth': 388,
-            'maxheight': 339
-        });
-
-
-
-
-
-
-    </script>
-}
+*@            

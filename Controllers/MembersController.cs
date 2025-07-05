@@ -31,7 +31,23 @@ namespace W1.Controllers
             _scopedService = scopedService;
             _appcontext = appcontext;
         }
- 
+
+
+
+        public bool checkfile(IFormFile file)
+        {             // check the file 
+            if (file != null && file.Length > 0)
+            {
+                // var fnext = Path.GetExtension(file.FileName);
+                // string fname = LotNo + "." + fnext;
+                //  verify the 
+                return true;
+            }
+            return false;
+        }
+
+
+
         /*
         [HttpPost]
         public async Task<IActionResult> VerifyUser(string email, string Code)
@@ -54,7 +70,7 @@ namespace W1.Controllers
         }
         */
 
- 
+
         /// <summary>
         /// //////////////////////////////////////////////////////////////////////////////////////////////
         /// </summary>
@@ -80,19 +96,19 @@ namespace W1.Controllers
 
             if (ModelState.IsValid)
             {
-                
+
                 String OfficePhone1 = OfficePhone.Insert(3, "-");
                 string OfficeFinal = OfficePhone1.Insert(7, "-");
 
                 String CellPhone1 = CellPhone.Insert(3, "-");
                 string CellPhoneFinal = CellPhone1.Insert(7, "-");
-                string currency = "$" +  Price;
-          
-               // string finalLot1 = null;
+                string currency = "$" + Price;
 
- 
+                // string finalLot1 = null;
+
+
                 // check the file 
-                 // try a no await 
+                // try a no await 
                 await UploadFile(file, LotNo);
                 Member member0 = new Member();
                 member0.TypeSell = TypeSell;
@@ -103,7 +119,7 @@ namespace W1.Controllers
                 member0.Email = Email;
                 member0.OfficePhone = OfficeFinal;
                 member0.CellPhone = CellPhoneFinal;
-                member0.ImageName =  file.FileName;
+                member0.ImageName = file.FileName;
                 member0.AgentUrl = AgentUrl;
 
                 _context.Add(member0);
@@ -113,7 +129,7 @@ namespace W1.Controllers
             else
             {
                 Member member1 = new Member();
-                 
+
                 member1.TypeSell = "";
                 member1.LotNo = "";
                 member1.Price = "";
@@ -122,17 +138,17 @@ namespace W1.Controllers
                 member1.Email = "";
                 member1.OfficePhone = "";
                 member1.CellPhone = "";
-                member1.ImageName =  "";
+                member1.ImageName = "";
                 return View(member1);
             }
- 
+
         }
 
         public async Task<bool> UploadFile(IFormFile file, string lotNo)
         {
             string path = "";
             bool iscopied = false;
- 
+
             try
             {
                 if (file.Length > 0)
@@ -201,10 +217,10 @@ namespace W1.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-          //  if (String.Compare(_scopedService.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
-          //  {
-          //      return RedirectToAction(nameof(Index), "home");
-          //  }
+            //  if (String.Compare(_scopedService.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
+            //  {
+            //      return RedirectToAction(nameof(Index), "home");
+            //  }
 
 
 
@@ -284,7 +300,7 @@ namespace W1.Controllers
             {
                 return NotFound();
             }
-           // PlacidSingleton.Instance.SetPlacid(false);
+            // PlacidSingleton.Instance.SetPlacid(false);
             return View(member);
         }
 
@@ -332,12 +348,6 @@ namespace W1.Controllers
         // GET: Members/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            /*
-            if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
-            {
-                return RedirectToAction(nameof(Index), "home");
-            }*/
-
 
             if (id == null)
             {
@@ -347,11 +357,13 @@ namespace W1.Controllers
 
             var member = await _context.Members
                 .FirstOrDefaultAsync(m => m.ID == id);
+
+
             if (member == null)
             {
                 return NotFound();
             }
-           // PlacidSingleton.Instance.SetPlacid(false);
+            // PlacidSingleton.Instance.SetPlacid(false);
             return View(member);
         }
 
@@ -379,7 +391,7 @@ namespace W1.Controllers
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return NotFound();
 
