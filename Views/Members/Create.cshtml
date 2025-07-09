@@ -21,18 +21,19 @@
         <br />
         <br />
         <button class="btn btn-primary" id="button1" onclick="stopTooltips()">Turn off ToolTips</button>
-        <br />
-        <br />
+        <hr />
+        <hr />
         <div class="text-center">
             <label for="html">Verify URL</label><br>
-            <input type="url" id="urlx" name="Url" value="" 
+            <input type="url" id="urlx" name="Url" value="" style="height:50px"
                    data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please copy paste URL" />
 
             <button class="btn btn-primary" id="button13" onclick="verifyUrl()">Verify URL</button>
         </div>
-        
+        <hr />
+        <hr />
         <br />
-        <br />
+ 
         @*
         <button class="btn btn-primary" id="button14" onclick="checkImageSize()">Check Image Size</button>
         *@
@@ -49,7 +50,7 @@
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Choose Image to check for dimensions" />
 
             </div>
-            <input type="submit" value="Submit" style="text-align: center">
+            <input type="submit" value="Submit" style="text-align: center; height: 50px;">; 
         </form>
     </div>
 
@@ -444,14 +445,52 @@
 
              });
 
+
+             function testLotImage(){
+                 let lotnum = document.getElementById('lotnumber').value;
+                 let file  = document.getElementById('fileclick');
+
+                 const selectedFile =  file.files[0].name.split(".")[0];
+
+                 alert(lotnum);
+                 alert(selectedFile);
+
+                 if (lotnum === selectedFile)
+                 { 
+                     return false;
+                 }
+                 else
+                     return true;
+             }
+
+
             $('#ajaxSend').submit(function (e) {
-               
-                   // e.preventDefault(); // Prevent default form submission
+
+                    var lotimage = testLotImage();
+                    debugger;
+                    if (lotimage) {
+                          e.preventDefault();
+                          const doubleCheckIcon =
+
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                                title: "Information",
+                                text: "LotNumber must equal Image Number",
+                                icon: "Error"
+                            });
+                          return;
+                    }
+ 
+                  
                     
                     $.ajax({
                         url: '@Url.Action("FileUpload1", "Members")', // Example API endpoint
                         method: "POST", // HTTP method (GET, POST, PUT, DELETE, etc.)
-                        data: $(this).serialize(),  // Expected data type of the response
+                        data: $(this).serialize(),
+                        dataType: 'test',
+                         
+                        contentType: false,
+                        processData: false, // Expected data type of the response
                         success: function(response) {
                             // This function is executed if the request is successful
                              console.log("Success:", response); // Log the response data
@@ -471,10 +510,14 @@
                             var currentUrl = window.location.href;
                             console.log(currentUrl);
                         },
+                       // error: function(response) {
                         error: function(xhr, status, error) {
-                            // This function is executed if an error occurs
-                            console.error("AJAX Error:", status, error);
-                             ajaxError();
+                            alert("AJAX Error:", status, error);
+                            alert("Server response text on error:", xhr.responseText);
+                           // alert(error);
+                           // console.error("AJAX Error:", status, error);
+                           //  ajaxError();
+                           
                         }
                     });
     

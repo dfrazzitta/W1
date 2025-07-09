@@ -81,7 +81,8 @@ namespace W1.Controllers
             //public async Task<ActionResult> FileUpload1(IFormFile file, int LotNo, string Price, string AgentLastName, string AgentFirstName, string Email,
             string OfficePhone, string CellPhone, string AgentUrl)
         {
-
+            // return StatusCode(400, "some text, json, etc.");
+            return BadRequest("Validation failed."); // 400 Bad Request
 
             // return Ok(new { message = "Data retrieved successfully!" });
 

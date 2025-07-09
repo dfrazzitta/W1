@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using W1.Data;
 using W1.Models;
- 
+
 
 /*
  * 
@@ -146,20 +146,20 @@ namespace W1.Controllers
             _context = context;
             //  PlacidSingleton.Instance.SetPlacid(false);
 
-          //  bool lp = System.IO.File.Exists("http://localhost:5000/wwwroot/forsale.txt");
+            //  bool lp = System.IO.File.Exists("http://localhost:5000/wwwroot/forsale.txt");
         }
 
         [OutputCache(Duration = 1440)]
         public IActionResult Index()
         {
             var user = HttpContext.User.Identity.IsAuthenticated;
-           // PlacidSingleton.Instance.SetPlacid(false);
+            // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
         [OutputCache(Duration = 1440)]
         public IActionResult ParkPlan()
         {
-           // PlacidSingleton.Instance.SetPlacid(false);
+            // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
@@ -167,29 +167,29 @@ namespace W1.Controllers
         [OutputCache(Duration = 1440)]
         public IActionResult Location()
         {
-           // PlacidSingleton.Instance.SetPlacid(false);
+            // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
         public IActionResult Rules()
         {
-           // PlacidSingleton.Instance.SetPlacid(false);
+            // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
         [OutputCache(Duration = 1440)]
         public IActionResult ResidentOwner()
         {
-           // PlacidSingleton.Instance.SetPlacid(false);
+            // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
         [OutputCache(Duration = 720)]
         public IActionResult Homes()
         {
-        
-            List<Member> member =   _context.Members.ToList();
 
-             
+            List<Member> member = _context.Members.ToList();
+
+
             string newHomes = "<div class=\"row\">\r\n <div class=\"col-sm-1\">\r\n </div>\r\n<div class=\"col-sm-10\" width:100%;>\r\n <div class=\"d-flex justify-content-center\">\r\n <table align=\"center\" mx-auto border=\"1\" cellpadding=\"4\" cellspacing=\"0\" width=\"100%\">\r\n <tbody>\r\n <tr>\r\n <td colspan=\"3\" align=\"center\" class=\"BG_Light_Blue\"> <a name=\"L88\" id=\"L88\"></a> <strong> Lot # 5 </strong></td>\r\n\r\n </tr>\r\n <tr>\r\n <td colspan=\"5\">\r\n <div align=\"center\"> <img src=\"6.jpg\" class=\"img-fluid auto\" alt=\"Lot # 5\" name=\"Main_05\" id=\"Main_05\" height=\"auto\" width=\"auto\">  \r\n <a id=\"abcd0\"  class=\"example-image-link\" href=\"/Images/platmap.jpg\" width='388px' height='339px' data-lightbox=\"example-1\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Image Expanded\">\r\n\r\n\r\n&nbspLocation\r\n </a>\r\n </div>\r\n </td>\r\n </tr>\r\n\r\n <tr>\r\n <td colspan=\"4\">\r\n <div align=\"center\"> <strong>Property Specifics:</strong> </div align=\"center\">\r\n <table align=\"center\" border=\"3\" cellpadding=\"1\" cellspacing=\"0\" width=\"55%\">\r\n  <tbody><tr>\r\n <td width=\"20%\"> <strong>TypeSell: </strong> </td>\r\n <td width=\"80%\">FSBO</td>\r\n  </tr>\r\n  </tr>\r\n\r\n <tr>\r\n <td width=\"20%\"> <strong>Price: </strong> </td>\r\n <td width=\"80%\"> $110,000.00 </td>\r\n  </tr>\r\n <tr>\r\n <td valign=\"top\"> <strong>Contact:</strong> </td>\r\n <td> Kathryn Valentine   <br /> Ph: 407-674-0220  <br />Ph: 407-479-8789 <br /><a style=\"font-size:16px;\" href=\"mailto:lakeplacidpark@gmail.com\">Email</a> <br /><a href=\"LINKTOWEB\" target=\"_blank\">Listing</a></td>\r\n </tr>\r\n </table>\r\n </td>\r\n </tr>\r\n </tbody>\r\n </table>\r\n </div>  </div>  <div class=\"col-sm-1\">\r\n </div> </div><br />";
             // <a class="menubar" style="font-size:18px;" href="mailto:lakeplacidpark@gmail.com">Email</a>
             //good
@@ -199,17 +199,17 @@ namespace W1.Controllers
             int ct = member.Count();
 
             foreach (Member m in member)
-           {
-               DynamicHomes dh1 = new DynamicHomes();
+            {
+                DynamicHomes dh1 = new DynamicHomes();
 
-               StringBuilder sb1 = new StringBuilder();
-               sb1.Append(newHomes);
-               string bb = "/" + m.LotNo.ToString() + ".jpg";
-               sb1.Replace("6.jpg", bb);
-               sb1.Replace("Lot # 5", "Home for Sale Placid Lot # " + m.LotNo.ToString());
+                StringBuilder sb1 = new StringBuilder();
+                sb1.Append(newHomes);
+                string bb = "/" + m.ImageName;  //m.LotNo.ToString() + "." + m.ImageName; // ".jpg";
+                sb1.Replace("6.jpg", bb);
+                sb1.Replace("Lot # 5", "Home for Sale Placid Lot # " + m.LotNo.ToString());
 
-               sb1.Replace("407-674-0220", m.CellPhone.ToString());
-               sb1.Replace("407-479-8789", m.OfficePhone.ToString());
+                sb1.Replace("407-674-0220", m.CellPhone.ToString());
+                sb1.Replace("407-479-8789", m.OfficePhone.ToString());
 
                 sb1.Replace("/Images/platmap.jpg", "/Images/lpm" + m.LotNo.ToString() + ".jpg");
 
@@ -230,26 +230,26 @@ namespace W1.Controllers
                     sb1.Replace("FSBO", m.TypeSell);
                 }
 
-               sb1.Replace("$110,000.00", m.Price.Trim());
-               string ll1 = sb1.ToString();
+                sb1.Replace("$110,000.00", m.Price.Trim());
+                string ll1 = sb1.ToString();
 
-               dh1.homelist = ll1; //.Add(ll);
-               dh.Add(dh1);
-           }
+                dh1.homelist = ll1; //.Add(ll);
+                dh.Add(dh1);
+            }
 
             // ct = 0;
-            
-           if (ct > 0)
-               return View(dh);
-           else
-               return View("HomeEmpty"); // return empty list if no members found
-             
-            
+
+            if (ct > 0)
+                return View(dh);
+            else
+                return View("HomeEmpty"); // return empty list if no members found
+
+
         }
- 
+
         public IActionResult Privacy()
         {
-           // PlacidSingleton.Instance.SetPlacid(false);
+            // PlacidSingleton.Instance.SetPlacid(false);
             return View();
         }
 
@@ -259,17 +259,17 @@ namespace W1.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-       
-        
+
+
         [HttpPost]
         public bool unsetforsale()
         {
             // Fix for CS0119 and CS0642:
             // Correctly open the file for appending and ensure the StreamWriter is properly used.
-             
+
             string logFilePath = Path.Combine(_appEnvironment.WebRootPath, "forsale.txt");
             System.IO.File.Delete(logFilePath);
- 
+
             return true;
         }
 
