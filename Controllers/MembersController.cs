@@ -82,7 +82,7 @@ namespace W1.Controllers
             string OfficePhone, string CellPhone, string AgentUrl)
         {
             // return StatusCode(400, "some text, json, etc.");
-            return BadRequest("Validation failed."); // 400 Bad Request
+            //return BadRequest("Validation failed."); // 400 Bad Request
 
             // return Ok(new { message = "Data retrieved successfully!" });
 
@@ -94,6 +94,11 @@ namespace W1.Controllers
             //    return RedirectToAction(nameof(Index), "home");
             //} 
             // return RedirectToAction(nameof(Index), "home"); if (ModelState.IsValid)
+
+            if (AgentUrl == null || AgentUrl.Length == 0)
+            {
+                AgentUrl = "noval";
+            }
 
             if (ModelState.IsValid)
             {

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using System.Diagnostics;
@@ -226,7 +227,13 @@ namespace W1.Controllers
                 }
                 else
                 {
-                    sb1.Replace("LINKTOWEB", m.AgentUrl);
+
+                    bool result = m.AgentUrl.Equals("noval");
+                    if (result)
+                        sb1.Replace("LINKTOWEB", "Contact Agent for Website URL");
+                    else
+                        sb1.Replace("LINKTOWEB", m.AgentUrl);
+
                     sb1.Replace("FSBO", m.TypeSell);
                 }
 

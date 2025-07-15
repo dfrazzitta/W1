@@ -114,7 +114,7 @@
 
          $('#formDelete').submit(function (e) {
             e.preventDefault(); // Prevent default form submission
-            debugger;
+           // debugger;
             $.ajax({
                 url: '@Url.Action("Delete", "Members")', // Replace with your controller action
                 type: 'POST',
@@ -139,7 +139,8 @@
 
                         var currentUrl = window.location.href;
                         console.log(currentUrl);
-                        ShowUpdate(currentUrl1);
+                        alert("record" + " " +  "deleted");
+                       // ShowUpdate(currentUrl1);
                    // } else {
                         // Handle error or display error message
                    //     alert('Error error error: ' + response.responseText);

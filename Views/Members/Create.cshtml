@@ -22,23 +22,26 @@
         <br />
         <button class="btn btn-primary" id="button1" onclick="stopTooltips()">Turn off ToolTips</button>
         <hr />
-        <hr />
+        
+        
         <div class="text-center">
             <label for="html">Verify URL</label><br>
             <input type="url" id="urlx" name="Url" value="" style="height:50px"
                    data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please copy paste URL" />
 
-            <button class="btn btn-primary" id="button13" onclick="verifyUrl()">Verify URL</button>
+            <button class="btn btn-primary" id="button13" onclick="verifyUrl()"
+                    data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="This will test the URL">
+                Verify URL
+            </button>
         </div>
         <hr />
-        <hr />
-        <br />
+        
  
         @*
         <button class="btn btn-primary" id="button14" onclick="checkImageSize()">Check Image Size</button>
-        *@
-        <br />
-        <br />
+         *@
+        
+        
         <form id="checkfile1" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="checkfile" name="checkfile1">
 
             <hr />
@@ -50,7 +53,7 @@
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Choose Image to check for dimensions" />
 
             </div>
-            <input type="submit" value="Submit" style="text-align: center; height: 50px;">; 
+            <input id="checkimagebutton"type="submit" value="Submit" style="text-align: center; margin: auto; height: 60px;">;
         </form>
     </div>
 
@@ -237,9 +240,14 @@
             <div class="text-center">
                 <label asp-for="AgentUrl" class="control-label"><b>URL</b></label><br />
                 <input id="AgentUrl" type="url" name="AgentUrl" autocomplete="off"
-                       value=""
+                       value="noval" disabled
                        class="form-control w-2 p-2 mx-auto d-flex"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please verify URL is viable" />
+                       @* 
+                <button class="btn btn-primary" id="button13" onclick="verifyUrl()"
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="This will test the URL">
+                    Verify URL
+                </button>  *@
             </div>
 
             <hr />
@@ -256,11 +264,11 @@
             <input type="submit" value="Submit" style="text-align: center;">
              
         </form>
-        <br />
+        
         @*
         <button class="btn btn-primary" id="button1" style="text-align: center;" onclick="testsubmit()">Send Submit</button>
         *@
-        <br />
+         
     </div>
 
     <div class="col-2  w-25  text-center">
@@ -360,18 +368,25 @@
             }
             *@
 
+
+
+            globalUrlFlag = false;
+
             function verifyUrl() {
-                //urlx
+                //disabled AgentUrl
+
+                 
 
                 const urlx = document.getElementById('urlx').value;
-
+                alert(urlx);
+ 
                 if (urlx === null || urlx.length === 0) {
                     const doubleCheckIcon =
 
                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
                             Swal.fire({
                                 title: "Information",
-                                text: "Please enter a URL in the input **",
+                                text: "Please enter a URL in the textbox !",
                                 icon:
                                 "Error"
                             });
@@ -379,20 +394,24 @@
                 }
                 else {
 
+                    const windowFeatures = "left=100,top=100,width=320,height=320,noopener ";
+                    const newWindow = window.open(urlx, "mozillaWindow", windowFeatures);
 
-                    const newWindow = window.open(urlx, '_blank');
-
-                    if (newWindow === null) {
+                    if (newWindow == null) {
                        // newWindow.onerror = (message, source, lineno, colno, error) => {
                            const doubleCheckIcon =
 
                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
                             Swal.fire({
                                 title: "Information",
-                                text: "Url Appears to be good",
+                                text: "Url does not appear to be good",
                                 icon:
                                 "Noice"
                             });
+                            globalUrlFlag = true;
+                            const agentUrl = document.getElementById('AgentUrl');
+                            agentUrl.value = 'noval';
+                            agentUrl.disabled = true;
                             return true; // Prevents default error handling in the new window
                        // };
                     }
@@ -417,6 +436,8 @@
                          
                     }
                   }
+                
+
             }
             // #region tooltips
 
@@ -455,7 +476,7 @@
                  alert(lotnum);
                  alert(selectedFile);
 
-                 if (lotnum === selectedFile)
+                 if (lotnum == selectedFile)
                  { 
                      return false;
                  }
@@ -467,7 +488,7 @@
             $('#ajaxSend').submit(function (e) {
 
                     var lotimage = testLotImage();
-                    debugger;
+                    //debugger;
                     if (lotimage) {
                           e.preventDefault();
                           const doubleCheckIcon =
@@ -487,10 +508,29 @@
                         url: '@Url.Action("FileUpload1", "Members")', // Example API endpoint
                         method: "POST", // HTTP method (GET, POST, PUT, DELETE, etc.)
                         data: $(this).serialize(),
-                        dataType: 'test',
+                        //dataType: 'text',
                          
-                        contentType: false,
-                        processData: false, // Expected data type of the response
+                        //contentType: false,
+                        //processData: false, // Expected data type of the response
+                        /*
+                        beforeSend: function(jqXHR, settings) {
+                             
+                            if (globalUrlFlag == false){
+                                const doubleCheckIcon =
+
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                    title: "Information",
+                                    text: "Please test URL for Usage probability!!",
+                                    icon:
+                                    "Error"
+                                });
+                                return false;
+                            }
+                             
+                        },  */
+
+
                         success: function(response) {
                             // This function is executed if the request is successful
                              console.log("Success:", response); // Log the response data
@@ -563,11 +603,8 @@
 
         function validateForm() {
 
-            return true;
-
-
-
-
+           // return true;
+ 
               let ts = document.forms["createForm"]["TypeSell"].value;
               if (ts == "") {
           
