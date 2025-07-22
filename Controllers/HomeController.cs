@@ -139,15 +139,28 @@ namespace W1.Controllers
         private readonly PlacidDBContext _context;
 
 
+        private string _path;
+
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment appEnvironment,
             PlacidDBContext context)
         {
             _logger = logger;
             _appEnvironment = appEnvironment;
             _context = context;
+
+        }
+
+
+
+        [OutputCache(Duration = 1440)]
+        public bool Indexx()
+        {
+            var path = _appEnvironment.WebRootPath + "\\" + "HomeVisible.txt";
+            _path = path;
             //  PlacidSingleton.Instance.SetPlacid(false);
 
-            //  bool lp = System.IO.File.Exists("http://localhost:5000/wwwroot/forsale.txt");
+            bool lp = System.IO.File.Exists(path);
+            return lp;
         }
 
         [OutputCache(Duration = 1440)]

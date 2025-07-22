@@ -109,7 +109,7 @@
                     </p>
                      
                     
-                    <p>
+                    <p id="homedisplay" hidden>
                         <i class="fa-solid fa-arrow-right"></i>
                         <a id="homecall" href="@Url.Action("Homes", "home")" style="color:antiquewhite;" class="menubar"
                         data-toggle="tooltip" data-html="true" title="Homes For Sale">ForSale</a>
@@ -187,7 +187,7 @@
                     
                     <a class="weatherwidget-io weather-widget-container" href="https://forecast7.com/en/27d91n82d79/largo/?unit=us" data-label_1="Largo Florida" data-label_2="WEATHER" data-theme="original">Largo Weather</a>
                     <hr />
-                    <hr />
+                    <hr id="hrclick"  />
                     <hr />
                    
                 </div>
@@ -233,13 +233,93 @@
 
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.15.15/validator.min.js"> </script>
-      
-       
+
+    @*
+    <script src="~/js/oscode.js"></script>
+    *@
+
     <script>
  
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
   
+        /*
+        let clickCountx = 0;
+        let lastClickTimex = 0;
+        const TRIPLE_CLICK_THRESHOLDX = 300; // milliseconds
+        let keysPressedx = {};
+        let  isVisiablex = false;
 
+        const myElement = document.getElementById('hrclick');
+
+        myElement.addEventListener('mousedown', (event) => {
+            const currentTimex = new Date().getTime();
+
+            if (currentTimex - lastClickTimex < TRIPLE_CLICK_THRESHOLDX) {
+                clickCountx++;
+
+            } else {
+                clickCountx = 1; // Start a new click sequence
+            }
+
+            lastClickTimex = currentTimex;
+
+            if (clickCountx === 3) {
+                console.log('Triple-click down detected!');
+                // Perform your desired action here
+                clickCountx = 0; // Reset for the next sequence
+                var myLog = document.getElementById('homedisplay');
+
+                myLog.hidden = !myLog.hidden;
+                isVisiable = true;
+
+               // e.preventDefault();
+            }
+        });
+        
+     
+                $.get("demo_test.asp", function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });  
+        
+        */
+
+                
+        $( document ).ready(function() {
+            // alert('this is index');
+                    const os1 = navigator.userAgent.toLowerCase();
+                    console.log(os1);
+                    console.log("shit");
+
+                  
+                    if( os1.includes("windows") )
+                    {
+                                  $.get("/home/Indexx", function(data, status){
+
+                    // if this is true -- then Home for sale will be active -- else menu option will not be present
+                    //   and this is determined by simply having --- HomeVisible.txt
+                                          if (data)
+                                           document.getElementById("homedisplay").removeAttribute('hidden')
+
+                                        });
+
+                    }
+
+
+                    if ( os1.includes("linux"))
+                    {
+                          $.get("https://LakePlacidPark.com/home/Indexx", function(data, status){
+
+                            // if this is true -- then Home for sale will be active -- else menu option will not be present
+                            //   and this is determined by simply having --- HomeVisible.txt
+                              if (data)
+                                   document.getElementById("homedisplay").removeAttribute('hidden')
+
+                          });
+                    }
+
+                    
+        });
+        
     </script>
 
     @await RenderSectionAsync("Scripts", required: true)

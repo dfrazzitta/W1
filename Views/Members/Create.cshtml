@@ -14,15 +14,8 @@
 </div>
 <hr />
 <div class="row d-flex justify-content-center">
-    <div class="col-2 w-25 p-3">
-        <br />
-        <br />
-        <button class="btn btn-primary" id="button1" onclick="activateTooltips()">Turn on ToolTips</button>
-        <br />
-        <br />
-        <button class="btn btn-primary" id="button1" onclick="stopTooltips()">Turn off ToolTips</button>
-        <hr />
-        
+    <div class="col-2 w-25 p-3 bg-info bg-opacity-10 border border-4 border-success style="height:150px">
+       
         
         <div class="text-center">
             <label for="html">Verify URL</label><br>
@@ -59,7 +52,7 @@
 
 
     <div id="formId" class="col-md-8 w-25 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
-
+          title heading 
         <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="form">
 
             <div class="form-group text-center">
@@ -289,8 +282,15 @@
         <br />
         <button class="btn btn-primary" id="button1" onclick="HelpHomeImageInfo()">Help Home Image</button>
 
+       
         <br />
-
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button1" onclick="activateTooltips()">Turn on ToolTips</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button1" onclick="stopTooltips()">Turn off ToolTips</button>
+        <hr />
     </div>
 </div>
 
@@ -378,7 +378,7 @@
                  
 
                 const urlx = document.getElementById('urlx').value;
-                alert(urlx);
+                //alert(urlx);
  
                 if (urlx === null || urlx.length === 0) {
                     const doubleCheckIcon =
