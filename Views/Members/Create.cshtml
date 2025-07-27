@@ -7,52 +7,87 @@
     ViewData["Title"] = "Create";
 }
 
+<style>
+    .tooltipx {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+
+        .tooltipx .tooltiptextx {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .tooltipx:hover .tooltiptextx {
+            visibility: visible;
+        }
+</style>
+
+
+
+
+
 <div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
     <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
     <p align="center">Create Lot For Sale</p>
     <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
 </div>
-<hr />
+ <br />
 <div class="row d-flex justify-content-center">
-    <div class="col-2 w-25 p-3 bg-info bg-opacity-10 border border-4 border-success style="height:150px">
-       
+    <div class="col-2 w-25 p-1 bg-info bg-opacity-10   border-success"  >
+
         
-        <div class="text-center">
-            <label for="html">Verify URL</label><br>
-            <input type="url" id="urlx" name="Url" value="" style="height:50px"
-                   data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please copy paste URL" />
+        <div class="text-center tooltipx">
+            <label for="html"><strong> Verify URL</strong></label><br>
+            <input type="url" id="urlx" name="Url" value="" style="height:50px"  
+                   @* data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please copy paste URL"  *@  />
 
             <button class="btn btn-primary" id="button13" onclick="verifyUrl()"
-                    data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="This will test the URL">
+                   @* data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="This will test the URL"  *@>
                 Verify URL
             </button>
+            <span class="tooltiptextx">Enter URL to test click button</span>
+            
+        </div>
+        <div id="result">
+            <p>Click the button to load data.</p>
         </div>
         <hr />
-        
- 
+
+
         @*
         <button class="btn btn-primary" id="button14" onclick="checkImageSize()">Check Image Size</button>
-         *@
+          
         
         
         <form id="checkfile1" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="checkfile" name="checkfile1">
 
-            <hr />
+           
             <div class="text-center">
                 <label asp-for="ImageName" class="control-label"><b>Check Image</b></label><br />
 
                 <input id="fileclick1" value="" title="Choose Image file" type="file"
-                       name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                       name="file" class="form-control text-center w-1 p-1 mx-auto d-flex"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Choose Image to check for dimensions" />
 
             </div>
             <input id="checkimagebutton"type="submit" value="Submit" style="text-align: center; margin: auto; height: 60px;">;
         </form>
+         *@
     </div>
-
+    
 
     <div id="formId" class="col-md-8 w-25 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
-          title heading 
+         @* title heading  center this *@
         <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="form">
 
             <div class="form-group text-center">
@@ -68,7 +103,7 @@
                     <option value="FSBO" />
                 </datalist>
                 <span asp-validation-for="TypeSell" class="text-danger"></span>
-
+                
             </div>
 
             <div class="text-center">
@@ -210,9 +245,10 @@
 
             <div class="text-center">
                 <label asp-for="Email" class="control-label"><b>Email</b></label><br />
-                <input id="Email" type="email" name="Email" value=""
+                <input id="email" type="email" name="Email" value=""  
                        class="form-control w-2 p-2 mx-auto d-flex" autocomplete="off"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter email of RE Agent or Seller" />
+                <p id="result"></p>
             </div>
 
             <div class="text-center">
@@ -231,16 +267,16 @@
             </div>
             <hr />
             <div class="text-center">
-                <label asp-for="AgentUrl" class="control-label"><b>URL</b></label><br />
-                <input id="AgentUrl" type="url" name="AgentUrl" autocomplete="off"
-                       value="noval" disabled
+                <label asp-for="AgentUrl" class="control-label" style="visibility: hidden"><b>URL</b></label><br />
+                <input id="AgentUrl" type="url" name="AgentUrl" autocomplete="off"  
+                       value="https://lakeplacidpark.com"  
                        class="form-control w-2 p-2 mx-auto d-flex"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please verify URL is viable" />
-                       @* 
+                  @*      
                 <button class="btn btn-primary" id="button13" onclick="verifyUrl()"
                         data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="This will test the URL">
                     Verify URL
-                </button>  *@
+                </button> *@ 
             </div>
 
             <hr />
@@ -253,14 +289,14 @@
             </div>
 
             <hr />
- 
+  
             <input type="submit" value="Submit" style="text-align: center;">
              
         </form>
         
-        @*
-        <button class="btn btn-primary" id="button1" style="text-align: center;" onclick="testsubmit()">Send Submit</button>
-        *@
+     @*
+        <button class="btn btn-primary" id="button1" style="text-align: center;" onclick="testsubmit()">Create Sale Record</button>
+         *@
          
     </div>
 
@@ -321,13 +357,29 @@
 
     <script>
                 
-            const inputElement = document.getElementById('Email');
+        
+            const inputElement = document.getElementById('email');
 
             // Add an event listener for the focusout event
             inputElement.addEventListener('focusout', function(e) {
-              // Code to execute when the input field loses focus
-              alert('Input field lost focus!');
+                 if (validator.isEmail(e.target.value)  == false)
+                 {
+                       e.preventDefault();
+                          $("#email").focus();
+                        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                        Swal.fire({
+                            title: "Information",
+                            text: "Email appears to be malformed - please check",
+                            icon:
+                            "Error"
+                        });
+                       $(this).css('color', 'red');
+                    //  alert("bad news");
+                 }
+                 else
+                     $(this).css('color', 'black');
             });
+             
 
             @*
             function testsubmit()
@@ -335,7 +387,7 @@
                 alert('second submit');
                 var form=$("#ajaxSend");
                 var vb = form.serialize();
-                debugger;
+               // debugger;
                  $.ajax({
                         url: '@Url.Action("FileUpload1", "Members")', // Example API endpoint
                         method: "POST", // HTTP method (GET, POST, PUT, DELETE, etc.)
@@ -366,7 +418,11 @@
                         }
                     });
             }
+           
+
             *@
+
+       
 
 
 
@@ -375,11 +431,23 @@
             function verifyUrl() {
                 //disabled AgentUrl
 
-                 
-
                 const urlx = document.getElementById('urlx').value;
                 //alert(urlx);
+
+                $.ajax({
+                    url: urlx,
+                    type: "GET", // Specifies the HTTP method
+                    dataType: "html", // Expected data type of the response
+                    success: function(response){
+                        $("#result").html("Data: " + response);
+                    },
+                    error: function(xhr, status, error){
+                        $("#result").html("Error: " + status + " - " + error);
+                    }
+                });
  
+            }
+                /*
                 if (urlx === null || urlx.length === 0) {
                     const doubleCheckIcon =
 
@@ -394,51 +462,66 @@
                 }
                 else {
 
-                    const windowFeatures = "left=100,top=100,width=320,height=320,noopener ";
-                    const newWindow = window.open(urlx, "mozillaWindow", windowFeatures);
+                           const parentLeft = window.screenLeft ? window.screenLeft : window.screenX;
+                            const parentTop = window.screenTop ? window.screenTop : window.screenY;
+                            const parentWidth = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+                            const parentHeight = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
 
-                    if (newWindow == null) {
-                       // newWindow.onerror = (message, source, lineno, colno, error) => {
-                           const doubleCheckIcon =
+                            // Calculate the center position
+                            const left = parentLeft + (parentWidth / 2) - (100 / 2);
+                            const top = parentTop + (parentHeight / 2) - (100 / 2);
 
-                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                                title: "Information",
-                                text: "Url does not appear to be good",
-                                icon:
-                                "Noice"
-                            });
-                            globalUrlFlag = true;
-                            const agentUrl = document.getElementById('AgentUrl');
-                            agentUrl.value = 'noval';
-                            agentUrl.disabled = true;
-                            return true; // Prevents default error handling in the new window
-                       // };
-                    }
-                    else {
+                            // Open the new window with the calculated position
+                            const specs = " '_blank', toolbar=no, scrollbars=no, resizable=no, top=200, left=300, width=600, height=400";
+                            const newWindow = window.open(urlx, "Test", specs);
+                   
 
-                         newWindow.onerror = (message, source, lineno, colno, error) => {
-                            console.error('Error in new window:', message, source, lineno, colno, error);
-                            // You can also send this error information back to the opener window
-                            // using postMessage or by accessing properties if same-origin.
-                             const doubleCheckIcon =
+                            if (newWindow == null) {
+                                   console.log("window is null");
+                                   const doubleCheckIcon =
 
-                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
-                            Swal.fire({
-                                title: "Information",
-                                text: message + " " + source + " " + lineno + " " + colno + " " + error,
-                                icon:
-                                "Error"
-                            });
+                                        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                    Swal.fire({
+                                        title: "Information",
+                                        text: "Url does not appear to be good",
+                                        icon:
+                                        "Notice"
+                                    });
+                                    globalUrlFlag = true;
+                                    const agentUrl = document.getElementById('AgentUrl');
+                                   // agentUrl.value = 'noval';
+                                   // agentUrl.disabled = true;
+                                    return true; // Prevents default error handling in the new window
+                       
+                            }
+                            else {
+                                console.log("window not null but appears error");
+                              //   newWindow.onerror = (message, source, lineno, colno, error) => {
+                                     newWindow.close();
+                                    // You can also send this error information back to the opener window
+                                    // using postMessage or by accessing properties if same-origin.
+                                     const doubleCheckIcon =
+
+                                        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                    Swal.fire({
+                                        title: "Information",
+                                        text: "Error in URL window",
+                                        icon: "error"
+                                    });
                             
-                            return true; // Prevents default error handling in the new window
-                        };
+                                   
+                                    return true; // Prevents default error handling in the new window
+                            //    };
                          
-                    }
-                  }
-                
+                            }
+                          }
+                  
 
-            }
+            }   */
+
+
+
+
             // #region tooltips
 
             function stopTooltips() {

@@ -1,12 +1,12 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using W1.Data;
 using W1.Models;
-using Microsoft.AspNetCore.Localization;
-using System.Globalization;
-using Microsoft.AspNetCore.HttpOverrides;
- 
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +18,7 @@ var folder = Environment.SpecialFolder.LocalApplicationData;
 var path = Environment.GetFolderPath(folder);
 string? DbPath = System.IO.Path.Join(path, "info.db");
 
-if( RuntimeInformation.IsOSPlatform(OSPlatform.Windows) )
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 {
     var folder22 = Environment.SpecialFolder.LocalApplicationData;
     var path22 = Environment.GetFolderPath(folder);
@@ -41,7 +41,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDbContext<PlacidDBContext>(options =>
     options.UseSqlite(connectionString));
 
- 
+
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -74,8 +74,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
     options.Cookie.HttpOnly = true;
-    
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(12);
+
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(112);
 
     options.LoginPath = "/Identity/Account/Login";
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
@@ -85,7 +85,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 //builder.Services.AddScoped<ITransientService, PlacidSingleton>();
 // builder.Services.AddScoped<IPlacidService, PlacidSingleton>();
 
-    builder.Services.AddScoped<IScopedService, ScopedService>();
+builder.Services.AddScoped<IScopedService, ScopedService>();
 
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -99,17 +99,17 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 var app = builder.Build();
 
-
+/*  cut this in when going live
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
+*/
 
-/*
 if (!app.Environment.IsDevelopment())
 {
     app.UseHttpsRedirection();
-} */
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -184,12 +184,34 @@
                     </div>
                     @RenderBody()
                     <hr />
-                    
+                    @*
                     <a class="weatherwidget-io weather-widget-container" href="https://forecast7.com/en/27d91n82d79/largo/?unit=us" data-label_1="Largo Florida" data-label_2="WEATHER" data-theme="original">Largo Weather</a>
                     <hr />
                     <hr id="hrclick"  />
                     <hr />
-                   
+                   *@
+                    <div class="tomorrow"
+                           data-location-id="126144"
+                           data-language="EN"
+                           data-unit-system="IMPERIAL"
+                           data-skin="light"
+                           data-widget-type="upcoming"
+                           style="padding-bottom:22px;position:relative;"
+                        >
+                          <a
+                            href="https://weather.tomorrow.io/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                          >
+                            <img
+                              alt="Powered by Tomorrow.io"
+                              src="https://weather-website-client.tomorrow.io/img/powered-by.svg"
+                              width="250"
+                              height="18"
+                            />
+                          </a>
+        </div>
                 </div>
             </div>
         </main>
@@ -233,6 +255,7 @@
 
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.15.15/validator.min.js"> </script>
+     
 
     @*
     <script src="~/js/oscode.js"></script>
@@ -240,7 +263,7 @@
 
     <script>
  
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+      // !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
   
         /*
         let clickCountx = 0;
@@ -290,36 +313,57 @@
                     console.log(os1);
                     console.log("shit");
 
+                      if( os1.includes("windows") )
+                      {
+                                    $.get("/home/Indexx", function(data, status){
+
+                      // if this is true -- then Home for sale will be active -- else menu option will not be present
+                      //   and this is determined by simply having --- HomeVisible.txt
+                                            if (data)
+                                             document.getElementById("homedisplay").removeAttribute('hidden')
+
+                                          });
+
+                      }
+
+
+                      if ( os1.includes("linux"))
+                      {
+                            $.get("https://LakePlacidPark.com/home/Indexx", function(data, status){
+
+                              // if this is true -- then Home for sale will be active -- else menu option will not be present
+                              //   and this is determined by simply having --- HomeVisible.txt
+                                if (data)
+                                     document.getElementById("homedisplay").removeAttribute('hidden')
+
+                            });
+                      }
                   
-                    if( os1.includes("windows") )
-                    {
-                                  $.get("/home/Indexx", function(data, status){
 
-                    // if this is true -- then Home for sale will be active -- else menu option will not be present
-                    //   and this is determined by simply having --- HomeVisible.txt
-                                          if (data)
-                                           document.getElementById("homedisplay").removeAttribute('hidden')
+                 //    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 
-                                        });
-
-                    }
-
-
-                    if ( os1.includes("linux"))
-                    {
-                          $.get("https://LakePlacidPark.com/home/Indexx", function(data, status){
-
-                            // if this is true -- then Home for sale will be active -- else menu option will not be present
-                            //   and this is determined by simply having --- HomeVisible.txt
-                              if (data)
-                                   document.getElementById("homedisplay").removeAttribute('hidden')
-
-                          });
-                    }
-
-                    
         });
-        
+          //   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+
+
+           
+          (function(d, s, id) {
+            if (d.getElementById(id)) {
+                if (window.__TOMORROW__) {
+                    window.__TOMORROW__.renderWidget();
+                }
+                return;
+            }
+            const fjs = d.getElementsByTagName(s)[0];
+            const js = d.createElement(s);
+            js.id = id;
+            js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+            fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'tomorrow-sdk');
+  
+
+    
     </script>
 
     @await RenderSectionAsync("Scripts", required: true)
