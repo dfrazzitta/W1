@@ -81,13 +81,12 @@ namespace W1.Controllers
             //public async Task<ActionResult> FileUpload1(IFormFile file, int LotNo, string Price, string AgentLastName, string AgentFirstName, string Email,
             string OfficePhone, string CellPhone, string AgentUrl)
         {
+
+            #region junk
             // return StatusCode(400, "some text, json, etc.");
             //return BadRequest("Validation failed."); // 400 Bad Request
 
             // return Ok(new { message = "Data retrieved successfully!" });
-
-            // string finalLot = null;
-
 
             //if (String.Compare(_scopedService.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
             //{
@@ -99,55 +98,62 @@ namespace W1.Controllers
             {
                 AgentUrl = "noval";
             }
+            #endregion
 
-            if (ModelState.IsValid)
+            // return StatusCode(404, "some text, json, etc.");
+
+
+            var memberx = await _context.Members
+               .FirstOrDefaultAsync(m => m.LotNo == LotNo);
+            if (memberx != null)
             {
-
-                String OfficePhone1 = OfficePhone.Insert(3, "-");
-                string OfficeFinal = OfficePhone1.Insert(7, "-");
-
-                String CellPhone1 = CellPhone.Insert(3, "-");
-                string CellPhoneFinal = CellPhone1.Insert(7, "-");
-                string currency = "$" + Price;
-
-                // string finalLot1 = null;
-
-
-                // check the file 
-                // try a no await 
-                await UploadFile(file, LotNo);
-                Member member0 = new Member();
-                member0.TypeSell = TypeSell;
-                member0.LotNo = LotNo;
-                member0.Price = currency;
-                member0.AgentLastName = AgentLastName;
-                member0.AgentFirstName = AgentFirstName;
-                member0.Email = Email;
-                member0.OfficePhone = OfficeFinal;
-                member0.CellPhone = CellPhoneFinal;
-                member0.ImageName = file.FileName;
-                member0.AgentUrl = AgentUrl;
-
-                _context.Add(member0);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return StatusCode(404, "some text, json, etc.");
             }
             else
             {
-                Member member1 = new Member();
+                if (ModelState.IsValid)
+                {
 
-                member1.TypeSell = "";
-                member1.LotNo = "";
-                member1.Price = "";
-                member1.AgentLastName = "";
-                member1.AgentFirstName = "";
-                member1.Email = "";
-                member1.OfficePhone = "";
-                member1.CellPhone = "";
-                member1.ImageName = "";
-                return View(member1);
+                    String OfficePhone1 = OfficePhone.Insert(3, "-");
+                    string OfficeFinal = OfficePhone1.Insert(7, "-");
+
+                    String CellPhone1 = CellPhone.Insert(3, "-");
+                    string CellPhoneFinal = CellPhone1.Insert(7, "-");
+                    string currency = Price;
+
+                    // try a no await 
+                    await UploadFile(file, LotNo);
+                    Member member0 = new Member();
+                    member0.TypeSell = TypeSell;
+                    member0.LotNo = LotNo;
+                    member0.Price = currency;
+                    member0.AgentLastName = AgentLastName;
+                    member0.AgentFirstName = AgentFirstName;
+                    member0.Email = Email;
+                    member0.OfficePhone = OfficeFinal;
+                    member0.CellPhone = CellPhoneFinal;
+                    member0.ImageName = file.FileName;
+                    member0.AgentUrl = AgentUrl;
+
+                    _context.Add(member0);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    Member member1 = new Member();
+                    member1.TypeSell = "";
+                    member1.LotNo = "";
+                    member1.Price = "";
+                    member1.AgentLastName = "";
+                    member1.AgentFirstName = "";
+                    member1.Email = "";
+                    member1.OfficePhone = "";
+                    member1.CellPhone = "";
+                    member1.ImageName = "";
+                    return View(member1);
+                }
             }
-
         }
 
         public async Task<bool> UploadFile(IFormFile file, string lotNo)
@@ -185,40 +191,6 @@ namespace W1.Controllers
         }
 
 
-        /*
-  
-        [HttpPost]
-        public async Task<IActionResult> EmailXXX(int lot, string namex)
-        {
-            //  if (String.Compare(_scopedService.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
-            //  {
-            //      return RedirectToAction(nameof(Index), "home");
-            //  }
-
-
-
-            return View(await _context.Users.ToListAsync());
-        }
-        */
-
-
-
-        /// <summary>
-        /// /////////////////////////////////////////////////////////////////////////////////////////////////////
-        /// </summary>
-        // GET: Members
-        public async Task<IActionResult> Email()
-        {
-            //  if (String.Compare(_scopedService.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
-            //  {
-            //      return RedirectToAction(nameof(Index), "home");
-            //  }
-
-
-
-            return View(await _context.Users.ToListAsync());
-        }
-
 
         // GET: Members
         public async Task<IActionResult> Index()
@@ -228,7 +200,7 @@ namespace W1.Controllers
             //      return RedirectToAction(nameof(Index), "home");
             //  }
 
-
+            List<Member> members = await _context.Members.ToListAsync();
 
             return View(await _context.Members.ToListAsync());
         }
@@ -236,12 +208,6 @@ namespace W1.Controllers
         // GET: Members/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            /*
-           if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
-           {
-               return RedirectToAction(nameof(Index), "home");
-           }*/
-
 
             if (id == null)
             {
@@ -261,11 +227,6 @@ namespace W1.Controllers
         // GET: Members/Create
         public IActionResult Create()
         {
-            /*
-            if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
-            {
-                return RedirectToAction(nameof(Index), "home");
-            }*/
             return View();
         }
 
@@ -276,14 +237,20 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,LotNo,Price,AgentLastName,AgentFirstName,Email,OfficePhone,CellPhone,AgentUrl,ImageName")] Member member)
         {
-            return NotFound();
+            //  return NotFound();
 
+            // var memberx = await _context.Members
+            //    .FirstOrDefaultAsync(m => m.LotNo == LotNo);
+            //  if (memberx == null)
+            //  {
             if (ModelState.IsValid)
             {
                 _context.Add(member);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            //    }
+
             return View(member);
         }
 
@@ -309,6 +276,17 @@ namespace W1.Controllers
             // PlacidSingleton.Instance.SetPlacid(false);
             return View(member);
         }
+
+        public bool UpdatePrice(int? id, int? Price)
+        {
+
+
+            return true;
+        }
+
+
+
+
 
         // POST: Members/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -378,7 +356,7 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var member = await _context.Members.FindAsync(id);
+            var member = _context.Members.Find(id);
 
             try
             {
@@ -394,6 +372,13 @@ namespace W1.Controllers
                         System.IO.File.Delete(imagepath);
                         _context.Members.Remove(member);
                         await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index), "Members");
+                    }
+                    else
+                    {
+                        _context.Members.Remove(member);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index), "Members");
                     }
                 }
             }
@@ -413,7 +398,7 @@ namespace W1.Controllers
             */
 
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), "Members");
         }
 
         private bool MemberExists(int id)

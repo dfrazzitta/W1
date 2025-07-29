@@ -66,12 +66,14 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CellPhone)
         </dd>
+        @*
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AgentUrl)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.AgentUrl)
         </dd>
+        *@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ImageName)
         </dt>
@@ -112,48 +114,7 @@
           });
            
 
-         $('#formDelete').submit(function (e) {
-            e.preventDefault(); // Prevent default form submission
-           // debugger;
-            $.ajax({
-                url: '@Url.Action("Delete", "Members")', // Replace with your controller action
-                type: 'POST',
-                data: $(this).serialize(), // Serialize form data
-               
-                success: function (response) {
-                  //  if (response.success) { // Assuming your controller returns a success property
-                        // Display success message using JavaScript
-                        console.log("Success:", response); // Log the response data
-                         
-
-                        // window.location.href = "http://localhost:5000/members/index.cshtml";
-                        // window.location.origin  https://www.example.com).
-                        // window.location.hostname
-
-                        var currentUrl1 =  window.location.origin;
-                        console.log(currentUrl1);
-
-                        var currentUrl2 = window.location.hostname;
-                        console.log(currentUrl2);
-
-
-                        var currentUrl = window.location.href;
-                        console.log(currentUrl);
-                        alert("record" + " " +  "deleted");
-                       // ShowUpdate(currentUrl1);
-                   // } else {
-                        // Handle error or display error message
-                   //     alert('Error error error: ' + response.responseText);
-                  //  }
-                },
-                error: function (xhr, status, error) {
-                                           // Handle error or display error message
-                        alert('(xhr, status, error: ');
-
-
-                }
-            });
-        });
+        
 
 
 

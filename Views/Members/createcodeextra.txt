@@ -1,0 +1,218 @@
+﻿
+            @*
+            function testsubmit()
+            {
+                alert('second submit');
+                var form=$("#ajaxSend");
+                var vb = form.serialize();
+               // debugger;
+                 $.ajax({
+                        url: '@Url.Action("FileUpload1", "Members")', // Example API endpoint
+                        method: "POST", // HTTP method (GET, POST, PUT, DELETE, etc.)
+                        data: new FormData$('#ajaxSend').serialize(),  // Expected data type of the response
+                        success: function(response) {
+                            // This function is executed if the request is successful
+                             console.log("Success:", response); // Log the response data
+                            // HelpHomeImageInfo();
+
+                            // window.location.href = "http://localhost:5000/members/index.cshtml";
+                            // window.location.origin  https://www.example.com).
+                            // window.location.hostname
+
+                            var currentUrl1 =  window.location.origin;
+                            console.log(currentUrl1);
+
+                            var currentUrl2 = window.location.hostname;
+                            console.log(currentUrl2);
+
+
+                            var currentUrl = window.location.href;
+                            console.log(currentUrl);
+                        },
+                        error: function(xhr, status, error) {
+                            // This function is executed if an error occurs
+                            console.error("AJAX Error:", status, error);
+                             ajaxError();
+                        }
+                    });
+            }
+           
+
+            *@
+
+
+            
+        /*
+
+        function myFunction() {
+            alert('Agent URL');
+            var x = document.getElementById("AgentUrl");
+            x.value = x.value.toUpperCase();
+        }
+
+        function DoAlertClick() {
+            alert('clicked');
+
+        }
+
+        function DoAlert() {
+            Swal.fire({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success"
+            });
+        }
+
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'maxwidth': 388,
+            'maxheight': 339
+        });
+        */
+
+
+
+              /*
+                if (urlx === null || urlx.length === 0) {
+                    const doubleCheckIcon =
+
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                            Swal.fire({
+                                title: "Information",
+                                text: "Please enter a URL in the textbox !",
+                                icon:
+                                "Error"
+                            });
+                            return true;
+                }
+                else {
+
+                           const parentLeft = window.screenLeft ? window.screenLeft : window.screenX;
+                            const parentTop = window.screenTop ? window.screenTop : window.screenY;
+                            const parentWidth = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+                            const parentHeight = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+                            // Calculate the center position
+                            const left = parentLeft + (parentWidth / 2) - (100 / 2);
+                            const top = parentTop + (parentHeight / 2) - (100 / 2);
+
+                            // Open the new window with the calculated position
+                            const specs = " '_blank', toolbar=no, scrollbars=no, resizable=no, top=200, left=300, width=600, height=400";
+                            const newWindow = window.open(urlx, "Test", specs);
+                   
+
+                            if (newWindow == null) {
+                                   console.log("window is null");
+                                   const doubleCheckIcon =
+
+                                        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                    Swal.fire({
+                                        title: "Information",
+                                        text: "Url does not appear to be good",
+                                        icon:
+                                        "Notice"
+                                    });
+                                    globalUrlFlag = true;
+                                    const agentUrl = document.getElementById('AgentUrl');
+                                   // agentUrl.value = 'noval';
+                                   // agentUrl.disabled = true;
+                                    return true; // Prevents default error handling in the new window
+                       
+                            }
+                            else {
+                                console.log("window not null but appears error");
+                              //   newWindow.onerror = (message, source, lineno, colno, error) => {
+                                     newWindow.close();
+                                    // You can also send this error information back to the opener window
+                                    // using postMessage or by accessing properties if same-origin.
+                                     const doubleCheckIcon =
+
+                                        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                    Swal.fire({
+                                        title: "Information",
+                                        text: "Error in URL window",
+                                        icon: "error"
+                                    });
+                            
+                                   
+                                    return true; // Prevents default error handling in the new window
+                            //    };
+                         
+                            }
+                          }
+                  
+
+            }   */
+
+
+
+            @*
+
+
+  document.getElementById('fileInput').addEventListener('change', function(event) {
+            let selectedFiles = event.target.files;
+            if (selectedFiles.length > 0) {
+                debugger;
+                     let imageFile = event.target.files[0];
+                     var reader = new FileReader();
+                     reader.onload = function (e) {
+                         var img = document.createElement("img");
+                         img.onload = function (event) {
+                             // Dynamically create a canvas element
+                             var canvas = document.createElement("canvas");
+
+                             // var canvas = document.getElementById("canvas");
+                             var ctx = canvas.getContext("2d");
+
+                             // Actual resizing
+                             ctx.drawImage(img, 0, 0, 1024, 682);
+
+                             // Show resized image in preview element
+                             var dataurl = canvas.toDataURL(imageFile.type);
+                             document.getElementById("preview").src = dataurl;
+                         }
+                         img.src = e.target.result;
+                     }
+                     reader.readAsDataURL(imageFile);
+
+                // debugger;
+            }
+        });
+
+        document.getElementById('button13').addEventListener('click', function() {
+              var file = document.getElementById('fileInput').click();
+
+                console.log(file.
+
+                /*
+                let imgInput = document.getElementById('fileclick');
+                imgInput.addEventListener('change', function (e) {
+                    if (e.target.files) {
+                        let imageFile = e.target.files[0];
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var img = document.createElement("img");
+                            img.onload = function (event) {
+                                // Dynamically create a canvas element
+                                var canvas = document.createElement("canvas");
+
+                                // var canvas = document.getElementById("canvas");
+                                var ctx = canvas.getContext("2d");
+
+                                // Actual resizing
+                                ctx.drawImage(img, 0, 0, 1024, 682);
+
+                                // Show resized image in preview element
+                                var dataurl = canvas.toDataURL(imageFile.type);
+                                document.getElementById("preview").src = dataurl;
+                            }
+                            img.src = e.target.result;
+                        }
+                        reader.readAsDataURL(imageFile);
+                    }
+                });
+                */
+
+            });
+*@            

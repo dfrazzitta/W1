@@ -41,14 +41,14 @@
 
             <div class="form-group">
                 <label asp-for="TypeSell" class="control-label"></label>
-                <input asp-for="TypeSell" id="test" class="form-control" readonly />
+                <input asp-for="TypeSell" id="test" readonly  class="form-control" />
 
                 <span asp-validation-for="TypeSell" class="text-danger"></span>
 
             </div>
             <div class="form-group">
                 <label asp-for="LotNo" class="control-label"></label>
-                <input id="LotNo" asp-for="LotNo" class="form-control" readonly />
+                <input id="LotNo" asp-for="LotNo" readonly class="form-control" />
 
                 <span asp-validation-for="LotNo" class="text-danger"></span>
 
@@ -60,37 +60,40 @@
             </div>
             <div class="form-group">
                 <label asp-for="AgentLastName" class="control-label"></label>
-                <input asp-for="AgentLastName" class="form-control" />
+                <input asp-for="AgentLastName" class="form-control"   />
                 <span asp-validation-for="AgentLastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AgentFirstName" class="control-label"></label>
-                <input asp-for="AgentFirstName" class="form-control" />
+                <input asp-for="AgentFirstName" class="form-control"   />
                 <span asp-validation-for="AgentFirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control"   />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OfficePhone" class="control-label"></label>
-                <input asp-for="OfficePhone" class="form-control" />
+                <input asp-for="OfficePhone" class="form-control"   />
                 <span asp-validation-for="OfficePhone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CellPhone" class="control-label"></label>
-                <input asp-for="CellPhone" class="form-control" />
+                <input asp-for="CellPhone" class="form-control"   />
                 <span asp-validation-for="CellPhone" class="text-danger"></span>
             </div>
+           
             <div class="form-group">
-                <label asp-for="AgentUrl" class="control-label"></label>
-                <input asp-for="AgentUrl" class="form-control" />
+                <label asp-for="AgentUrl" class="control-label" style="visibility: hidden"></label>
+                <input asp-for="AgentUrl" class="form-control"  style="visibility: hidden"/>
                 <span asp-validation-for="AgentUrl" class="text-danger"></span>
             </div>
+             
+             
             <div class="form-group">
                 <label asp-for="ImageName" class="control-label"></label>
-                <input asp-for="ImageName" class="form-control" readonly />
+                <input asp-for="ImageName" readonly class="form-control" />
                 <span asp-validation-for="ImageName" class="text-danger"></span>
             </div>
 
@@ -115,70 +118,51 @@
 @section Scripts
 {
     <script>
-
+ 
                 window.onload = function() {
-                  // Code to be executed after the page has fully loaded
-                  // alert("Page loaded successfully!");
-
-
-
-                  // You can manipulate DOM elements here, e.g.,
-                  // document.getElementById("myElement").textContent = "Content loaded!";
                 };
-
-
+ 
                 $(document).ready(function() {
+                        $('#target').on('submit', function(e) {
+                                e.preventDefault(); // Prevent default form submission
+                                debugger;
+                                var formData = new FormData(this); // Create FormData object from the form
 
+                                // You can also append additional data manually if needed
+                                // formData.append('extraData', 'someValue');
 
+                                $.ajax({
+                                    url:  '@Url.Action("Edit", "Members")', // Replace with your server-side endpoint (e.g., ASP.NET Core controller action)
+                                    type: 'POST',
+                                    data: formData,
+                                    processData: false, // Important: Don't process the data, let FormData handle it
+                                    contentType: false, // Important: Don't set content type, FormData handles it
+                                    success: function(response) {
+                                        console.log('Upload successful:', response);
+                                        // Handle success response
+                                    },
+                                    error: function(xhr, status, error) {
+ 
+                                        // Example of accessing specific properties:
+                                        if (xhr.status === 404) {
+                                            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                            Swal.fire({
+                                                title: "Information",
+                                                text: "Appears a record exists for this Lot",
+                                                icon:
+                                                "Error"
+                                            });
 
-
-                    /*
-                $( "form" ).on( "submit", function( event ) {
-
-                    var ty = document.getElementById('LotNo').value;
-                    if (ty != null) {
-                        alert(ty);
-                        return;
-                    }
-
-
-                  $( "span" ).text( "Not valid!" ).show().fadeOut( 1000 );
-                         event.preventDefault();
-                });
-                    */
-        /*
-                    $( "#target" ).on( "submit", function( event ) {
-                      alert( "Handler for `submit` called." );
-                     // event.preventDefault();
-                      const formData = $(this).serialize();
-                      alert(formData);
-
-                   //   $( "#target" ).trigger( "submit" );
-                           console.log(formData);
-                            $.ajax({
-
-                              url: '/members/edit',
-                              method: 'POST',
-                              data: formData,
-                              success: function(response) {
-                                console.log('Form submitted successfully');
-                              }
+                                        } else {
+                                            console.error('An unexpected error occurred.');
+                                        }
+                                        // Handle error
+                                    }
+                                });
                             });
-                  //  });
-                  */
+                        });
                 });
-
-
-                /*
-                window.onload = function() {
-                    let x = document.getElementById("test");
-
-                  // Your code here will execute after the page is fully loaded
-                    alert( x.value);
-
-                };  */
-
-
+ 
     </script>
 }
 
@@ -195,11 +179,7 @@
 }
 
 <h1>Edit</h1>
-
  
-
-
-
 <h4>Member</h4>
 <hr />
 <div class="row">

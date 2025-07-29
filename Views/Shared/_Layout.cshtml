@@ -190,6 +190,13 @@
                     <hr id="hrclick"  />
                     <hr />
                    *@
+
+
+                    <a class="weatherwidget-io" href="https://forecast7.com/en/27d91n82d79/largo/?unit=us" data-label_1="LARGO" data-label_2="WEATHER" data-theme="original">LARGO WEATHER</a>
+                  
+                    
+                    @*
+
                     <div class="tomorrow"
                            data-location-id="126144"
                            data-language="EN"
@@ -211,7 +218,8 @@
                               height="18"
                             />
                           </a>
-        </div>
+                    </div>
+                    *@
                 </div>
             </div>
         </main>
@@ -264,54 +272,13 @@
     <script>
  
       // !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-  
-        /*
-        let clickCountx = 0;
-        let lastClickTimex = 0;
-        const TRIPLE_CLICK_THRESHOLDX = 300; // milliseconds
-        let keysPressedx = {};
-        let  isVisiablex = false;
-
-        const myElement = document.getElementById('hrclick');
-
-        myElement.addEventListener('mousedown', (event) => {
-            const currentTimex = new Date().getTime();
-
-            if (currentTimex - lastClickTimex < TRIPLE_CLICK_THRESHOLDX) {
-                clickCountx++;
-
-            } else {
-                clickCountx = 1; // Start a new click sequence
-            }
-
-            lastClickTimex = currentTimex;
-
-            if (clickCountx === 3) {
-                console.log('Triple-click down detected!');
-                // Perform your desired action here
-                clickCountx = 0; // Reset for the next sequence
-                var myLog = document.getElementById('homedisplay');
-
-                myLog.hidden = !myLog.hidden;
-                isVisiable = true;
-
-               // e.preventDefault();
-            }
-        });
-        
-     
-                $.get("demo_test.asp", function(data, status){
-            alert("Data: " + data + "\nStatus: " + status);
-        });  
-        
-        */
-
+   
                 
         $( document ).ready(function() {
             // alert('this is index');
                     const os1 = navigator.userAgent.toLowerCase();
                     console.log(os1);
-                    console.log("shit");
+                   // console.log("shit");
 
                       if( os1.includes("windows") )
                       {
@@ -340,31 +307,19 @@
                       }
                   
 
-                 //    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 
         });
-          //   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+         //     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 
-
+       //   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
            
-          (function(d, s, id) {
-            if (d.getElementById(id)) {
-                if (window.__TOMORROW__) {
-                    window.__TOMORROW__.renderWidget();
-                }
-                return;
-            }
-            const fjs = d.getElementsByTagName(s)[0];
-            const js = d.createElement(s);
-            js.id = id;
-            js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
-
-            fjs.parentNode.insertBefore(js, fjs);
-        })(document, 'script', 'tomorrow-sdk');
-  
+          
 
     
     </script>
+
+    
 
     @await RenderSectionAsync("Scripts", required: true)
 </body>
