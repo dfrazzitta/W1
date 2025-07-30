@@ -208,4 +208,12 @@ imgpalms {
     border-radius: 15px;  
 }
 
-   
+
+.containerlogout {
+    text-align: center; /* Centers the text horizontally within the div */
+}
+
+.formxx {
+    margin: 0 auto;
+    width: 250px;
+}

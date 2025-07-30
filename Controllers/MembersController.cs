@@ -1,14 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Threading.Tasks;
 using W1.Data;
 using W1.Models;
 
@@ -48,27 +40,7 @@ namespace W1.Controllers
 
 
 
-        /*
-        [HttpPost]
-        public async Task<IActionResult> VerifyUser(string email, string Code)
-        {
-           
-            if (String.Compare("placiduser@xyztt.com", email) == 0 && String.Compare("23456", Code) == 0)
-            {
-                _scopedService.SetPlacidUser(email);
-                _scopedService.SetPlacid(true);
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                PlacidSingleton.Instance.SetPlacid(false);
-                PlacidSingleton.Instance.SetPlacidUser("");
-                return RedirectToAction(nameof(Index), "home");
-            }
-   
-            return RedirectToAction(nameof(Index), "home");
-        }
-        */
+
 
 
         /// <summary>
@@ -113,12 +85,15 @@ namespace W1.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
+                    /*
                     String OfficePhone1 = OfficePhone.Insert(3, "-");
                     string OfficeFinal = OfficePhone1.Insert(7, "-");
 
                     String CellPhone1 = CellPhone.Insert(3, "-");
                     string CellPhoneFinal = CellPhone1.Insert(7, "-");
+                    */
+
+
                     string currency = Price;
 
                     // try a no await 
@@ -130,8 +105,8 @@ namespace W1.Controllers
                     member0.AgentLastName = AgentLastName;
                     member0.AgentFirstName = AgentFirstName;
                     member0.Email = Email;
-                    member0.OfficePhone = OfficeFinal;
-                    member0.CellPhone = CellPhoneFinal;
+                    member0.OfficePhone = OfficePhone;
+                    member0.CellPhone = CellPhone;
                     member0.ImageName = file.FileName;
                     member0.AgentUrl = AgentUrl;
 
@@ -230,6 +205,22 @@ namespace W1.Controllers
             return View();
         }
 
+
+
+
+        public string FirstLetterToUpper(string str)
+        {
+            if (str == null)
+                return null;
+
+            if (str.Length > 1)
+                return char.ToUpper(str[0]) + str.Substring(1);
+
+            return str.ToUpper();
+        }
+
+
+
         // POST: Members/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -245,6 +236,10 @@ namespace W1.Controllers
             //  {
             if (ModelState.IsValid)
             {
+                string fn = member.AgentFirstName;
+                string fn1 = FirstLetterToUpper(fn);
+                member.AgentFirstName = fn1;
+
                 _context.Add(member);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -273,7 +268,17 @@ namespace W1.Controllers
             {
                 return NotFound();
             }
-            // PlacidSingleton.Instance.SetPlacid(false);
+
+            string op = member.OfficePhone.Replace("-", "");
+            string cp = member.CellPhone.Replace("-", "");
+
+
+            member.OfficePhone = op;
+            member.CellPhone = cp;
+            //   string op = member.OfficePhone.Replace(member.OfficePhone.Substring(3, 1), "-");
+
+
+
             return View(member);
         }
 
@@ -284,10 +289,6 @@ namespace W1.Controllers
             return true;
         }
 
-
-
-
-
         // POST: Members/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -295,11 +296,7 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,TypeSell,LotNo,Price,AgentLastName,AgentFirstName,Email,OfficePhone,CellPhone,AgentUrl,ImageName")] Member member)
         {
-            /*
-           if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
-           {
-               return RedirectToAction(nameof(Index), "home");
-           }*/
+
 
             if (id != member.ID)
             {
@@ -310,8 +307,12 @@ namespace W1.Controllers
             {
                 try
                 {
+                    // check all fields phone etc
+
                     _context.Update(member);
                     await _context.SaveChangesAsync();
+                    // RedirectPermanent("http://localhost:5000/members");
+                    return RedirectToAction(nameof(Index), "Members");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -324,9 +325,10 @@ namespace W1.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(member);
+            else
+                return View(member);
         }
 
         // GET: Members/Delete/5

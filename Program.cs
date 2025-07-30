@@ -1,8 +1,5 @@
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
 using System.Runtime.InteropServices;
 using W1.Data;
 using W1.Models;

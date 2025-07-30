@@ -6,15 +6,15 @@
         void PerformAction();
         void SetVal(bool val);
 
-        bool GetVal( );
+        bool GetVal();
 
         string GetPlacidUser();
 
         void SetPlacidUser(string CurrentUser);
- 
+
         bool GetPlacid();
-         void SetPlacid(bool val);
-        
+        void SetPlacid(bool val);
+
 
     }
 
@@ -29,11 +29,11 @@
             Console.WriteLine("Scoped service action performed.");
         }
 
-        public bool GetVal( )
+        public bool GetVal()
         {
             return _b;
         }
- 
+
         public void SetVal(bool b)
         {
             _b = b;
@@ -70,7 +70,7 @@
         bool GetPlacid();
 
         void SetPlacid(bool val);
-        
+
     }
 
 

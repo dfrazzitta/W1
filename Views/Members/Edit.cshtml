@@ -14,9 +14,10 @@
 </style>
 
 
-<h1 align="center">Edit</h1>
-
-<h4 align="center">Member</h4>
+ 
+<br />
+<h4 align="center">Member Edit</h4>
+<h4 align="center">Greyed out fields can not be edited</h4>
 <hr />
 <div class="row">
     <div class="col-3 w-25 p-3">
@@ -41,14 +42,16 @@
 
             <div class="form-group">
                 <label asp-for="TypeSell" class="control-label"></label>
-                <input asp-for="TypeSell" id="test" readonly  class="form-control" />
+                <input asp-for="TypeSell" id="test" readonly  class="form-control"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Not Editable" />
 
                 <span asp-validation-for="TypeSell" class="text-danger"></span>
 
             </div>
             <div class="form-group">
                 <label asp-for="LotNo" class="control-label"></label>
-                <input id="LotNo" asp-for="LotNo" readonly class="form-control" />
+                <input id="LotNo" asp-for="LotNo" readonly class="form-control"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Not Editable" />
 
                 <span asp-validation-for="LotNo" class="text-danger"></span>
 
@@ -75,12 +78,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="OfficePhone" class="control-label"></label>
-                <input asp-for="OfficePhone" class="form-control"   />
+                <input id="officephone" type="number"  asp-for="OfficePhone" class="form-control"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Do Not add dashes" />
+                
+                         @*onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')" />*@
+
                 <span asp-validation-for="OfficePhone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CellPhone" class="control-label"></label>
-                <input asp-for="CellPhone" class="form-control"   />
+                <input asp-for="CellPhone" type="number"  class="form-control" onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Do Not add dashes" />
                 <span asp-validation-for="CellPhone" class="text-danger"></span>
             </div>
            
@@ -93,7 +101,8 @@
              
             <div class="form-group">
                 <label asp-for="ImageName" class="control-label"></label>
-                <input asp-for="ImageName" readonly class="form-control" />
+                <input asp-for="ImageName" readonly class="form-control"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Not Editable" />
                 <span asp-validation-for="ImageName" class="text-danger"></span>
             </div>
 
@@ -118,14 +127,28 @@
 @section Scripts
 {
     <script>
- 
+
+                function handleMouseDown() {
+            //officephone
+                    document.getElementById('officephone').value = "";
+
+                    console.log("Mouse button pressed on the input!");
+                }
+
+                function addDashes(f) {
+                      let num = f.value;
+                      let parts = [num.slice(0, 3), num.slice(3, 6), num.slice(6, 10)];
+                      f.value = parts[0] + "-" + parts[1] + "-" + parts[2];
+                    }
+
                 window.onload = function() {
                 };
  
                 $(document).ready(function() {
+ 
                         $('#target').on('submit', function(e) {
                                 e.preventDefault(); // Prevent default form submission
-                                debugger;
+                               // debugger;
                                 var formData = new FormData(this); // Create FormData object from the form
 
                                 // You can also append additional data manually if needed
@@ -139,7 +162,7 @@
                                     contentType: false, // Important: Don't set content type, FormData handles it
                                     success: function(response) {
                                         console.log('Upload successful:', response);
-                                        // Handle success response
+                                         window.location.href =  '@Url.Action("Index", "Members")' ;
                                     },
                                     error: function(xhr, status, error) {
  
@@ -153,13 +176,15 @@
                                                 "Error"
                                             });
 
-                                        } else {
+                                        } 
+                                        else
+                                        {
                                             console.error('An unexpected error occurred.');
                                         }
                                         // Handle error
                                     }
                                 });
-                            });
+                            
                         });
                 });
  
@@ -169,144 +194,4 @@
 
 
 
-
-
-@*
-@model W1.Models.Member
-
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<h1>Edit</h1>
  
-<h4>Member</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form id="target" asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
-            <div class="form-group">
-                <label asp-for="TypeSell" class="control-label"></label>
-                <input asp-for="TypeSell" id="test" class="form-control" disabled />
-                
-                <span asp-validation-for="TypeSell" class="text-danger"></span>
-                
-            </div>
-            <div class="form-group">
-                <label asp-for="LotNo" class="control-label"></label>
-                <input id="LotNo" asp-for="LotNo" class="form-control" />
-                
-                <span asp-validation-for="LotNo" class="text-danger"></span>
-                
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" maxlength="15" style="width:110px; " class="form-control  mx-auto d-flex" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AgentLastName" class="control-label"></label>
-                <input asp-for="AgentLastName"   class="form-control" />
-                <span asp-validation-for="AgentLastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AgentFirstName" class="control-label"></label>
-                <input asp-for="AgentFirstName"   class="form-control" />
-                <span asp-validation-for="AgentFirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email"   class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OfficePhone" class="control-label"></label>
-                <input asp-for="OfficePhone"   class="form-control" />
-                <span asp-validation-for="OfficePhone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CellPhone" class="control-label"></label>
-                <input asp-for="CellPhone"   class="form-control" />
-                <span asp-validation-for="CellPhone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AgentUrl" class="control-label"></label>
-                <input asp-for="AgentUrl"   class="form-control" />
-                <span asp-validation-for="AgentUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageName" class="control-label"></label>
-                <input asp-for="ImageName"   class="form-control" />
-                <span asp-validation-for="ImageName" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-             
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts
-{
-    <script>
-
-        $(document).ready(function() {
-            /*
-        $( "form" ).on( "submit", function( event ) {
-
-            var ty = document.getElementById('LotNo').value;
-            if (ty != null) {
-                alert(ty);
-                return;
-            }
-       
-
-          $( "span" ).text( "Not valid!" ).show().fadeOut( 1000 );
-                 event.preventDefault();
-        });
-            */
-/*
-            $( "#target" ).on( "submit", function( event ) {
-              alert( "Handler for `submit` called." );
-             // event.preventDefault();
-              const formData = $(this).serialize();
-              alert(formData);
-
-           //   $( "#target" ).trigger( "submit" );
-                   console.log(formData);
-                    $.ajax({
-                      
-                      url: '/members/edit',
-                      method: 'POST',
-                      data: formData,
-                      success: function(response) {
-                        console.log('Form submitted successfully');
-                      }
-                    });
-          //  });
-          */
-        });
-
-        
-        /*
-        window.onload = function() {
-            let x = document.getElementById("test");
-            
-          // Your code here will execute after the page is fully loaded
-            alert( x.value);
-
-        };  */
-
-
-    </script>
-}
- 
-*@

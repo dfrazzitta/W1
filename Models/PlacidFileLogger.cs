@@ -1,6 +1,6 @@
 ﻿namespace W1.Models
 {
-  
+
 
 
     public class PlacidFileLogger : ILogger

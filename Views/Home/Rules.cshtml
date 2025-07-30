@@ -2,23 +2,13 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-
- 
-
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
 
 }
 
-
-
 <div style="padding:0px 10px;">
     @Html.Raw(ViewBag.HtmlStr)
 </div>
-
-
 
 <div style="padding:0px 10px;">
     <!--Sub Header-->
@@ -51,10 +41,6 @@
         <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
     </div>
    
-
-
-    
-
 </div>
  
 <div class="row">
@@ -71,7 +57,7 @@
                 <strong>Download Placid Park Rules</strong>
             </p>
             <a href="~/Info/Rules.pdf" download="Rules">
-                <img src="~/Rules9.jpeg" alt="Placid Park Rules"   width="60" height="60">
+                <img src="~/Rules9.jpeg" alt="Placid Park Rules"   width="90" height="90">
             </a>
         </div>
     </div>
@@ -113,21 +99,11 @@
                                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                             </form>
                         </li>
-                        @*
-                        <li class="nav-item">
-                            <a href="~/info.db" download="~/info.db">
-                                <img src="~/red.jpg" alt="Placid Park DB" class="align-content-center" width="104" height="142">
-                            </a>
-                        </li>
-                        *@
+                       
                     }
                     else
                     {
-                        @*
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                        </li>
-                         *@
+                       
                         <li class="nav-item">
                              
                             <a class="nav-link text-dark " asp-area="Identity" asp-page="/Account/Login"
@@ -136,8 +112,7 @@
                          
                     }
                 </ul>
-
-               
+      
             </div>
         </div>
         <div class="col-md-3">
@@ -168,9 +143,7 @@
     <script>
         // A $( document ).ready() block.
         $(document).ready(function () {
-           // function showAlert1() {
-           //     alert("AA was pressed!");
-           // }
+          
         });
 
         function showAlert() {
@@ -214,80 +187,15 @@
         document.onkeyup = function(e) {
 
           if (e.keyCode ===  27 && isVisiable) {
-
                 var myLog = document.getElementById("loginForm");
-
                 myLog.hidden = !myLog.hidden;
                 isVisiable = false;
-
                e.preventDefault();
 
           }
         };
 
 
-         /*
-        let keysPressed = {};
-
-        document.onkeyup = function(e) {
-        if (e.which == 85) {
-               if (e.ctrlKey && e.shiftKey  ) {
-                //alert("Ctrl + Alt + Shift + U shortcut combination was pressed");
-                   var myLog = document.getElementById("loginForm");
-                   
-                    myLog.hidden = !myLog.hidden;
-                   
-                   e.preventDefault();
-               }
-          }
-          
-          if (e.keyCode ===  27 && !keysPressed) {
-               
-                var myLog = document.getElementById("loginForm");
-                
-                myLog.hidden = !myLog.hidden;
-               
-               e.preventDefault();
-
-          }   
-        };
-        */
-       
-        /*
-        document.addEventListener('keydown', (event) => {
-           keysPressed[event.key] = true;
-           // debugger;
-           if (keysPressed['Control'] && event.key == 'o') {
-               //alert(event.key);
-               // event.preventDefault();
-                var myLog = document.getElementById("loginForm");
-               // logEmail = document.getElementById("Code");
-               // logElement = document.getElementById("email");
-                myLog.hidden = !myLog.hidden;
-               // myLog.onclick( ); //        .onclick();
-               event.preventDefault();
-                      
-           }
-
-           if (event.keyCode ===  27 ) {
-               //alert(event.key);
-               // event.preventDefault();
-                var myLog = document.getElementById("loginForm");
-               // logEmail = document.getElementById("Code");
-               // logElement = document.getElementById("email");
-                myLog.hidden = !myLog.hidden;
-               // myLog.onclick( ); //        .onclick();
-               event.preventDefault();
-
-           }
-        });
-
-        document.addEventListener('keyup', (event) => {
-           delete keysPressed[event.key];
-        });
-        */
-
- 
     </script>
 
 }

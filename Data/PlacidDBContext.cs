@@ -1,19 +1,18 @@
-﻿ 
-using W1.Models;
+﻿
 using Microsoft.EntityFrameworkCore;
-using static NuGet.Packaging.PackagingConstants;
+using W1.Models;
 
 namespace W1.Data;
 
 public class PlacidDBContext : DbContext
 {
-    public PlacidDBContext(DbContextOptions<PlacidDBContext> options) : base(options )
+    public PlacidDBContext(DbContextOptions<PlacidDBContext> options) : base(options)
     {
 
-        
+
     }
 
-    
+
     public DbSet<Member> Members { get; set; }
     public DbSet<User> Users { get; set; }
 
@@ -22,5 +21,5 @@ public class PlacidDBContext : DbContext
 
     }
 
-public DbSet<W1.Models.UserModel> UserModel { get; set; } = default!;
+    public DbSet<W1.Models.UserModel> UserModel { get; set; } = default!;
 }

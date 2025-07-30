@@ -1,13 +1,10 @@
-﻿using W1.Models;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations;
 
 
 
 namespace W1.Models
 {
-    public class User   
+    public class User
     {
 
         [Key]
@@ -43,6 +40,6 @@ namespace W1.Models
         public string? Cell { get; set; }
 
 
-         
+
     }
 }

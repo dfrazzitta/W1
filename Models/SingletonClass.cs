@@ -1,12 +1,4 @@
-﻿
-
-
-
-
-using Microsoft.EntityFrameworkCore;
-using W1.Data;
-
-namespace W1.Models
+﻿namespace W1.Models
 {
 
     public sealed class SingletonClass

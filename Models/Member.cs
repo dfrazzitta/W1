@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 
 
@@ -38,11 +37,11 @@ public class Member
 
 
     [Required]
-     
+
     [EmailAddress(ErrorMessage = "Invalid primary email address")]
     public string? Email { get; set; }
-     
- 
+
+
     [Required(ErrorMessage = "You must provide a phone number")]
     [Display(Name = "Office Phone")]
     [DataType(DataType.PhoneNumber)]

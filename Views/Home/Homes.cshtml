@@ -1,12 +1,32 @@
 ﻿@model IEnumerable<W1.Models.DynamicHomes>
 
- @*    
-<div id="spin" class="spinner-wrapper">
-    <div class="spinner-border text-primary" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
-</div>
-*@
+<style>
+    /* Tooltip container */
+    .tooltipz {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    }
+
+        /* Tooltip text */
+        .tooltipz .tooltiptextz {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltipz:hover .tooltiptext {
+            visibility: visible;
+        }
+</style>
 
 <br />
 <div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
@@ -78,6 +98,21 @@
                // Code to execute after the entire page and all resources are loaded
                $("#spin").hide(); // Hide the spinner
                console.log("Page and all resources are loaded!");
+           });
+
+
+           $(document).ready(function() {
+                       $( "a" ).hover(
+                                      function() {
+                                       var title = $(this).attr("data-title");
+                                        $('<div/>', {
+                                            text: title,
+                                            class: 'box'
+                                        }).appendTo(this);
+                                      }, function() {
+                                        $(document).find("div.box").remove();
+                                      }
+                                    );
            });
     </script>
 }
