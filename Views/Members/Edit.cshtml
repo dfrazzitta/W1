@@ -58,22 +58,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" maxlength="15" style="width:110px; " class="form-control  mx-auto d-flex" />
+                <input asp-for="Price" maxlength="15" style="width:110px; " class="form-control  mx-auto d-flex"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Editable" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AgentLastName" class="control-label"></label>
-                <input asp-for="AgentLastName" class="form-control"   />
+                <input asp-for="AgentLastName" class="form-control" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Editable" />
                 <span asp-validation-for="AgentLastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AgentFirstName" class="control-label"></label>
-                <input asp-for="AgentFirstName" class="form-control"   />
+                <input asp-for="AgentFirstName" class="form-control" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Editable" />
                 <span asp-validation-for="AgentFirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control"   />
+                <input asp-for="Email" class="form-control" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Editable" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -115,7 +116,13 @@
     <div class="col-3 w-25 p-3">
 
 
-        <button class="btn btn-primary" id="button1" onclick="HelpTypeSellInfo()">ReadMe</button>
+        <button class="btn btn-primary" id="button1" onclick="activateTooltips()">Activate Tooltips</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button1" onclick="activateTooltips()">StopTooltips</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="button1" onclick="help()">Info</button>
         
     </div>
 </div>
@@ -128,6 +135,34 @@
 {
     <script>
 
+         function help() {
+             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+            Swal.fire({
+                title: "Information",
+                text: "Greyed items can not be changed",
+                icon:
+                "Info"
+            });
+        }
+
+         function stopTooltips() {
+            console.log('called turn off tooltips');
+            const tooltipTriggerList = [].slice.call(
+              document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+              const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                const tooltip = new bootstrap.Tooltip(tooltipTriggerEl)
+                tooltip.disable()
+                return tooltip;
+            })
+        }
+
+
+        function activateTooltips() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+              return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        }
                 function handleMouseDown() {
             //officephone
                     document.getElementById('officephone').value = "";

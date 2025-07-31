@@ -131,9 +131,26 @@
     <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
 </div>
 
-<form align="center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-    <button type="submit" align="center" class="nav-link btn btn-link text-dark">Click here to Logout</button>
-</form>
+
+<div class="container-fluid" style="background-color: aqua;">
+    <div class="row">
+        <div class="col-md-5">
+            
+        </div>
+        <div class="col-md-2">
+            @*@Url.Action("Index", "home")" *@
+            <form align="center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "home")" method="post">  
+             
+                <button type="submit" align="center" class="nav-link btn btn-link text-dark">Click here to Logout</button>
+            </form>
+        </div>
+        <div class="col-md-5">
+            
+        </div>
+    </div>
+    
+</div>
+ 
  
  
      
