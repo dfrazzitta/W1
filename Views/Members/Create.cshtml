@@ -224,16 +224,22 @@
             </div>
 
             <div class="text-center">
-                <label asp-for="OfficePhone" class="control-label"><b>Primary Phone</b></label><br />
-                <input id="OfficePhone" type="number" name="OfficePhone" value="" autocomplete="off"
+                <label asp-for="OfficePhone" class="control-label"><b>Office Phone</b></label><br />
+                <input id="OfficePhone" maxlength="10"   type="number" name="OfficePhone" value="" autocomplete="off"
+                        
+                       pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                       oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                        class="form-control w-2 p-2 mx-auto d-flex" 
                        @* onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')" *@
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter of office phone of RE Agent - NO DASHES" />
             </div>
 
             <div class="text-center">
-                <label asp-for="CellPhone" class="control-label"><b>Secondary Phone</b></label><br />
-                <input id="CellPhone"   type="number" name="CellPhone" value="" @* onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')" *@
+                <label asp-for="CellPhone" class="control-label"><b>Cell Phone</b></label><br />
+                <input id="CellPhone" maxlength="10" type="number"                                                                       
+                                                                          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                       oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                       name="CellPhone" value="" @* onkeyup="this.value=this.value.replace(/[^0-9+() -.]/g,'')" *@
                        class="form-control w-2 p-2 mx-auto d-flex" autocomplete="off"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter the Cellphone of RE Agent/seller - NO DASHES" />
 
@@ -245,11 +251,7 @@
                        value="https://lakeplacidpark.com"  
                        class="form-control w-2 p-2 mx-auto d-flex"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please verify URL is viable" />
-                  @*      
-                <button class="btn btn-primary" id="button13" onclick="verifyUrl()"
-                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="This will test the URL">
-                    Verify URL
-                </button> *@ 
+              
             </div>
 
             <hr />
@@ -315,6 +317,46 @@
 {
 
     <script>
+
+                function isDigit(char) {
+                  return char >= '0' && char <= '9';
+                }
+
+                /*
+             const inputElementCell = document.getElementById('CellPhone');
+            // Add an event listener for the focusout event
+          
+            inputElementCell.addEventListener('keyup', function(e) {
+                console.log('keyupcell');
+                console.log( e.target.value);
+                var b = isDigit(e.target.value);
+                console.log(b);
+                console.log(isDigit(e.target.value));
+             });
+              
+
+            inputElementCell.addEventListener('blur', function(e) {
+
+                  console.log('blurcell');
+                   console.log( e.target.value.length);
+            });
+
+            const inputElementOffice = document.getElementById('OfficePhone');
+            // Add an event listener for the focusout event
+            inputElementOffice.addEventListener('keyup', function(e) {
+
+                  console.log('keyupoffice');
+                   console.log( e.target.value);
+                    console.log(isDigit(e.target.value));
+            });
+ 
+            // Add an event listener for the focusout event
+            inputElementOffice.addEventListener('blur', function(e) {
+
+                console.log('bluroffice');
+                 console.log( e.target.value.length);
+             });
+             */
 
             $(document).ready(function() {
                 $('#ajaxSend').on('submit', function(e) {
@@ -501,7 +543,7 @@
 
 
             $(document).ready(function() {
-
+                 
             });
 
 
