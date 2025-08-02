@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35728.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W1", "W1.csproj", "{413BE835-AC8C-4AA3-9A94-EBCA160EEE6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.AspNetCore", "..\a\serilog\serilog-aspnetcore\src\Serilog.AspNetCore\Serilog.AspNetCore.csproj", "{FEF26C91-CF05-B551-60FE-FD8045625E37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{413BE835-AC8C-4AA3-9A94-EBCA160EEE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{413BE835-AC8C-4AA3-9A94-EBCA160EEE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{413BE835-AC8C-4AA3-9A94-EBCA160EEE6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEF26C91-CF05-B551-60FE-FD8045625E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF26C91-CF05-B551-60FE-FD8045625E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF26C91-CF05-B551-60FE-FD8045625E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEF26C91-CF05-B551-60FE-FD8045625E37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

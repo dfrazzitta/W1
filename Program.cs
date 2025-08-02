@@ -1,10 +1,24 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+
+using Serilog.Events;
+using Serilog.Templates;
+using Serilog.Templates.Themes;
 using System.Runtime.InteropServices;
 using W1.Data;
 using W1.Models;
 
 
+// The initial "bootstrap" logger is able to log errors during start-up. It's completely replaced by the
+// logger configured in `AddSerilog()` below, once configuration and dependency-injection have both been
+// set up successfully.
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
+
+Log.Information("Starting up!");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,7 +52,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDbContext<PlacidDBContext>(options =>
     options.UseSqlite(connectionString));
 
-
+builder.Services.AddSerilog((services, lc) => lc
+       .ReadFrom.Configuration(builder.Configuration)
+       .ReadFrom.Services(services)
+       .Enrich.FromLogContext()
+       .WriteTo.Console(new ExpressionTemplate(
+           // Include trace and span ids when present.
+           "[{@t:HH:mm:ss} {@l:u3}{#if @tr is not null} ({substring(@tr,0,4)}:{substring(@sp,0,4)}){#end}] {@m}\n{@x}",
+           theme: TemplateTheme.Code)));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -79,8 +100,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-//builder.Services.AddScoped<ITransientService, PlacidSingleton>();
-// builder.Services.AddScoped<IPlacidService, PlacidSingleton>();
+
 
 builder.Services.AddScoped<IScopedService, ScopedService>();
 
@@ -103,10 +123,17 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 });
 */
 
-if (!app.Environment.IsDevelopment())
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 {
-    app.UseHttpsRedirection();
+    app.UseForwardedHeaders(new ForwardedHeadersOptions
+    {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    });
 }
+else
+    app.UseHttpsRedirection();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -120,11 +147,8 @@ else
     app.UseHsts();
 }
 
-//PlacidSingleton.Instance.SetPlacid(true);
-//bool b = PlacidSingleton.Instance.GetPlacid();
-
 app.UseRequestLocalization();
-
+app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

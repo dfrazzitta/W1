@@ -28,6 +28,13 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="Serilog.Expressions" Version="5.0.0" />
+  </ItemGroup>
+
+   
+
+  <ItemGroup>
+    <ProjectReference Include="..\a\serilog\serilog-aspnetcore\src\Serilog.AspNetCore\Serilog.AspNetCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>

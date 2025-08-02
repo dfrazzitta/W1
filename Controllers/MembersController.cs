@@ -170,10 +170,6 @@ namespace W1.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            //  if (String.Compare(_scopedService.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
-            //  {
-            //      return RedirectToAction(nameof(Index), "home");
-            //  }
 
             List<Member> members = await _context.Members.ToListAsync();
 
@@ -205,9 +201,6 @@ namespace W1.Controllers
             return View();
         }
 
-
-
-
         public string FirstLetterToUpper(string str)
         {
             if (str == null)
@@ -230,10 +223,7 @@ namespace W1.Controllers
         {
             //  return NotFound();
 
-            // var memberx = await _context.Members
-            //    .FirstOrDefaultAsync(m => m.LotNo == LotNo);
-            //  if (memberx == null)
-            //  {
+
             if (ModelState.IsValid)
             {
                 string fn = member.AgentFirstName;
@@ -244,7 +234,7 @@ namespace W1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //    }
+
 
             return View(member);
         }
@@ -252,11 +242,7 @@ namespace W1.Controllers
         // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            /*
-           if (String.Compare(PlacidSingleton.Instance.GetPlacidUser().ToLower(), "placiduser@xyztt.com") != 0)
-           {
-               return RedirectToAction(nameof(Index), "home");
-           }*/
+
 
             if (id == null)
             {
@@ -275,9 +261,6 @@ namespace W1.Controllers
 
             member.OfficePhone = op;
             member.CellPhone = cp;
-            //   string op = member.OfficePhone.Replace(member.OfficePhone.Substring(3, 1), "-");
-
-
 
             return View(member);
         }
@@ -296,7 +279,6 @@ namespace W1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,TypeSell,LotNo,Price,AgentLastName,AgentFirstName,Email,OfficePhone,CellPhone,AgentUrl,ImageName")] Member member)
         {
-
 
             if (id != member.ID)
             {
@@ -349,7 +331,7 @@ namespace W1.Controllers
             {
                 return NotFound();
             }
-            // PlacidSingleton.Instance.SetPlacid(false);
+
             return View(member);
         }
 
@@ -389,15 +371,6 @@ namespace W1.Controllers
                 return NotFound();
 
             }
-            /*
-  
-            if (member != null)
-            {
-                _context.Members.Remove(member);
-            }
- 
-            await _context.SaveChangesAsync();
-            */
 
 
             return RedirectToAction(nameof(Index), "Members");
@@ -413,31 +386,3 @@ namespace W1.Controllers
 
 
 
-/*
-
-
-<form method="post" enctype="multipart/form-data">
-    <input type="file" asp-for="Upload" />
-    <input type="submit" />
-</form>
-
-
- public class UploadFileModel : PageModel
-    {
-        private IHostingEnvironment _environment;
-        public UploadFileModel(IHostingEnvironment environment)
-        {
-            _environment = environment;
-        }
-        [BindProperty]
-        public IFormFile Upload { get; set; }
-        public async Task OnPostAsync()
-        {
-            var file = Path.Combine(_environment.ContentRootPath, "uploads", Upload.FileName);
-            using (var fileStream = new FileStream(file, FileMode.Create))
-            {
-                await Upload.CopyToAsync(fileStream);
-            }
-        }
-    }
-*/

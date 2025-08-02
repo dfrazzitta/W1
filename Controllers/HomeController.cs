@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
+using Serilog;
 using System.Diagnostics;
 using System.Text;
 using W1.Data;
@@ -17,7 +18,7 @@ using W1.Models;
  * Edit price in admin 
  * change map location to intermediate size 
  * 
- * 
+ * Gary - 719-651-2424     Nancy 727-222-9492
  * 
  * 
  * 
@@ -129,21 +130,22 @@ namespace W1.Controllers
 {
     public class HomeController : Controller
     {
+        static int _callCount;
         private readonly ILogger<HomeController> _logger;
         private readonly IWebHostEnvironment _appEnvironment;
 
         private readonly PlacidDBContext _context;
 
-
+        private readonly IDiagnosticContext _diagnosticContext;
         private string _path;
 
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment appEnvironment,
-            PlacidDBContext context)
+            PlacidDBContext context, IDiagnosticContext diagnosticContext)
         {
             _logger = logger;
             _appEnvironment = appEnvironment;
             _context = context;
-
+            _diagnosticContext = diagnosticContext ?? throw new ArgumentNullException(nameof(diagnosticContext));
         }
 
 
@@ -151,9 +153,9 @@ namespace W1.Controllers
         {
             var path = _appEnvironment.WebRootPath + "\\" + "HomeVisible.txt";
             _path = path;
-            //  PlacidSingleton.Instance.SetPlacid(false);
 
             bool lp = System.IO.File.Exists(path);
+            _diagnosticContext.Set("IndexCallCount", Interlocked.Increment(ref _callCount));
             return lp;
         }
 
@@ -161,13 +163,14 @@ namespace W1.Controllers
         public IActionResult Index()
         {
             var user = HttpContext.User.Identity.IsAuthenticated;
-            // PlacidSingleton.Instance.SetPlacid(false);
+            _logger.LogInformation("home page" + );
+            _diagnosticContext.Set("IndexCallCount", Interlocked.Increment(ref _callCount));
             return View();
         }
         [OutputCache(Duration = 1440)]
         public IActionResult ParkPlan()
         {
-            // PlacidSingleton.Instance.SetPlacid(false);
+            _logger.LogInformation("Park Plan");
             return View();
         }
 
@@ -175,19 +178,19 @@ namespace W1.Controllers
         [OutputCache(Duration = 1440)]
         public IActionResult Location()
         {
-            // PlacidSingleton.Instance.SetPlacid(false);
+            _logger.LogInformation("Location");
             return View();
         }
 
         public IActionResult Rules()
         {
-            // PlacidSingleton.Instance.SetPlacid(false);
+            _logger.LogInformation("Rules");
             return View();
         }
         [OutputCache(Duration = 1440)]
         public IActionResult ResidentOwner()
         {
-            // PlacidSingleton.Instance.SetPlacid(false);
+            _logger.LogInformation("ResidentOwner");
             return View();
         }
 
@@ -210,7 +213,7 @@ namespace W1.Controllers
         [OutputCache(Duration = 720)]
         public IActionResult Homes()
         {
-
+            _logger.LogInformation("Homes");
             List<Member> member = _context.Members.ToList();
 
 
@@ -290,7 +293,7 @@ namespace W1.Controllers
 
         public IActionResult Privacy()
         {
-            // PlacidSingleton.Instance.SetPlacid(false);
+
             return View();
         }
 
@@ -308,7 +311,7 @@ namespace W1.Controllers
             // Fix for CS0119 and CS0642:
             // Correctly open the file for appending and ensure the StreamWriter is properly used.
 
-            string logFilePath = Path.Combine(_appEnvironment.WebRootPath, "forsale.txt");
+            string logFilePath = Path.Combine(_appEnvironment.WebRootPath, "HomeVisible.txt");
             System.IO.File.Delete(logFilePath);
 
             return true;
@@ -317,7 +320,7 @@ namespace W1.Controllers
         [HttpPost]
         public bool setforsale()
         {
-            string logFilePath = Path.Combine(_appEnvironment.WebRootPath, "forsale.txt");
+            string logFilePath = Path.Combine(_appEnvironment.WebRootPath, "HomeVisible.txt");
             System.IO.File.Create(logFilePath);
             return true;
         }
