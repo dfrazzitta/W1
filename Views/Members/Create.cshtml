@@ -322,41 +322,7 @@
                   return char >= '0' && char <= '9';
                 }
 
-                /*
-             const inputElementCell = document.getElementById('CellPhone');
-            // Add an event listener for the focusout event
-          
-            inputElementCell.addEventListener('keyup', function(e) {
-                console.log('keyupcell');
-                console.log( e.target.value);
-                var b = isDigit(e.target.value);
-                console.log(b);
-                console.log(isDigit(e.target.value));
-             });
-              
-
-            inputElementCell.addEventListener('blur', function(e) {
-
-                  console.log('blurcell');
-                   console.log( e.target.value.length);
-            });
-
-            const inputElementOffice = document.getElementById('OfficePhone');
-            // Add an event listener for the focusout event
-            inputElementOffice.addEventListener('keyup', function(e) {
-
-                  console.log('keyupoffice');
-                   console.log( e.target.value);
-                    console.log(isDigit(e.target.value));
-            });
- 
-            // Add an event listener for the focusout event
-            inputElementOffice.addEventListener('blur', function(e) {
-
-                console.log('bluroffice');
-                 console.log( e.target.value.length);
-             });
-             */
+            
 
             $(document).ready(function() {
                 $('#ajaxSend').on('submit', function(e) {
@@ -387,17 +353,20 @@
                                     icon:
                                     "Error"
                                 });
-                            
-                            } else {
                                 console.error('An unexpected error occurred.');
                             }
                             // Handle error
+                            
+                            else {
+                            }
                         }
                     });
                 });
             });
-            const inputElement = document.getElementById('email');
 
+
+
+            const inputElement = document.getElementById('email');
             // Add an event listener for the focusout event
             inputElement.addEventListener('focusout', function(e) {
                  if (validator.isEmail(e.target.value)  == false)

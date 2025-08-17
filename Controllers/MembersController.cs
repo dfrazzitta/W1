@@ -380,8 +380,28 @@ namespace W1.Controllers
         {
             return _context.Members.Any(e => e.ID == id);
         }
+
+        [HttpPost]
+        public bool unsetforsale()
+        {
+            // Fix for CS0119 and CS0642:
+            // Correctly open the file for appending and ensure the StreamWriter is properly used.
+            string logFilePath = Path.Combine(_appEnvironment.WebRootPath, "HomeVisible.txt");
+            System.IO.File.Delete(logFilePath);
+            return true;
+        }
+
+        [HttpPost]
+        public bool setforsale()
+        {
+            string logFilePath = Path.Combine(_appEnvironment.WebRootPath, "HomeVisible.txt");
+            System.IO.File.Create(logFilePath);
+            return true;
+        }
+
     }
 }
+
 
 
 

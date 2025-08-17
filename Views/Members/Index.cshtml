@@ -141,8 +141,17 @@
             @*@Url.Action("Index", "home")" *@
             <form align="center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "home")" method="post">  
              
-                <button type="submit" align="center" class="nav-link btn btn-link text-dark">Click here to Logout</button>
+                <button type="submit" align="center" class="nav-link btn btn-link text-dark">Logout</button>
             </form>
+            @*
+            <br />
+            <button align="center" type="button" class="btn btn-info" onclick="activate()">Activate</button>
+            <br />
+            <br />
+            <button align="center" type="button" class="btn btn-info" onclick="deactivate()">DeActivate</button>
+            *@
+
+
         </div>
         <div class="col-md-5">
             
@@ -172,7 +181,7 @@
         {
             alert('activate');
             $.ajax({
-              url: "/home/setforsale", // The URL to send the request to
+              url: "/members/setforsale", // The URL to send the request to
               method: "POST", // HTTP method (e.g., GET, POST, PUT, DELETE)
               dataType: "json", // Expected data type of the server response (e.g., "json", "xml", "html")
               data: {},
@@ -196,7 +205,7 @@
         {
             alert('deactivate');
             $.ajax({
-              url: "/home/unsetforsale", // The URL to send the request to
+              url: "/members/unsetforsale", // The URL to send the request to
               method: "POST", // HTTP method (e.g., GET, POST, PUT, DELETE)
               dataType: "json", // Expected data type of the server response (e.g., "json", "xml", "html")
               data: {},

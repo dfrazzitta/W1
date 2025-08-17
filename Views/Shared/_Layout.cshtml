@@ -270,9 +270,31 @@
     *@
 
     <script>
- 
+        /*
+        class Car {
+          constructor(make, model) {
+            this.make = make;
+            this.model = model;
+          }
+
+          startEngine() {
+            console.log(`${this.make} ${this.model} engine started.`);
+          }
+        }
+
+        const myCar = new Car("Toyota", "Camry"); // myCar is an object (instance of Car)
+        myCar.startEngine(); // Calls the method defined in the Car class
+        */
+
+
       // !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-   
+         document.addEventListener("DOMContentLoaded", function() {
+              // Your JavaScript code to execute after the DOM is ready
+              console.log("DOM content loaded.");
+               var path = window.location.pathname;
+               var page = path.split("/").pop();
+                 console.log( path );
+        });
                 
         $( document ).ready(function() {
             // alert('this is index');
