@@ -1,12 +1,15 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
 using Serilog.Events;
 using Serilog.Templates;
 using Serilog.Templates.Themes;
 using System.Runtime.InteropServices;
+using W1;
 using W1.Data;
 using W1.Models;
 
@@ -22,7 +25,12 @@ Log.Information("Starting up!");
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddHostedService<MyBackgroundService>();
+//await using (var scope = host.Services.CreateAsyncScope())
+//{
+//    var db = scope.ServiceProvider.GetRequiredService<MyDbContext>();
+//    await db.Database.MigrateAsync();
+//}
 SingletonClass s1 = SingletonClass.Instance;
 
 var folder = Environment.SpecialFolder.LocalApplicationData;
@@ -93,7 +101,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     // Cookie settings
     options.Cookie.HttpOnly = true;
 
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+
+    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+    options.Cookie.SameSite = SameSiteMode.Strict;
+
+
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
     options.LoginPath = "/Identity/Account/Login";
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";

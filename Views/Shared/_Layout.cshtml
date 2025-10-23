@@ -45,8 +45,8 @@
     </script>
 
 </head>
-<body>
-    @*
+<body >
+    @*onload="onload55()"
     <div class="loadingDiv-parent">
         <div class="loadingDiv">
             <div class="card border-success">
@@ -91,6 +91,63 @@
                         </h2>
                     </div>
 
+
+                    <!-- As a link -->
+                    <nav class="navbar bg-body-tertiary">
+                        <div class="container-fluid">
+                            
+                            <a href="@Url.Action("Index", "home")" style="color:antiquewhite;" class="menubar"
+                               data-toggle="tooltip" data-html="true" title="Home Page">Home</a>
+                        </div>
+                    </nav>
+
+                    <!-- As a heading -->
+                    <nav class="navbar bg-body-tertiary">
+                        <div class="container-fluid">
+                             <a href="@Url.Action("Location", "home")" style="color:antiquewhite;" class="menubar"
+                               data-toggle="tooltip" data-html="true" title="Lake Placid Location">Location</a>
+                        </div>
+                    </nav>
+
+                    <nav class="navbar bg-body-tertiary">
+                        <div class="container-fluid">
+                            
+                            <a href="@Url.Action("ParkPlan", "home")" style="color:antiquewhite;" class="menubar"
+                               data-toggle="tooltip" data-html="true" title="Lake Placid Park Plan">ParkPlan</a>
+                        </div>
+                    </nav>
+
+                    <!-- As a heading -->
+                    <nav class="navbar bg-body-tertiary">
+                        <div class="container-fluid">
+                       
+                            <a href="@Url.Action("ParkPlan", "home")" style="color:antiquewhite;" class="menubar"
+                               data-toggle="tooltip" data-html="true" title="Lake Placid Park Plan">ParkPlan</a>
+                        </div>
+                    </nav>
+
+                    <nav class="navbar bg-body-tertiary">
+                        <div class="container-fluid">
+
+                            <a href="@Url.Action("Rules", "home")" style="color:antiquewhite;" class="menubar"
+                               data-toggle="tooltip" data-html="true" title="Download Rules">Rules</a>
+                        </div>
+                    </nav>
+
+                    <p id="homedisplay" style="margin: 0;" hidden>
+                        <nav class="navbar bg-body-tertiary">
+                            <div class="container-fluid">
+                            
+                                <a id="homecall" href="@Url.Action("Homes", "home")" style="color:antiquewhite;" class="menubar"
+                                   data-toggle="tooltip" data-html="true" title="Homes For Sale">ForSale</a>
+                            </div>
+                        </nav>
+                    </p>
+
+                    
+
+
+                    @*
                     <p>
                         <i class="fa-solid fa-arrow-right"></i>
                         <a href="@Url.Action("Index", "home")" style="color:antiquewhite;" class="menubar"
@@ -115,12 +172,15 @@
                         data-toggle="tooltip" data-html="true" title="Homes For Sale">ForSale</a>
                          
                     </p>
+                    
                      
                     <p>
                         <i class="fa-solid fa-arrow-right"></i>
                         <a href="@Url.Action("Rules", "home")" style="color:antiquewhite;" class="menubar"
                            data-toggle="tooltip" data-html="true" title="Download Rules">Rules</a>
                     </p>
+
+                     *@
                     <hr>
 
                     <p>
@@ -270,6 +330,8 @@
     *@
 
     <script>
+
+
         /*
         class Car {
           constructor(make, model) {
@@ -311,7 +373,7 @@
                                             if (data)
                                              document.getElementById("homedisplay").removeAttribute('hidden')
 
-                                          });
+                                            });
 
                       }
 
