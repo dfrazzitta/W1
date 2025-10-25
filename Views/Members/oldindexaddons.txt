@@ -1,0 +1,101 @@
+﻿<div class="container-fluid" style="background-color: aqua;">
+    <div class="row">
+        <div class="col-md-5">
+            <form align="center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "home")" method="post">
+
+                <button type="submit" align="center" style="font-size: 46px;" class="nav-link btn btn-link text-dark">Logout - Logout</button>
+            </form>
+            @*
+            <br />
+            <button align="center" type="button" class="btn btn-info" onclick="activate()">Activate</button>
+            <br />
+            <br />
+            <button align="center" type="button" class="btn btn-info" onclick="deactivate()">DeActivate</button>
+            *@
+            <hr />
+            <hr />
+
+            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+                @* title heading  center this *@
+                <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="form">
+
+                    <div class="form-group text-center">
+                    </div>
+
+                    <div class="text-center">
+                    </div>
+
+                    @*
+                https://www.geeksforgeeks.org/us-currency-validation-using-regular-expressions/
+                https://codepen.io/559wade/pen/LRzEjj
+            *@
+                    <div class="text-center">
+                    </div>
+
+                    <div class="text-center">
+                    </div>
+
+                    <div class="text-center">
+                    </div>
+
+                    <div class="text-center">
+                    </div>
+
+                    <div class="text-center">
+                    </div>
+
+                    <div class="text-center">
+                    </div>
+                    <hr />
+                    <div class="text-center">
+                    </div>
+
+                    <hr />
+                    <div class="text-center">
+                        <input id="fileclick" value="" title="Choose Image file" type="file"
+                               name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                               data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Image" />
+                    </div>
+
+                    <hr />
+
+                    <input type="submit" value="Submit" style="text-align: center;">
+
+                </form>
+        </div>
+        <div class="col-md-2">
+
+                @*@Url.Action("Index", "home")" *@
+
+                @*
+            <div style="border: 2px solid black; padding: 10px;">
+                <h2 style="text-align: center">  Image</h2>
+                <h2 style="text-align: center">  Change</h2>
+                <hr />
+                <hr />
+
+            <button class="btn btn-primary" id="button1" onclick="ChangeImage0()">Multipage Scan Image #0</button>
+            <br />
+            <br />
+                <button class="btn btn btn-secondary" id="button1" onclick="ChangeImage1()">Multipage Scan Image #1</button>
+            <br />
+            <br />
+                <button class="btn btn-success" id="button1" onclick="ChangeImage2()">Multipage Scan Image #2</button>
+            <br />
+            <br />
+                <button class="btn btn-warning" id="button1" onclick="ChangeImage3()">Multipage Scan Image #3</button>
+            <br />
+            <br />
+                <button class="btn btn-info" id="button1" onclick="ChangeImage4()">Multipage Scan Image #4</button>
+
+
+            <br />
+            <br />
+               
+            </div> *@
+                </form>
+            
+        </div>
+        <div class="col-md-5">
+             
+        </div>

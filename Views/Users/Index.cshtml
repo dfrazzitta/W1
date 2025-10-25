@@ -1,15 +1,77 @@
 ﻿@model IEnumerable<W1.Models.User>
 
 @{
-    ViewData["Title"] = "Placid Members";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 align="center">Lot Owners</h1>
+<h1>Index</h1>
+
+ 
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-3">
+             
+        </div>
+        <div class="col-sm-6">
+            <!-- As a link -->
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+                  @*  <a href="@Url.Action("Index", "home")" style="color:black;" class="menubar"
+                       data-toggle="tooltip" data-html="true" title="Home Page">Home</a>
+                       *@
+                </div>
+            </nav>
+
+            <!-- As a heading -->
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    @*
+                        <a href="@Url.Action("Location", "home")" style="color:black;" class="menubar"
+                       data-toggle="tooltip" data-html="true" title="Lake Placid Location">Location</a>
+                       *@
+                    <a class="nav-link text-dark " asp-area="Identity" asp-page="/Account/Register"
+                       asp-route-returnUrl="@Url.Action("Index", "Members", new { area = "Views" })">********* Click to Change Usr/Pass *********</a>
+                     
+
+                </div>
+            </nav>
+
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    
+                    // Example of generating a login URL with a return URL
+                    
+                    <a href="@Url.Action("ParkPlan", "home")" style="color:black;" class="menubar"
+                       data-toggle="tooltip" data-html="true" title="Lake Placid Park Plan">ParkPlan</a>
+                </div>
+            </nav>
+
+            <!-- As a heading -->
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+
+                    <a href="@Url.Action("ParkPlan", "home")" style="color:black;" class="menubar"
+                       data-toggle="tooltip" data-html="true" title="Lake Placid Park Plan">ParkPlan</a>
+                </div>
+            </nav>
+        </div>
+        <div class="col-sm-3">
+             
+        </div>
+    </div>
+</div>
 
 
-@*
-<p align="center">
-    <a align="center" asp-action="Create">Create New</a>
+
+
+
+ 
+
+
+<p>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -59,14 +121,10 @@
 }
     </tbody>
 </table>
-<br />
-<div>
-    <i class="fa-solid fa-arrow-right"></i>
-    <a href="@Url.Action("Index", "Members")" style="color:blue;" class="menubar"
-       data-toggle="tooltip" data-html="true" title="Placid Homes Listed for Sale">Placid Homes Listed for Sale</a>
-</div>
- *@
+
+
 
 @section Scripts
 {
+
 }

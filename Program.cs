@@ -129,6 +129,8 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 
 var app = builder.Build();
 
+
+
 /*  cut this in when going live
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {

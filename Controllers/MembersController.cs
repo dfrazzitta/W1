@@ -1,8 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer.Server;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Runtime.InteropServices;
 using W1.Data;
 using W1.Models;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace W1.Controllers
 {
@@ -399,6 +407,130 @@ namespace W1.Controllers
             return true;
         }
 
+
+
+        [HttpPost]
+        public ActionResult FileUpload0(IFormFile file)
+        {
+            UploadFile0(file, "1_b.jpg");
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpPost]
+        public ActionResult FileUpload1(IFormFile file)
+        {
+            UploadFile0(file, "6_b.jpg");
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public ActionResult FileUpload2(IFormFile file)
+        {
+            UploadFile0(file, "3_b.jpg");
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public ActionResult FileUpload3(IFormFile file)
+        {
+            UploadFile0(file, "4_b.jpg");
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public ActionResult FileUpload4(IFormFile file)
+        {
+            UploadFile0(file, "8_b.jpg");
+            return RedirectToAction(nameof(Index));
+        }
+
+        public bool UploadFile0(IFormFile file, string itemNo)
+        {
+            string path = "";
+            bool iscopied = false;
+
+            try
+            {
+                if (file.Length > 0)
+                {
+                    using var fileStream = file.OpenReadStream();
+                    byte[] bytes = new byte[file.Length];
+                    fileStream.Read(bytes, 0, (int)file.Length);
+                    MemoryStream ms = new MemoryStream(bytes);
+                    System.Drawing.Image returnImage = System.Drawing.Image.FromStream(ms);
+                    System.Drawing.Image NewImage = ResizeImage(returnImage, 700, 200);
+
+                    path = _appEnvironment.WebRootPath;
+
+                    // NewImage.Save(path + "\\" + "Images" + "\\" + "SlideShow" + "\\" + "1_b.jpg", ImageFormat.Jpeg);
+                    try
+                    {
+                        NewImage.Save(path + "\\" + "Images" + "\\" + "SlideShow" + "\\" + itemNo, ImageFormat.Jpeg);
+
+                    }
+                    catch (ArgumentNullException ex)
+                    {
+                        Console.WriteLine($"Error: Argument is null. {ex.Message}");
+                    }
+                    catch (ExternalException ex)
+                    {
+                        Console.WriteLine($"Error during image saving (GDI+): {ex.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                    }
+
+                    // Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "Upload"));
+                    /*
+                    var tt = path + "\\" + filename;
+                    using (var filestream = new FileStream(path + "\\" + filename, FileMode.Create))  //        //Path.Combine(path, filename), FileMode.Create))
+                    {
+                        await file.CopyToAsync(filestream);
+                    }
+
+                    */
+
+                    iscopied = true;
+                }
+                else
+                {
+                    iscopied = false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return iscopied;
+        }
+
+
+        public System.Drawing.Image ResizeImage(System.Drawing.Image image, int width, int height)
+        {
+            // Create a new Bitmap with the desired dimensions
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            // Set the resolution of the new bitmap to match the original
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                // Configure rendering quality for better results
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                // Draw the original image onto the new bitmap, resizing it
+                graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel);
+            }
+
+            return destImage;
+        }
     }
 }
 

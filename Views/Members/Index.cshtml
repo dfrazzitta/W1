@@ -27,7 +27,9 @@
     <p align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-size: 20pt; font-family: Brush Script MT, cursive;">
         Homes Listed
     </p>
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <p align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-size: 20pt; font-family: Brush Script MT, cursive;">
+        <h2 id="blink" align="center" style="color: #be2d2d;">Be Responsible - Remember to logout !!!!!!!!!!</h2>
+        <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
 </div>
 
 
@@ -122,55 +124,147 @@
     </tbody>
 </table>
 <br />
-@*
  
- *@
  
 <div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
     <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
     <p align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-size: 20pt; font-family: Brush Script MT, cursive;">
         End Homes Listed
     </p>
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
-</div>
-
-<div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
     <p align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-size: 20pt; font-family: Brush Script MT, cursive;">
         <h2 id="blink" align="center" style="color: #be2d2d;">Be Responsible - Remember to logout !!!!!!!!!!</h2>
-        
-    </p>
     <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
 </div>
 
+ 
 
+ 
 <div class="container-fluid" style="background-color: aqua;">
     <div class="row">
-        <div class="col-md-5">
-            
-        </div>
-        <div class="col-md-2">
-            @*@Url.Action("Index", "home")" *@
-            <form align="center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "home")" method="post">  
+        <div class="col">
              
-                <button type="submit" align="center" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
-            @*
-            <br />
-            <button align="center" type="button" class="btn btn-info" onclick="activate()">Activate</button>
-            <br />
-            <br />
-            <button align="center" type="button" class="btn btn-info" onclick="deactivate()">DeActivate</button>
-            *@
+        </div>
+        <div class="col-6">
+            <form align="center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "home")" method="post">
 
+                <button type="submit" align="center" style="font-size: 46px;" class="nav-link btn btn-link text-dark">Logout - Logout</button>
+            </form>
+            <br />
+            <br />
+            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+                @* title heading  center this *@
+                <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload0" name="form">
+ 
+                    <hr />
+                    <div class="text-center">
+                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #0</h1>
+                        <input id="fileclick" value="" title="Choose Image file #0" type="file"
+                               name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                               data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Image" />
+                         
+                    </div>
+
+                    <hr />
+
+                    <input type="submit" value="Submit" style="text-align: center;">
+
+                </form>
+            </div>
+
+            <br />
+            <br />
+            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+                @* title heading  center this *@
+                <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="form">
+
+                    <hr />
+                    <div class="text-center">
+                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #1</h1>
+                        <input id="fileclick" value="" title="Choose Image file #1" type="file"
+                               name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                               data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Image" />
+                    </div>
+
+                    <hr />
+
+                    <input type="submit" value="Submit" style="text-align: center;">
+
+                </form>
+            </div>
+            <br />
+            <br />
+
+            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+                @* title heading  center this *@
+                <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload2" name="form">
+
+                    <hr />
+                    <div class="text-center">
+                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #2</h1>
+                        <input id="fileclick" value="" title="Choose Image file #2" type="file"
+                               name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                               data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Image" />
+                    </div>
+
+                    <hr />
+
+                    <input type="submit" value="Submit" style="text-align: center;">
+
+                </form>
+            </div>
+
+            <br />
+            <br />
+            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+                @* title heading  center this *@
+                <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload3" name="form">
+
+                    <hr />
+                    <div class="text-center">
+                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #3</h1>
+                        <input id="fileclick" value="" title="Choose Image file #3" type="file"
+                               name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                               data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Image" />
+                    </div>
+
+                    <hr />
+
+                    <input type="submit" value="Submit" style="text-align: center;">
+
+                </form>
+            </div>
+
+            <br />
+            <br />
+            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+                @* title heading  center this *@
+                <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload4" name="form">
+
+                    <hr />
+                    <div class="text-center">
+                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #4</h1>
+                        <input id="fileclick" value="" title="Choose Image file #4" type="file"
+                               name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                               data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Image" />
+                    </div>
+
+                    <hr />
+
+                    <input type="submit" value="Submit" style="text-align: center;">
+
+                </form>
+            </div>
 
         </div>
-        <div class="col-md-5">
-            
+        <div class="col">
+             
         </div>
     </div>
-    
+     
 </div>
+
+
+
  
  
  
@@ -180,6 +274,39 @@
 @section Scripts
 {
     <script>
+
+         function ChangeImage0() {
+             alert('0');
+             /*
+                <div class="text-center">
+                 <label asp-for="ImageName" class="control-label"><b>Home Image</b></label><br />
+
+                 <input id="fileclick" value="" title="Choose Image file" type="file"
+                        name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Image" />
+             </div>
+             */
+         }
+
+          function ChangeImage1() {
+
+              alert('1');
+          }
+
+          function ChangeImage2() {
+
+              alert('2');
+          }
+
+            function ChangeImage3() {
+
+               alert('3');
+           }
+
+           function ChangeImage4() {
+
+               alert('4');
+           }
 
         /*
         window.addEventListener("unload", (event) => {
