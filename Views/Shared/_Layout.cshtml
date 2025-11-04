@@ -7,24 +7,36 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>@ViewData["Title"] Lake Placid Park</title>
+    @*
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" >
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.2/jsoneditor.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.css" rel="stylesheet">
-   
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    *@
+
+
+
+    <link rel="stylesheet" href="~/csss/bootstrap.min.css">
+    <link href="~/csss/all.min.css" rel="stylesheet">
+    <link href="~/csss/lightbox.css" rel="stylesheet">
+    <link href="~/csss/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/csss/bootstrap-icons.min.css">
+
+    <link href="~/csss/site1.css" rel="stylesheet" />
+
+    @*
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.2/jsoneditor.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.css" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+   *@
 
-    
-    <link href="~/css/site1.css" rel="stylesheet" />
 
-    
-    @*
-   
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
-    *@
+
 
     @*
     <link rel="stylesheet" href="~/W1.styles.css" asp-append-version="true">
@@ -40,15 +52,16 @@
         }
     </style>
 
-    <script type="text/javascript">   
-        var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-16477161-1']);  _gaq.push(['_trackPageview']);  
-        (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';   
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })(); 
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-16477161-1']);  _gaq.push(['_trackPageview']);
+        (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();
     </script>
 
 </head>
-<body >
+<body>
     @*onload="onload55()"
     <div class="loadingDiv-parent">
         <div class="loadingDiv">
@@ -81,7 +94,7 @@
                 </div>
             </div>
 
- 
+
 
             <div class="row">
                 <div class="col rounded-2" style="background-color:indianred;  width:100%; max-width: 180px; min-width: 50px;">
@@ -98,7 +111,7 @@
                     <!-- As a link -->
                     <nav class="navbar bg-body-tertiary">
                         <div class="container-fluid">
-                            
+
                             <a href="@Url.Action("Index", "home")" style="color:antiquewhite;" class="menubar"
                                data-toggle="tooltip" data-html="true" title="Home Page">Home</a>
                         </div>
@@ -107,14 +120,14 @@
                     <!-- As a heading -->
                     <nav class="navbar bg-body-tertiary">
                         <div class="container-fluid">
-                             <a href="@Url.Action("Location", "home")" style="color:antiquewhite;" class="menubar"
+                            <a href="@Url.Action("Location", "home")" style="color:antiquewhite;" class="menubar"
                                data-toggle="tooltip" data-html="true" title="Lake Placid Location">Location</a>
                         </div>
                     </nav>
 
                     <nav class="navbar bg-body-tertiary">
                         <div class="container-fluid">
-                            
+
                             <a href="@Url.Action("ParkPlan", "home")" style="color:antiquewhite;" class="menubar"
                                data-toggle="tooltip" data-html="true" title="Lake Placid Park Plan">ParkPlan</a>
                         </div>
@@ -123,7 +136,7 @@
                     <!-- As a heading -->
                     <nav class="navbar bg-body-tertiary">
                         <div class="container-fluid">
-                       
+
                             <a href="@Url.Action("ParkPlan", "home")" style="color:antiquewhite;" class="menubar"
                                data-toggle="tooltip" data-html="true" title="Lake Placid Park Plan">ParkPlan</a>
                         </div>
@@ -140,14 +153,14 @@
                     <p id="homedisplay" style="margin: 0;" hidden>
                         <nav class="navbar bg-body-tertiary">
                             <div class="container-fluid">
-                            
+
                                 <a id="homecall" href="@Url.Action("Homes", "home")" style="color:antiquewhite;" class="menubar"
                                    data-toggle="tooltip" data-html="true" title="Homes For Sale">ForSale</a>
                             </div>
                         </nav>
                     </p>
 
-                    
+
 
 
                     @*
@@ -203,7 +216,7 @@
                     <hr />
                     <br>
                     <hr />
-                    
+
                     <br />
                     <br />
                 </div>
@@ -232,7 +245,7 @@
                                 <img id="image3" src="~/Images/Slideshow/4_b.jpg" class="d-block img-h w-150 mx-auto" style="width:100%;height:30%;" alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img id="image4"  src="~/Images/Slideshow/8_b.jpg" class="d-block img-h w-150 mx-auto" style="width:100%;height:50%;" alt="...">
+                                <img id="image4" src="~/Images/Slideshow/8_b.jpg" class="d-block img-h w-150 mx-auto" style="width:100%;height:50%;" alt="...">
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -256,8 +269,8 @@
 
 
                     <a class="weatherwidget-io" href="https://forecast7.com/en/27d91n82d79/largo/?unit=us" data-label_1="LARGO" data-label_2="WEATHER" data-theme="original">LARGO WEATHER</a>
-                  
-                    
+
+
                     @*
 
                     <div class="tomorrow"
@@ -286,129 +299,135 @@
                 </div>
             </div>
         </main>
-    
- 
+
+
         <footer class="border-top footer text-muted">
-        
+
             <div class="container-fluid" style="background-color: aqua;">
                 &copy; 1978 - LPP, Inc. - <a asp-area="" asp-controller="Home" asp-action="Index">Lake Placid Park Inc.</a>
             </div>
-         
+
         </footer>
     </div>
 
-    webdocument.ExecuteScript("location.reload();");
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
-     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
-     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
-     
-    <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.14.0/src-noconflict/ace.js"></script>
     @*
-    <script src="~/js/assign.js"></script>
-    *@
-    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
-    @*
-    <script src="~/js/ajv-validator.js"></script>
-    *@
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.14.0/src-noconflict/ace.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.all.min.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"> </script
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.0/dist/sweetalert2.all.min.js"></script>
-   
-      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.15.15/validator.min.js"> </script>
+
+
+    *@
+    <script src="~/jss/bootstrap.bundle.min.js"></script>
+
+    <script src="~/jss/jquery.min.js"></script>
+
+    <script src="~/jss/jquery-ui.min.js"></script>
+
+    <script src="~/jss/jquery.blockUI.min.js"></script>
+
+    <script src="~/jss/jquery.form.min.js"></script>
+
+    <script src="~/jss/ace.js"></script>
+
+    <script src="~/jss/lz-string.min.js"></script>
+
+    <script src="~/jss/lightbox.min.js"></script>
+
+    <script src="~/jss/sweetalert2.all.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"> </script>
+    <script src="~/jss/all.min.js"> </script>
 
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.15.15/validator.min.js"> </script>
-     
 
-    @*
-    <script src="~/js/oscode.js"></script>
-    *@
+    <script src="~/jss/validator.min.js"> </script>
 
+    webdocument.ExecuteScript("location.reload();");
     <script>
 
 
-        /*
-        class Car {
-          constructor(make, model) {
-            this.make = make;
-            this.model = model;
+          /*
+          class Car {
+            constructor(make, model) {
+              this.make = make;
+              this.model = model;
+            }
+
+            startEngine() {
+              console.log(`${this.make} ${this.model} engine started.`);
+            }
           }
 
-          startEngine() {
-            console.log(`${this.make} ${this.model} engine started.`);
-          }
-        }
-
-        const myCar = new Car("Toyota", "Camry"); // myCar is an object (instance of Car)
-        myCar.startEngine(); // Calls the method defined in the Car class
-        */
+          const myCar = new Car("Toyota", "Camry"); // myCar is an object (instance of Car)
+          myCar.startEngine(); // Calls the method defined in the Car class
+          */
 
 
-      // !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-         document.addEventListener("DOMContentLoaded", function() {
-              // Your JavaScript code to execute after the DOM is ready
-              console.log("DOM content loaded.");
-               var path = window.location.pathname;
-               var page = path.split("/").pop();
-                 console.log( path );
-        });
-                
-        $( document ).ready(function() {
-            // alert('this is index');
-                    const os1 = navigator.userAgent.toLowerCase();
-                    console.log(os1);
-                   // console.log("shit");
+        // !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+           document.addEventListener("DOMContentLoaded", function() {
+                // Your JavaScript code to execute after the DOM is ready
+                console.log("DOM content loaded.");
+                 var path = window.location.pathname;
+                 var page = path.split("/").pop();
+                   console.log( path );
+          });
 
-                      if( os1.includes("windows") )
-                      {
-                                    $.get("/home/Indexx", function(data, status){
+          $( document ).ready(function() {
+              // alert('this is index');
+                      const os1 = navigator.userAgent.toLowerCase();
+                      console.log(os1);
+                     // console.log("shit");
 
-                      // if this is true -- then Home for sale will be active -- else menu option will not be present
-                      //   and this is determined by simply having --- HomeVisible.txt
-                                            if (data)
-                                             document.getElementById("homedisplay").removeAttribute('hidden')
+                        if( os1.includes("windows") )
+                        {
+                                      $.get("/home/Indexx", function(data, status){
 
-                                            });
+                        // if this is true -- then Home for sale will be active -- else menu option will not be present
+                        //   and this is determined by simply having --- HomeVisible.txt
+                                              if (data)
+                                               document.getElementById("homedisplay").removeAttribute('hidden')
 
-                      }
+                                              });
+
+                        }
 
 
-                      if ( os1.includes("linux"))
-                      {
-                            $.get("https://LakePlacidPark.com/home/Indexx", function(data, status){
+                        if ( os1.includes("linux"))
+                        {
+                              $.get("https://LakePlacidPark.com/home/Indexx", function(data, status){
 
-                              // if this is true -- then Home for sale will be active -- else menu option will not be present
-                              //   and this is determined by simply having --- HomeVisible.txt
-                                if (data)
-                                     document.getElementById("homedisplay").removeAttribute('hidden')
+                                // if this is true -- then Home for sale will be active -- else menu option will not be present
+                                //   and this is determined by simply having --- HomeVisible.txt
+                                  if (data)
+                                       document.getElementById("homedisplay").removeAttribute('hidden')
 
-                            });
-                      }
-                  
+                              });
+                        }
 
-                      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 
-        });
-         //     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 
-       //   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-           
-          
+          });
+           //     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 
-    
+         //   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+
+
+
+
     </script>
 
-    
+
 
     @await RenderSectionAsync("Scripts", required: true)
 </body>
