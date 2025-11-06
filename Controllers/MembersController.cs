@@ -157,7 +157,7 @@ namespace W1.Controllers
                     path = _appEnvironment.WebRootPath;
                     // Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "Upload"));
                     var tt = path + "\\" + filename;
-                    using (var filestream = new FileStream(path + "\\" + filename, FileMode.Create))  //        //Path.Combine(path, filename), FileMode.Create))
+                    using (var filestream = new FileStream(path + "\\" + filename, FileMode.Create))  //        
                     {
                         await file.CopyToAsync(filestream);
                     }
@@ -410,10 +410,6 @@ namespace W1.Controllers
         }
 
 
-
-
-
-
         [HttpPost]
         public ActionResult FileUpload10(IFormFile file)
         {
@@ -542,14 +538,24 @@ namespace W1.Controllers
                     using (SixLabors.ImageSharp.Image image = SixLabors.ImageSharp.Image.Load(imageBytes))
                     {
                         // Define the resize options, e.g., maintaining aspect ratio and using high quality resampling
-                        var resizeOptions = new ResizeOptions
+                        // var resizeOptions = new ResizeOptions
+                        // {
+                        //     Size = new SixLabors.ImageSharp.Size(700, 200);
+                        //  };
+
+                        var options = new ResizeOptions
                         {
-                            Size = new SixLabors.ImageSharp.Size(700, 200),
-                            Mode = ResizeMode.Manual
+                            Size = new Size(700, 200),
+                            Mode = ResizeMode.Min, // Resizes to fit within the specified bounds while maintaining aspect ratio
+                            Sampler = KnownResamplers.Lanczos3 // Specifies the resampling algorithm
                         };
 
+                        image.Mutate(x => x.Rotate(-90));
                         image.Mutate(x => x.Resize(700, 200));
 
+
+
+                        //  image.Mutate(x => x.Resize(options(700, 0)); //);
 
                         var jp = new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder
                         {
