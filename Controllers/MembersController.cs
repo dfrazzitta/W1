@@ -415,20 +415,21 @@ namespace W1.Controllers
         {
             if (file == null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index"); // return RedirectToAction(nameof(Index));
             }
 
             var extension = Path.GetExtension(file.FileName);
-            bool areEqual = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
 
-            if (areEqual == false)
+            if (areEqualjpg == false || areEqualjpeg == false)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
 
 
             UploadFile0(file, "1_b.jpg");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index"); //  return RedirectToAction(nameof(Index));
         }
 
 
@@ -437,10 +438,21 @@ namespace W1.Controllers
         {
             if (file == null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index"); // return RedirectToAction(nameof(Index));
             }
+
+            var extension = Path.GetExtension(file.FileName);
+            bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
+
+            if (areEqualjpg == false || areEqualjpeg == false)
+            {
+                return RedirectToAction("Index");
+            }
+
+
             UploadFile0(file, "6_b.jpg");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index"); // return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -448,10 +460,21 @@ namespace W1.Controllers
         {
             if (file == null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index"); // return RedirectToAction(nameof(Index));
             }
+
+            var extension = Path.GetExtension(file.FileName);
+            bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
+
+            if (areEqualjpg == false || areEqualjpeg == false)
+            {
+                return RedirectToAction("Index");
+            }
+
+
             UploadFile0(file, "3_b.jpg");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index"); //  return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -459,10 +482,21 @@ namespace W1.Controllers
         {
             if (file == null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index"); // return RedirectToAction(nameof(Index));
             }
+
+            var extension = Path.GetExtension(file.FileName);
+            bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
+
+            if (areEqualjpg == false || areEqualjpeg == false)
+            {
+                return RedirectToAction("Index");
+            }
+
+
             UploadFile0(file, "4_b.jpg");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index"); // return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -470,10 +504,21 @@ namespace W1.Controllers
         {
             if (file == null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index"); //  return RedirectToAction(nameof(Index));
             }
+
+            var extension = Path.GetExtension(file.FileName);
+            bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
+
+            if (areEqualjpg == false)
+            {
+                return RedirectToAction("Index");
+            }
+
             UploadFile0(file, "8_b.jpg");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
+
         }
 
 
@@ -550,7 +595,7 @@ namespace W1.Controllers
                             Sampler = KnownResamplers.Lanczos3 // Specifies the resampling algorithm
                         };
 
-                        image.Mutate(x => x.Rotate(-90));
+                        // image.Mutate(x => x.Rotate(-90));
                         image.Mutate(x => x.Resize(700, 200));
 
 
