@@ -241,3 +241,12 @@ imgpalms {
     height: 100%;
     object-fit: cover; /* Crop and scale the image to fill the container */
 }
+
+.example-image-link {
+    display: inline-block;
+    padding: 4px;
+    margin: 0 0.5rem 1rem 0.5rem;
+    background-color: var(--bg-color);
+    line-height: 0;
+    border-radius: var(--border-radius-large);
+}

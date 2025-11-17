@@ -48,11 +48,6 @@ namespace W1.Controllers
             return false;
         }
 
-
-
-
-
-
         /// <summary>
         /// //////////////////////////////////////////////////////////////////////////////////////////////
         /// </summary>
@@ -83,13 +78,18 @@ namespace W1.Controllers
             #endregion
 
             // return StatusCode(404, "some text, json, etc.");
+            bool areEqual = string.Equals(Path.GetFileNameWithoutExtension(file.FileName), LotNo.ToString(), StringComparison.OrdinalIgnoreCase);
+            if (areEqual == false)
+            {
+                return StatusCode(598, "some text, json, etc.");
+            }
 
 
             var memberx = await _context.Members
-               .FirstOrDefaultAsync(m => m.LotNo == LotNo);
+           .FirstOrDefaultAsync(m => m.LotNo == LotNo);
             if (memberx != null)
             {
-                return StatusCode(404, "some text, json, etc.");
+                return StatusCode(599, "some text, json, etc.");
             }
             else
             {
@@ -126,6 +126,8 @@ namespace W1.Controllers
                 }
                 else
                 {
+                    return StatusCode(597, "some text, json, etc.");
+                    /*
                     Member member1 = new Member();
                     member1.TypeSell = "";
                     member1.LotNo = "";
@@ -137,6 +139,7 @@ namespace W1.Controllers
                     member1.CellPhone = "";
                     member1.ImageName = "";
                     return View(member1);
+                    */
                 }
             }
         }
@@ -180,9 +183,9 @@ namespace W1.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-
-            List<Member> members = await _context.Members.ToListAsync();
-
+            //  System.IO.File.Create(Path.Combine(_appEnvironment.WebRootPath, "HomeIndex.txt"));
+            //   List<Member> members = await _context.Members.ToListAsync();
+            //   System.IO.File.Create(Path.Combine(_appEnvironment.WebRootPath, "HomeIndex1.txt"));
             return View(await _context.Members.ToListAsync());
         }
 
@@ -422,7 +425,7 @@ namespace W1.Controllers
             bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
             bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
 
-            if (areEqualjpg == false || areEqualjpeg == false)
+            if (areEqualjpg == false)
             {
                 return RedirectToAction("Index");
             }
@@ -445,7 +448,7 @@ namespace W1.Controllers
             bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
             bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
 
-            if (areEqualjpg == false || areEqualjpeg == false)
+            if (areEqualjpg == false)
             {
                 return RedirectToAction("Index");
             }
@@ -467,7 +470,7 @@ namespace W1.Controllers
             bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
             bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
 
-            if (areEqualjpg == false || areEqualjpeg == false)
+            if (areEqualjpg == false)
             {
                 return RedirectToAction("Index");
             }
@@ -489,7 +492,7 @@ namespace W1.Controllers
             bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
             bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
 
-            if (areEqualjpg == false || areEqualjpeg == false)
+            if (areEqualjpg == false)
             {
                 return RedirectToAction("Index");
             }

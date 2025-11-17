@@ -204,19 +204,19 @@
             </div>
 
             <div class="text-center">
-                <label asp-for="AgentLastName" class="control-label"><b>Last Name</b></label><br />
+                <label asp-for="AgentLastName" class="control-label"><b>Contact Last Name</b></label><br />
                 <input id="LastName" type='text' name="AgentLastName" value="" autocomplete="off"
                        class="form-control w-2 p-2 mx-auto d-flex" />
             </div>
 
             <div class="text-center">
-                <label asp-for="AgentFirstName" class="control-label"><b>First Name</b></label><br />
+                <label asp-for="AgentFirstName" class="control-label"><b>Contact First  Name</b></label><br />
                 <input id="FirstName" type='text' name="AgentFirstName" value="" autocomplete="off"
                        class="form-control w-2 p-2 mx-auto d-flex" />
             </div>
 
             <div class="text-center">
-                <label asp-for="Email" class="control-label"><b>Email</b></label><br />
+                <label asp-for="Email" class="control-label"><b>Contact Email</b></label><br />
                 <input id="email" type="email" name="Email" value=""  
                        class="form-control w-2 p-2 mx-auto d-flex" autocomplete="off"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please enter email of RE Agent or Seller" />
@@ -224,7 +224,7 @@
             </div>
 
             <div class="text-center">
-                <label asp-for="OfficePhone" class="control-label"><b>Office Phone</b></label><br />
+                <label asp-for="OfficePhone" class="control-label"><b>Contact Phone #1</b></label><br />
                 <input id="OfficePhone" maxlength="10"   type="number" name="OfficePhone" value="" autocomplete="off"
                         
                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -235,7 +235,7 @@
             </div>
 
             <div class="text-center">
-                <label asp-for="CellPhone" class="control-label"><b>Cell Phone</b></label><br />
+                <label asp-for="CellPhone" class="control-label"><b>Contact Phone #2</b></label><br />
                 <input id="CellPhone" maxlength="10" type="number"                                                                       
                                                                           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -334,6 +334,8 @@
                     // You can also append additional data manually if needed
                     // formData.append('extraData', 'someValue');
 
+                    // "Appears a record exists for this Lot - Please correct Lot Data or Delete the Record in database",
+
                     $.ajax({
                         url:  '@Url.Action("FileUpload1", "Members")', // Replace with your server-side endpoint (e.g., ASP.NET Core controller action)
                         type: 'POST',
@@ -346,11 +348,25 @@
                         },
                         error: function(xhr, status, error) {
                            // Example of accessing specific properties:
-                            if (xhr.status === 404) {
+                            if (xhr.status === 598) {
                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
                                 Swal.fire({
-                                    title: "Information",
-                                    text: "Appears a record exists for this Lot - Please correct Lot Data or Delete the Record in database",
+                                    title: "Error",
+                                    text: "Please insure Lot Number  and Home Image Number are the same - they must be the sale number !! - example: Lot No == 99 and Home Image == 77.jpg - the number 99 does not equal 77 - they must be equal.",
+                                    icon:
+                                    "Error"
+                                });
+                                console.error('An unexpected error occurred.');
+                            }
+                            // Handle error
+
+                            else {
+                            }
+                            if (xhr.status === 599) {
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "Error has occurred because a duplicate record exists with this Lot Number - Please delete Lot Number record  or Edit Record",
                                     icon:
                                     "Error"
                                 });
@@ -358,6 +374,21 @@
                             }
                             // Handle error
                             
+                            else {
+                            }
+
+                             if (xhr.status === 597) {
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "There is a blank field - Please look for a unfilled entry field and correct by adding a valid value or data !",
+                                    icon:
+                                    "Error"
+                                });
+                                console.error('An unexpected error occurred.');
+                            }
+                            // Handle error
+
                             else {
                             }
                         }

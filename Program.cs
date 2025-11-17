@@ -25,7 +25,7 @@ Log.Information("Starting up!");
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHostedService<MyBackgroundService>();
+//builder.Services.AddHostedService<MyBackgroundService>();
 //await using (var scope = host.Services.CreateAsyncScope())
 //{
 //    var db = scope.ServiceProvider.GetRequiredService<MyDbContext>();
@@ -52,13 +52,41 @@ if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
     var path33 = Environment.GetFolderPath(folder);
 }
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
 
-builder.Services.AddDbContext<PlacidDBContext>(options =>
-    options.UseSqlite(connectionString));
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+{
+
+	  var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlite(connectionString));
+
+    builder.Services.AddDbContext<PlacidDBContext>(options =>
+        options.UseSqlite(connectionString));
+
+   // var folder1 = Environment.CurrentDirectory;
+
+   // var connectionStringl = "./info.db";
+
+    //builder.Configuration.GetConnectionString("DefaultConnectionLinux") ?? throw new InvalidOperationException("Connection string //'DefaultConnectionLLinux' not found.");
+
+
+    //builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    //    options.UseSqlite(connectionStringl));
+
+    //builder.Services.AddDbContext<PlacidDBContext>(options =>
+    //    options.UseSqlite(connectionStringl));
+}
+else
+{
+    // Add services to the container.
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlite(connectionString));
+
+    builder.Services.AddDbContext<PlacidDBContext>(options =>
+        options.UseSqlite(connectionString));
+}
+
 
 builder.Services.AddSerilog((services, lc) => lc
        .ReadFrom.Configuration(builder.Configuration)
@@ -106,7 +134,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.SameSite = SameSiteMode.Strict;
 
 
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
 
     options.LoginPath = "/Identity/Account/Login";
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
