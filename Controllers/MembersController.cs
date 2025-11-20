@@ -5,6 +5,8 @@ using Microsoft.SqlServer.Server;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Processing;
+using System.Diagnostics;
+
 //using System.Drawing;
 //using System.Drawing.Drawing2D;
 //using System.Drawing.Imaging;
@@ -13,6 +15,7 @@ using System.Runtime.InteropServices;
 using W1.Data;
 using W1.Models;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace W1.Controllers
 {
@@ -21,17 +24,20 @@ namespace W1.Controllers
     {
         private readonly PlacidDBContext _context;
         private readonly ApplicationDbContext _appcontext;
-        private readonly IScopedService _scopedService;
+        //private readonly IScopedService _scopedService;
 
 
         private readonly IWebHostEnvironment _appEnvironment;
+        private readonly ILogger<MembersController> _logger;
 
-        public MembersController(ApplicationDbContext appcontext, PlacidDBContext context, IWebHostEnvironment appEnvironment, IScopedService scopedService)
+
+        public MembersController(ILogger<MembersController> logger, ApplicationDbContext appcontext, PlacidDBContext context, IWebHostEnvironment appEnvironment) //, IScopedService scopedService)
         {
             _context = context;
             _appEnvironment = appEnvironment;
-            _scopedService = scopedService;
+            //  _scopedService = scopedService;
             _appcontext = appcontext;
+            _logger = logger;
         }
 
 
@@ -348,6 +354,45 @@ namespace W1.Controllers
             return View(member);
         }
 
+
+        bool ChangeLinuxFilePermissions(string file)
+        {
+
+
+            using (Process proc = new Process())
+            {
+                proc.StartInfo.FileName = "rm ";
+                //  proc.StartInfo.Arguments = $"\{file}\"";
+                proc.StartInfo.UseShellExecute = false;
+                proc.StartInfo.RedirectStandardOutput = true;
+                proc.StartInfo.RedirectStandardError = true;
+                proc.StartInfo.CreateNoWindow = true;
+
+                proc.Start();
+                proc.WaitForExit();
+
+                if (proc.ExitCode == 0)
+                {
+                    _logger.LogInformation("file deleted {Data}", file);
+                    //Console.WriteLine($"Successfully changed permissions for '{filePath}' to '{permissions}'.");
+                    return true;
+                }
+                else
+                {
+                    _logger.LogInformation("file deleted  error {Data}", file);
+
+                    string error = proc.StandardError.ReadToEnd();
+                    // Console.WriteLine($"Error changing permissions for '{filePath}': {error}");
+                    return false;
+                }
+            }
+
+            //return true;
+        }
+
+
+
+
         // POST: Members/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -357,6 +402,9 @@ namespace W1.Controllers
 
             try
             {
+                var path1 = _appEnvironment.WebRootPath;
+                var linuxPath1 = path1 + "//" + member.ImageName;
+                _logger.LogInformation("linux Processing data: {Data}", linuxPath1);
 
                 if (member != null)
                 {
@@ -364,9 +412,28 @@ namespace W1.Controllers
 
                     // Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "Upload"));
                     var imagepath = path + "\\" + member.ImageName;
+                    _logger.LogInformation("Processing data: {Data}", imagepath);
+                    var linuxPath = path + "/" + member.ImageName;
+
                     if (System.IO.File.Exists(imagepath))
                     {
-                        System.IO.File.Delete(imagepath);
+                        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                        {
+
+                            string newPath = imagepath.Replace("\\", "/");
+                            _logger.LogInformation("Processing data linuxPath: {Data}", path);
+                            _logger.LogInformation("Processing data linuxPath: {Data}", linuxPath);
+
+                            // change file attributes on Linux
+                            // ChangeLinuxFilePermissions(linuxPath);
+                            System.IO.File.Delete(linuxPath);
+                        }
+                        else
+                        {
+                            System.IO.File.Delete(imagepath);
+                        }
+
+
                         _context.Members.Remove(member);
                         await _context.SaveChangesAsync();
                         return RedirectToAction(nameof(Index), "Members");
@@ -422,8 +489,8 @@ namespace W1.Controllers
             }
 
             var extension = Path.GetExtension(file.FileName);
-            bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
-            bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpg = System.String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpeg = System.String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
 
             if (areEqualjpg == false)
             {
@@ -445,8 +512,8 @@ namespace W1.Controllers
             }
 
             var extension = Path.GetExtension(file.FileName);
-            bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
-            bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpg = System.String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpeg = System.String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
 
             if (areEqualjpg == false)
             {
@@ -467,8 +534,8 @@ namespace W1.Controllers
             }
 
             var extension = Path.GetExtension(file.FileName);
-            bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
-            bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpg = System.String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpeg = System.String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
 
             if (areEqualjpg == false)
             {
@@ -489,8 +556,8 @@ namespace W1.Controllers
             }
 
             var extension = Path.GetExtension(file.FileName);
-            bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
-            bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpg = System.String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpeg = System.String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
 
             if (areEqualjpg == false)
             {
@@ -511,8 +578,8 @@ namespace W1.Controllers
             }
 
             var extension = Path.GetExtension(file.FileName);
-            bool areEqualjpg = String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
-            bool areEqualjpeg = String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpg = System.String.Equals(extension, ".jpg", StringComparison.OrdinalIgnoreCase);
+            bool areEqualjpeg = System.String.Equals(extension, ".jpeg", StringComparison.OrdinalIgnoreCase);
 
             if (areEqualjpg == false)
             {

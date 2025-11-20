@@ -56,16 +56,16 @@ if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 {
 
-	  var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlite(connectionString));
 
     builder.Services.AddDbContext<PlacidDBContext>(options =>
         options.UseSqlite(connectionString));
 
-   // var folder1 = Environment.CurrentDirectory;
+    // var folder1 = Environment.CurrentDirectory;
 
-   // var connectionStringl = "./info.db";
+    // var connectionStringl = "./info.db";
 
     //builder.Configuration.GetConnectionString("DefaultConnectionLinux") ?? throw new InvalidOperationException("Connection string //'DefaultConnectionLLinux' not found.");
 
@@ -87,7 +87,7 @@ else
         options.UseSqlite(connectionString));
 }
 
-
+/*
 builder.Services.AddSerilog((services, lc) => lc
        .ReadFrom.Configuration(builder.Configuration)
        .ReadFrom.Services(services)
@@ -96,6 +96,8 @@ builder.Services.AddSerilog((services, lc) => lc
            // Include trace and span ids when present.
            "[{@t:HH:mm:ss} {@l:u3}{#if @tr is not null} ({substring(@tr,0,4)}:{substring(@sp,0,4)}){#end}] {@m}\n{@x}",
            theme: TemplateTheme.Code)));
+*/
+
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -143,7 +145,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 
 
-builder.Services.AddScoped<IScopedService, ScopedService>();
+//builder.Services.AddScoped<IScopedService, ScopedService>();
 
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -191,7 +193,7 @@ else
 }
 
 app.UseRequestLocalization();
-app.UseSerilogRequestLogging();
+//app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

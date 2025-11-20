@@ -139,16 +139,16 @@ namespace W1.Controllers
 
         private readonly PlacidDBContext _context;
 
-        private readonly IDiagnosticContext _diagnosticContext;
+
         private string _path;
 
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment appEnvironment,
-            PlacidDBContext context, IDiagnosticContext diagnosticContext)
+            PlacidDBContext context)
         {
             _logger = logger;
             _appEnvironment = appEnvironment;
             _context = context;
-            _diagnosticContext = diagnosticContext ?? throw new ArgumentNullException(nameof(diagnosticContext));
+            // _diagnosticContext = diagnosticContext ?? throw new ArgumentNullException(nameof(diagnosticContext));
         }
 
 
@@ -158,7 +158,7 @@ namespace W1.Controllers
             _path = path;
 
             bool lp = System.IO.File.Exists(path);
-            _diagnosticContext.Set("IndexCallCount", Interlocked.Increment(ref _callCount));
+            //_diagnosticContext.Set("IndexCallCount", Interlocked.Increment(ref _callCount));
             return lp;
         }
 
@@ -167,7 +167,7 @@ namespace W1.Controllers
         {
             var user = HttpContext.User.Identity.IsAuthenticated;
             _logger.LogInformation("home page");
-            _diagnosticContext.Set("IndexCallCount", Interlocked.Increment(ref _callCount));
+            // _diagnosticContext.Set("IndexCallCount", Interlocked.Increment(ref _callCount));
             return View();
         }
         [OutputCache(Duration = 1440)]
