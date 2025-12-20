@@ -101,19 +101,11 @@ namespace W1.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    /*
-                    String OfficePhone1 = OfficePhone.Insert(3, "-");
-                    string OfficeFinal = OfficePhone1.Insert(7, "-");
-
-                    String CellPhone1 = CellPhone.Insert(3, "-");
-                    string CellPhoneFinal = CellPhone1.Insert(7, "-");
-                    */
-
 
                     string currency = Price;
 
                     // try a no await 
-                    //   await UploadFile(file, LotNo);
+                    await UploadFile(file, LotNo);
                     Member member0 = new Member();
                     member0.TypeSell = TypeSell;
                     member0.LotNo = LotNo;
@@ -126,8 +118,8 @@ namespace W1.Controllers
                     member0.ImageName = file.FileName;
                     member0.AgentUrl = AgentUrl;
 
-                    //      _context.Add(member0);
-                    //      await _context.SaveChangesAsync();
+                    _context.Add(member0);
+                    await _context.SaveChangesAsync();
                     // return RedirectToAction(nameof(Index));
                     return StatusCode(200, "Process completed.");
                 }

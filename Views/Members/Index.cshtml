@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    var stype = "none";
 }
 
 
@@ -92,10 +93,25 @@
     </thead>
     <tbody>
         @foreach (var item in Model) {
-             
+
             <tr>
                 <td>
+                    @{
+                        string jj = item.TypeSell.Trim().ToLower();
+                        
+                        if (jj == "fsbo")
+                        {
+                            <button class="btn btn-success" onclick="activate('jj')">fsbo</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger" onclick="deactivate(jj)">agent</button>
+                        }
+                    }
+                    @*
+
                     @Html.DisplayFor(modelItem => item.TypeSell)
+                    *@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LotNo)
@@ -154,33 +170,60 @@
  
 <div class="container-fluid" style="background-color: aqua;">
     <div class="row">
-        <div class="col">
+        <div class="col-3">
             <br />
             <br />
             <br />
             <br />
             <br />
             <br />
-            <button class="btn btn-primary" id="button1" onclick="HelpTypeSellInfo()">Slider Image Replacement Help</button>
+            @*
+            <button class="btn btn-primary" align="center" id="button1" onclick="HelpTypeSellInfo()">Slider Image Replacement Help</button>
+            *@
+            <br />
+            <br />
+            <br />
             <br />
         </div>
         <div class="col-6">
+            <hr />
             <form align="center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "home")" method="post">
                 <div class="col text-center">
+                    <br />
+                    <button class="btn btn-primary" type="submit" align="center" style="font-size: 26px;">
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        <span role="status">LogOut...</span>
+                    </button>
+                    @*
                     <button type="submit" align="center" style="font-size: 26px;" class="btn btn-primary">Logout</button>
+                    *@
                 </div>
                 @*
              <button type="submit" align="center" style="font-size: 46px;" class="nav-link btn btn-link text-dark">Logout</button>
-                    *@
+                    
+
+                
+                <br /><hr />
+                <button class="btn btn-primary" align="center" id="button1" onclick="HelpTypeSellInfo()">Slider Image Replacement Help</button>
+                <br />  *@
+                <br />
             </form>
+             
+            <hr  />
+            <div align="center">
+               
+                <button class="btn btn-primary" align="center" id="button1" onclick="HelpTypeSellInfo()">Slider Image Replacement Help</button>
+             </div>
+                
             <br />
-            <br />
-            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+             
+            <div id="formId" class="center bg-opacity-10 border border-4 border-success mb-2">
+                @*col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2*@
                 <img src="~/Images/Slideshow/1_b.jpg" width="100%" height="100">
-                <form id="ajaxSend1" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload10" name="form">
+                <form id="ajaxSend1" class="center" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload10" name="form">
  
                     <hr />
-                    <div class="text-center">
+                    <div class=" center text-center">
                         <h1 id="blink" align="center" style="color: #be2d2d;">Image #1 (just jpg)</h1>
                         <input id="fileclick1" value="" title="Choose Image file #1" type="file" accept="image/jpeg, image/jpg" 
                                name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
@@ -198,7 +241,7 @@
             <br />
             <br />
             
-            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+            <div id="formId" class="center bg-opacity-10 border border-4 border-success mb-2">
                 <img src="~/Images/Slideshow/6_b.jpg" width="100%" height="100">
                 <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload20" name="form">
 
@@ -220,7 +263,7 @@
             <br />
             <br />
 
-            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+            <div id="formId" class="center bg-opacity-10 border border-4 border-success mb-2>
                 <img src="~/Images/Slideshow/3_b.jpg" width="100%" height="100">
                 <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload30" name="form">
 
@@ -242,7 +285,7 @@
 
             <br />
             <br />
-            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+            <div id="formId" class="center bg-opacity-10 border border-4 border-success mb-2>
                 <img src="~/Images/Slideshow/4_b.jpg" width="100%" height="100">
                 <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload40" name="form">
 
@@ -265,7 +308,7 @@
 
             <br />
             <br />
-            <div id="formId" class="col-md-8 w-480 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
+            <div id="formId" class="center bg-opacity-10 border border-4 border-success mb-2"">
                 <img src="~/Images/Slideshow/8_b.jpg" width="100%" height="100">
                 <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload50" name="form">
 
@@ -285,7 +328,7 @@
             </div>
 
         </div>
-        <div class="col">
+        <div class="col-3">
              
         </div>
     </div>
@@ -312,15 +355,16 @@
                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
                             Swal.fire({
                                 title: "Information",
-                                html: '1.  Take Picture and use horizontal view <br /> \
-                                         2.   Send Image to your local email <br> \
-                                         3.   Download the image to your local machine <br/> \
-                                         4.   Choose the image with the Choose File dialog (must be a jpeg/jpg) <br/> \
-                                         5.   Click the Submit button in the box <br/> \
-                                         6.   The software will display the NEW image in the image box <br/> \
-                                         7.   If image looks acceptable then press the CTRL-F5 keys at the same time <br/> \
-                                         8.   The CTRL-F5 will force a reload of the image on the server <br/> \
-                                         9.   (Some browsers have a timeout to automatically reload a image)'
+                                html:  '1.  Use a image resized to 700 x 200 <br /> \
+                                          2.  Take Picture and use horizontal view <br /> \
+                                          3.   Send Image to your local email <br> \
+                                          4.   Download the image to your local machine <br/> \
+                                          5.   Choose the image with the Choose File dialog (must be a jpeg/jpg) <br/> \
+                                          6.   Click the Submit button in the box <br/> \
+                                          7.   The software will display the NEW image in the image box <br/> \
+                                          8.   If image looks acceptable then press the CTRL-F5 keys at the same time <br/> \
+                                          9.   The CTRL-F5 will force a reload of the image on the server <br/> \
+                                        10.   (Some browsers have a timeout to automatically reload a image)'
                                     ,
                                 icon:
                                 "info"
@@ -362,9 +406,18 @@
         });
 
 
-        function activate()
+        function activate(string type)
         {
-            alert('activate');
+             
+            alert(type);
+             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "There is a blank field - Please look for a unfilled entry field and correct by adding a valid value or data !",
+                                    icon:
+                                    "Error"
+                                });
+            /*
             $.ajax({
               url: "/members/setforsale", // The URL to send the request to
               method: "POST", // HTTP method (e.g., GET, POST, PUT, DELETE)
@@ -383,6 +436,7 @@
                 console.log("Request complete.");
               }
             });
+            */
         }
 
 
