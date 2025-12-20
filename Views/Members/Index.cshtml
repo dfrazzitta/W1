@@ -49,10 +49,20 @@
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
+                @{
+                    
+                       
+                }
+                <small class="paragraph1">Name #1</small>
+                @*
                 @Html.DisplayNameFor(model => model.AgentLastName)
+                *@
             </th>
             <th>
+                <small class="paragraph1">Name #2</small>
+                @*
                 @Html.DisplayNameFor(model => model.AgentFirstName)
+                *@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -61,10 +71,13 @@
                 @*
                 @Html.DisplayNameFor(model => model.OfficePhone)
                 *@
-                <small class="paragraph1">Seller Phone</small>
+                <small class="paragraph1">Primary Phone</small>
             </th>
             <th>
+                <small class="paragraph1">Secondary Phone</small>
+                @*
                 @Html.DisplayNameFor( model => model.CellPhone)
+                *@
             </th>
             @*
             <th>
@@ -153,8 +166,12 @@
         </div>
         <div class="col-6">
             <form align="center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "home")" method="post">
-
-                <button type="submit" align="center" style="font-size: 46px;" class="nav-link btn btn-link text-dark">Logout - Logout</button>
+                <div class="col text-center">
+                    <button type="submit" align="center" style="font-size: 26px;" class="btn btn-primary">Logout</button>
+                </div>
+                @*
+             <button type="submit" align="center" style="font-size: 46px;" class="nav-link btn btn-link text-dark">Logout</button>
+                    *@
             </form>
             <br />
             <br />

@@ -113,7 +113,7 @@ namespace W1.Controllers
                     string currency = Price;
 
                     // try a no await 
-                    await UploadFile(file, LotNo);
+                    //   await UploadFile(file, LotNo);
                     Member member0 = new Member();
                     member0.TypeSell = TypeSell;
                     member0.LotNo = LotNo;
@@ -126,9 +126,10 @@ namespace W1.Controllers
                     member0.ImageName = file.FileName;
                     member0.AgentUrl = AgentUrl;
 
-                    _context.Add(member0);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    //      _context.Add(member0);
+                    //      await _context.SaveChangesAsync();
+                    // return RedirectToAction(nameof(Index));
+                    return StatusCode(200, "Process completed.");
                 }
                 else
                 {
@@ -165,8 +166,8 @@ namespace W1.Controllers
                     string filename = lotNo + Path.GetExtension(file.FileName);
                     path = _appEnvironment.WebRootPath;
                     // Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "Upload"));
-                    var tt = path + "\\" + filename;
-                    using (var filestream = new FileStream(path + "\\" + filename, FileMode.Create))  //        
+                    var tt = path + "/" + filename;
+                    using (var filestream = new FileStream(path + "/" + filename, FileMode.Create))  //        
                     {
                         await file.CopyToAsync(filestream);
                     }

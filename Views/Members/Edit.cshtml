@@ -88,7 +88,7 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OfficePhone" class="control-label"></label>
+                <label asp-for="OfficePhone" class="control-label">Primary Phone</label>
                 <input id="officephone"   maxlength="10" type="number" name="OfficePhone" 
                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -101,7 +101,7 @@
                 <span asp-validation-for="OfficePhone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CellPhone" class="control-label"></label>
+                <label asp-for="CellPhone" class="control-label">Secondary Phone</label>
                 <input asp-for="CellPhone"  
                        maxlength="10" type="number" name="CellPhone"  
                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"

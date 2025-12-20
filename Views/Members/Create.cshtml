@@ -60,6 +60,15 @@
 
     <div id="formId" class="col-md-8 w-25 p-3 bg-info bg-opacity-10 border border-4 border-success mb-2">
          @* title heading  center this *@
+        
+         
+         <div id="spin" class="spinner-wrapper">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Processing...</span>
+            </div>
+        </div>
+
+
         <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload1" name="form">
 
             <div class="form-group text-center">
@@ -264,9 +273,9 @@
             </div>
 
             <hr />
- 
+             
             <input type="submit" value="Submit" style="text-align: center;">
- 
+                   
         </form>
      @*   
         <button class="btn btn-primary" id="button1" style="text-align: center" onclick="testsubmit()">Create Sale Record</button>
@@ -326,11 +335,14 @@
             
 
             $(document).ready(function() {
+                 $("#spin").hide();
                 $('#ajaxSend').on('submit', function(e) {
                     e.preventDefault(); // Prevent default form submission
-                    //debugger;
+                    console.log("be4 debugger");
+                   // debugger;
                     var formData = new FormData(this); // Create FormData object from the form
-
+                   // debugger;
+                     console.log("aft debugger form data");
                     // You can also append additional data manually if needed
                     // formData.append('extraData', 'someValue');
 
@@ -342,10 +354,21 @@
                         data: formData,
                         processData: false, // Important: Don't process the data, let FormData handle it
                         contentType: false, // Important: Don't set content type, FormData handles it
+                        beforeSend: function(jqXHR, settings) {
+                             console.log('beforeSend:');
+                             $("#spin").show(); // show the spinner
+                        },
                         success: function(response) {
                             console.log('Upload successful:', response);
-                           window.location.href = '@Url.Action("Index", "Members")'; 
+                             $("#spin").hide(); // Hide the spinner
+                             window.location.href = '@Url.Action("Index", "Members")'; 
                         },
+                        complete: function() {
+                                // Hide the loading indicator when complete (regardless of success/error)
+                                console.log('complete:');
+                               // $('#loading-spinner').hide();
+                        },
+     
                         error: function(xhr, status, error) {
                            // Example of accessing specific properties:
                             if (xhr.status === 598) {
