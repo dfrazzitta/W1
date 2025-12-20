@@ -101,11 +101,11 @@
                         
                         if (jj == "fsbo")
                         {
-                            <button class="btn btn-success" onclick="activate('jj')">fsbo</button>
+                            <button type='button' class="btn btn-success" disabled">fsbo</button>
                         }
                         else
                         {
-                            <button class="btn btn-danger" onclick="deactivate(jj)">agent</button>
+                            <button class="btn btn-danger" disabled>agent</button>
                         }
                     }
                     @*
@@ -121,7 +121,21 @@
                     
                 </td>
                 <td>
+
+                    @{
+                        string jjj = item.TypeSell.Trim().ToLower();
+                        string kkz = item.AgentFirstName.Trim().ToLower();
+                        if (jjj == "agent")
+                        {
+                            <button type='button' class="btn btn-success" disabled">@Html.DisplayFor(modelItem => item.AgentLastName)</button>
+                        }
+                        else
+                            @Html.DisplayFor(modelItem => item.AgentLastName)
+                       
+                    }
+                    @*
                     @Html.DisplayFor(modelItem => item.AgentLastName)
+                    *@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AgentFirstName)
@@ -406,10 +420,10 @@
         });
 
 
-        function activate(string type)
+        function activate( type)
         {
-             
             alert(type);
+            /*
              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
                                 Swal.fire({
                                     title: "Error",
@@ -417,6 +431,7 @@
                                     icon:
                                     "Error"
                                 });
+                                */
             /*
             $.ajax({
               url: "/members/setforsale", // The URL to send the request to
