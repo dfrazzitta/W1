@@ -37,9 +37,9 @@
 
 
 <div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <img class="imgcircle" src="~/Images/red.jpg" alt="palm" width="10" height="10">
     <p align="center">Create Lot For Sale</p>
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <img class="imgcircle" src="~/Images/red.jpg" alt="palm" width="10" height="10">
 </div>
  <br />
 <div class="row d-flex justify-content-center">
@@ -213,15 +213,17 @@
             </div>
 
             <div class="text-center">
-                <label asp-for="AgentLastName" class="control-label"><b>Contact Last Name</b></label><br />
+                <label asp-for="AgentLastName" class="control-label"><b>Name #1 (Fsbo(LN) - Agent(Co Name) </b></label><br />
                 <input id="LastName" type='text' name="AgentLastName" value="" autocomplete="off"
-                       class="form-control w-2 p-2 mx-auto d-flex" />
+                       class="form-control w-2 p-2 mx-auto d-flex"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="If Fsbo (enter lastname_ if Agent (enter company name - ie Century21" "  />
             </div>
 
             <div class="text-center">
-                <label asp-for="AgentFirstName" class="control-label"><b>Contact First  Name</b></label><br />
+                <label asp-for="AgentFirstName" class="control-label"><b>Name #1 (Fsbo(FN) - Agent(Co Name)</b></label><br />
                 <input id="FirstName" type='text' name="AgentFirstName" value="" autocomplete="off"
-                       class="form-control w-2 p-2 mx-auto d-flex" />
+                       class="form-control w-2 p-2 mx-auto d-flex"
+                       data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="If Fsbo (enter lastname_ if Agent (Agent name ie: B Smith" />
             </div>
 
             <div class="text-center">
@@ -296,9 +298,10 @@
         <button class="btn btn-primary" id="button1" onclick="HelpUnitPriceInfo()">Help Unit Price</button>
         <br />
         <br />
+        @*
         <button class="btn btn-primary" id="button1" onclick="HelpAgentURLInfo()">Help Agent URL</button>
         <br />
-        <br />
+        <br />  *@
         <button class="btn btn-primary" id="button1" onclick="HelpHomeImageInfo()">Help Home Image</button>
 
        
@@ -316,9 +319,9 @@
 <br />
 <hr />
 <div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <img class="imgcircle" src="~/Images/red.jpg" alt="palm" width="10" height="10">
     <p align="center">End Create Lot For Sale</p>
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <img class="imgcircle" src="~/Images/red.jpg" alt="palm" width="10" height="10">
 </div>
 <hr />
 

@@ -25,6 +25,8 @@
 
     <link href="~/csss/site1.css" rel="stylesheet" />
 
+
+
     @*
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.2/jsoneditor.css" rel="stylesheet">
 
@@ -49,6 +51,13 @@
         #jsoneditor {
             width: 500px;
             height: 500px;
+        }
+
+        input:disabled,
+        .form-control:disabled {
+            background-color: #333; /* Dark gray background */
+            color: #fff; /* White text for contrast */
+            border-color: #444; /* Slightly lighter border */
         }
     </style>
 
@@ -352,7 +361,7 @@
 
     <script src="~/jss/validator.min.js"> </script>
 
-    webdocument.ExecuteScript("location.reload();");
+    @*webdocument.ExecuteScript("location.reload();");  *@
     <script>
 
 

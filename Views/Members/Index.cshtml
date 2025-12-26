@@ -24,13 +24,13 @@
 
 <br />
 <div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <img class="imgcircle" src="~/Images/red.jpg" alt="palm" width="10" height="10">
     <p align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-size: 20pt; font-family: Brush Script MT, cursive;">
         Homes Listed
     </p>
     <p align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-size: 20pt; font-family: Brush Script MT, cursive;">
         <h2 id="blink" align="center" style="color: #be2d2d;">Be Responsible - Remember to logout !!!!!!!!!!</h2>
-        <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+        <img class="imgcircle" src="~/Images/red.jpg" alt="palm" width="10" height="10">
 </div>
 
 
@@ -92,13 +92,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
 
             <tr>
                 <td>
                     @{
                         string jj = item.TypeSell.Trim().ToLower();
-                        
+
                         if (jj == "fsbo")
                         {
                             <button type='button' class="btn btn-success" disabled">fsbo</button>
@@ -116,9 +117,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.LotNo)
                 </td>
-                <td >
+                <td>
                     @Html.DisplayFor(modelItem => item.Price)
-                    
+
                 </td>
                 <td>
 
@@ -130,9 +131,9 @@
                             <button type='button' class="btn btn-success" disabled">@Html.DisplayFor(modelItem => item.AgentLastName)</button>
                         }
                         else
-                            @Html.DisplayFor(modelItem => item.AgentLastName)
-                       
-                    }
+                @Html.DisplayFor(modelItem => item.AgentLastName)
+
+                                }
                     @*
                     @Html.DisplayFor(modelItem => item.AgentLastName)
                     *@
@@ -149,34 +150,35 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CellPhone)
                 </td>
-                
+
                 <td>
                     @*
                     @Html.DisplayFor(modelItem => item.ImageName)
                     *@
-                        <a href=@Html.DisplayFor(modelItem => item.ImageName)>Image</a>
+                    <a href=@Html.DisplayFor(modelItem => item.ImageName)>Image</a>
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                       
+
                     <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
-        </tr>
-}
+            </tr>
+        }
     </tbody>
+
 </table>
 <br />
  
  
 <div class="row" style="background-color:  lightgoldenrodyellow; opacity: .9">
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+    <img class="imgcircle" src="~/Images/red.jpg" alt="palm" width="10" height="10">
     <p align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-size: 20pt; font-family: Brush Script MT, cursive;">
         End Homes Listed
     </p>
     <p align="center" class="rounded-5" style="margin:1px 1px; padding:0px 0px; font-size: 20pt; font-family: Brush Script MT, cursive;">
         <h2 id="blink" align="center" style="color: #be2d2d;">Be Responsible - Remember to logout !!!!!!!!!!</h2>
-    <img class="imgcircle" src="~/red.jpg" alt="palm" width="10" height="10">
+        <img class="imgcircle" src="~/Images/red.jpg" alt="palm" width="10" height="10">
 </div>
 
  
@@ -208,21 +210,25 @@
                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                         <span role="status">LogOut...</span>
                     </button>
-                    @*
-                    <button type="submit" align="center" style="font-size: 26px;" class="btn btn-primary">Logout</button>
-                    *@
+  
                 </div>
-                @*
-             <button type="submit" align="center" style="font-size: 46px;" class="nav-link btn btn-link text-dark">Logout</button>
-                    
-
-                
-                <br /><hr />
-                <button class="btn btn-primary" align="center" id="button1" onclick="HelpTypeSellInfo()">Slider Image Replacement Help</button>
-                <br />  *@
+              
                 <br />
             </form>
-             
+            @*
+            <form align="center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "home")" method="post">
+                <div class="col text-center">
+                    <br />
+                     
+
+                    <button class="btn btn-primary" type="submit" align="center" style="font-size: 26px;">
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        <span role="status">Cleanup...</span>
+                    </button>
+ 
+                <br />
+            </form>
+             *@
             <hr  />
             <div align="center">
                
@@ -238,7 +244,7 @@
  
                     <hr />
                     <div class=" center text-center">
-                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #1 (just jpg)</h1>
+                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #1(just jpg/jpeg)</h1>
                         <input id="fileclick1" value="" title="Choose Image file #1" type="file" accept="image/jpeg, image/jpg" 
                                name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
                                data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Image" />
@@ -261,7 +267,7 @@
 
                     <hr />
                     <div class="text-center">
-                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #2 (just jpg)</h1>
+                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #2 (just jpg/jpeg)</h1>
                         
                         <input id="fileclick" value="" title="Choose Image file #2" type="file" accept="image/jpeg, image/jpg"
                                name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
@@ -277,13 +283,13 @@
             <br />
             <br />
 
-            <div id="formId" class="center bg-opacity-10 border border-4 border-success mb-2>
+            <div id="formId" class="center bg-opacity-10 border border-4 border-success mb-2">
                 <img src="~/Images/Slideshow/3_b.jpg" width="100%" height="100">
                 <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload30" name="form">
 
                     <hr />
                     <div class="text-center">
-                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #3 (just jpg)</h1>
+                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #3 (just jpg/jpeg)</h1>
                         
                         <input id="fileclick" value="" title="Choose Image file #3" type="file" accept="image/jpeg, image/jpg"
                                name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
@@ -299,14 +305,14 @@
 
             <br />
             <br />
-            <div id="formId" class="center bg-opacity-10 border border-4 border-success mb-2>
+            <div id="formId" class="center bg-opacity-10 border border-4 border-success mb-2">
                 <img src="~/Images/Slideshow/4_b.jpg" width="100%" height="100">
                 <form id="ajaxSend" method="post" enctype="multipart/form-data" asp-controller="Members" asp-action="FileUpload40" name="form">
 
                     <hr />
                     <div class="text-center">
                         
-                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #4 (just jpg)</h1>
+                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #4 (just jpg/jpeg)</h1>
                         
                         <input id="fileclick" value="" title="Choose Image file #4" type="file" accept="image/jpeg, image/jpg"
                                name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
@@ -328,7 +334,7 @@
 
                     <hr />
                     <div class="text-center">
-                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #5 (just jpg)</h1>
+                        <h1 id="blink" align="center" style="color: #be2d2d;">Image #5 (just jpg/jpeg)</h1>
                         <input id="fileclick" value="" title="Choose Image file #5" type="file" accept="image/jpeg, image/jpg"
                                name="file" class="form-control text-center w-2 p-2 mx-auto d-flex"
                                data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Image" />
@@ -366,19 +372,18 @@
                 {
                         const doubleCheckIcon =
 
-                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
                             Swal.fire({
                                 title: "Information",
-                                html:  '1.  Use a image resized to 700 x 200 <br /> \
-                                          2.  Take Picture and use horizontal view <br /> \
+                                html:  '1. Take Picture and use horizontal view <br /> \
+                            <strong>2.  Use the image resized to 700w x 200h </strong> <br /> \
                                           3.   Send Image to your local email <br> \
                                           4.   Download the image to your local machine <br/> \
                                           5.   Choose the image with the Choose File dialog (must be a jpeg/jpg) <br/> \
                                           6.   Click the Submit button in the box <br/> \
-                                          7.   The software will display the NEW image in the image box <br/> \
-                                          8.   If image looks acceptable then press the CTRL-F5 keys at the same time <br/> \
-                                          9.   The CTRL-F5 will force a reload of the image on the server <br/> \
-                                        10.   (Some browsers have a timeout to automatically reload a image)'
+                                          7.   The software will display the NEW image in the image box - if not press CTRL-F5 at sametime<br/> \
+                                          8.   The CTRL-F5 will force a reload of the image from the server <br/> \
+                                          9.   <strong>(Some browsers have a timeout to automatically reload a image)</strong>'
                                     ,
                                 icon:
                                 "info"
@@ -386,6 +391,9 @@
 
                 }
          $(document).ready(function() {
+
+            // setupCellClicks();
+
 
                var blink = document.getElementById('blink');
                  setInterval(function() {
@@ -418,6 +426,26 @@
             $("#spin").hide(); // Hide the spinner
             console.log("Page and all resources are loaded!");
         });
+
+        function handleCellClick(clickedCell) {
+          alert("Cell index is: " + this.cellIndex);
+          
+           
+          // 'clickedCell' refers to the specific <td> element that was clicked
+        }
+
+
+        function setupCellClicks() {
+          const cells = document.querySelectorAll('td');
+
+          cells.forEach(cell => {
+            cell.addEventListener('click', function() {
+              // 'this' refers to the specific cell element within the loop's context
+              alert('You clicked on cell: ' + this.innerHTML);
+            });
+          });
+        }
+
 
 
         function activate( type)
