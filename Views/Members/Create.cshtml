@@ -87,9 +87,11 @@
                 
             </div>
 
+
+            
             <div class="text-center">
                 <label asp-for="LotNo" class="control-label"><b>Lot Number</b></label>
-                <input id="lotnumber" asp-for="LotNo" list="exampleList" value="" name="LotNo" type="number" min="1" max="98" readonly
+                <input id="lotnumber" asp-for="LotNo" list="exampleList" value="" name="LotNo"     
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Lot Number from dropdown"
                        data-html="true" maxlength="2" size="4"
                        class="form-control w-2 p-2 mx-auto d-flex  " />
@@ -335,7 +337,7 @@
                   return char >= '0' && char <= '9';
                 }
 
-            
+                    
 
             $(document).ready(function() {
                  $("#spin").hide();
@@ -375,6 +377,7 @@
                         error: function(xhr, status, error) {
                            // Example of accessing specific properties:
                             if (xhr.status === 598) {
+                                 $("#spin").hide(); // Hide the spinner
                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
                                 Swal.fire({
                                     title: "Error",
@@ -382,6 +385,7 @@
                                     icon:
                                     "Error"
                                 });
+                                
                                 console.error('An unexpected error occurred.');
                             }
                             // Handle error
@@ -389,10 +393,11 @@
                             else {
                             }
                             if (xhr.status === 599) {
+                                  $("#spin").hide(); // Hide the spinner
                                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
                                 Swal.fire({
                                     title: "Error",
-                                    text: "Error has occurred because a duplicate record exists with this Lot Number - Please delete Lot Number record  or Edit Record",
+                                    text: "A duplicate Lot Number has been detected- Please delete Lot Number record",
                                     icon:
                                     "Error"
                                 });
@@ -420,6 +425,47 @@
                         }
                     });
                 });
+
+
+                 function setFocusToInput() {
+                  // Get the input element by its ID
+                  const inputElement = document.getElementById("lotnumber");
+
+                  // Call the focus() method on the element
+                  if (inputElement) {
+                    inputElement.focus();
+                  }
+                }
+
+                 const inputElement = document.getElementById("lotnumber");
+
+                    // Define the function to run when focus is lost
+                    function myFunction() {
+                      console.log("Input field lost focus!");
+                      // You can add validation logic or other actions here
+                      var num = inputElement.value.trim();
+                      if ( (num  > 0 && num <= 98) || num === "1A") {
+                           //alert('is valid');
+                            
+                      }
+                      else {
+                              inputElement.value = "";
+                              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32"><path d="M342.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 178.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l160-160zm96 128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 402.7 54.6 297.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l256-256z" fill="currentColor" /></svg>'
+                                Swal.fire({
+                                  title: "Information",
+                                  html: 'Invalid Entry  - Please enter a valid value between 1 and 98 or 1A (1a is not valid)'
+                                        ,
+                                  icon:
+                                  "info"
+                                });
+
+                      }
+                          
+                      
+                    }
+
+                    // Add the event listener
+                    inputElement.addEventListener("blur", myFunction);
             });
 
 

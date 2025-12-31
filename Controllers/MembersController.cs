@@ -12,6 +12,7 @@ using System.Diagnostics;
 //using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using W1.Data;
 using W1.Models;
 using static System.Net.Mime.MediaTypeNames;
@@ -82,6 +83,16 @@ namespace W1.Controllers
                 AgentUrl = "noval";
             }
             #endregion
+
+            var allmembers = await _context.Members.ToListAsync();
+
+            foreach (var m in allmembers)
+            {
+                if (string.Compare(m.LotNo, LotNo) == 0)
+                {
+                    return StatusCode(599, "some text, json, etc.");
+                }
+            }
 
             // return StatusCode(404, "some text, json, etc.");
             bool areEqual = string.Equals(Path.GetFileNameWithoutExtension(file.FileName), LotNo.ToString(), StringComparison.OrdinalIgnoreCase);
