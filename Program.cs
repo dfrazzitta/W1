@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -188,13 +189,18 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
+
+
 app.UseRequestLocalization();
 //app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
+
+app.UseStatusCodePagesWithRedirects("/StatusCodeError/{0}");
 app.UseStaticFiles();
 
 app.UseRouting();

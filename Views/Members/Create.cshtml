@@ -89,7 +89,7 @@
 
             <div class="text-center">
                 <label asp-for="LotNo" class="control-label"><b>Lot Number</b></label>
-                <input id="lotnumber" asp-for="LotNo" list="exampleList" value="" name="LotNo"
+                <input id="lotnumber" asp-for="LotNo" list="exampleList" value="" name="LotNo" type="number" min="1" max="98" readonly
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Please choose Lot Number from dropdown"
                        data-html="true" maxlength="2" size="4"
                        class="form-control w-2 p-2 mx-auto d-flex  " />
@@ -220,7 +220,7 @@
             </div>
 
             <div class="text-center">
-                <label asp-for="AgentFirstName" class="control-label"><b>Name #1 (Fsbo(FN) - Agent(Co Name)</b></label><br />
+                <label asp-for="AgentFirstName" class="control-label"><b>Name #1 (Fsbo(FN) - Agent Name)</b></label><br />
                 <input id="FirstName" type='text' name="AgentFirstName" value="" autocomplete="off"
                        class="form-control w-2 p-2 mx-auto d-flex"
                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="If Fsbo (enter lastname_ if Agent (Agent name ie: B Smith" />

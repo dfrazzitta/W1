@@ -1,0 +1,97 @@
+﻿<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LotNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cell)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LotNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cell)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+
+                    <!-- As a link -->
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+                  @*  <a href="@Url.Action("Index", "home")" style="color:black;" class="menubar"
+                       data-toggle="tooltip" data-html="true" title="Home Page">Home</a>
+                       *@
+                </div>
+            </nav>
+
+            <!-- As a heading -->
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    @*
+                        <a href="@Url.Action("Location", "home")" style="color:black;" class="menubar"
+                       data-toggle="tooltip" data-html="true" title="Lake Placid Location">Location</a>
+                       *@
+                    <a class="nav-link text-dark " asp-area="Identity" asp-page="/Account/Register"
+                       asp-route-returnUrl="@Url.Action("Index", "Members", new { area = "Views" })">********* Click to Change Usr/Pass *********</a>
+                     
+
+                </div>
+            </nav>
+
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    
+                    // Example of generating a login URL with a return URL
+                    
+                    <a href="@Url.Action("ParkPlan", "home")" style="color:black;" class="menubar"
+                       data-toggle="tooltip" data-html="true" title="Lake Placid Park Plan">ParkPlan</a>
+                </div>
+            </nav>
+
+            <!-- As a heading -->
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+
+                    <a href="@Url.Action("ParkPlan", "home")" style="color:black;" class="menubar"
+                       data-toggle="tooltip" data-html="true" title="Lake Placid Park Plan">ParkPlan</a>
+                </div>
+            </nav>

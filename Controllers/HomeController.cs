@@ -1,13 +1,15 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity;
 using Serilog;
 using System.Diagnostics;
 using System.Text;
+
+using System.Threading.Tasks;
 using W1.Data;
 using W1.Models;
-
-
 /*
  * 
  * 
@@ -149,6 +151,8 @@ namespace W1.Controllers
             _appEnvironment = appEnvironment;
             _context = context;
             // _diagnosticContext = diagnosticContext ?? throw new ArgumentNullException(nameof(diagnosticContext));
+
+
         }
 
 
@@ -166,14 +170,20 @@ namespace W1.Controllers
         public IActionResult Index()
         {
             var user = HttpContext.User.Identity.IsAuthenticated;
-            _logger.LogInformation("home page");
+            if (user)
+                _logger.LogInformation("Index - homepage - User Authenticated");
+
             // _diagnosticContext.Set("IndexCallCount", Interlocked.Increment(ref _callCount));
             return View();
         }
         [OutputCache(Duration = 1440)]
         public IActionResult ParkPlan()
         {
-            _logger.LogInformation("Park Plan");
+
+            var user = HttpContext.User.Identity.IsAuthenticated;
+            if (user)
+                _logger.LogInformation("ParkPlan - User Authenticated");
+
             return View();
         }
 
@@ -181,19 +191,31 @@ namespace W1.Controllers
         [OutputCache(Duration = 1440)]
         public IActionResult Location()
         {
-            _logger.LogInformation("Location");
+            var user = HttpContext.User.Identity.IsAuthenticated;
+            if (user)
+                _logger.LogInformation("Location - User Authenticated");
+
             return View();
         }
 
         public IActionResult Rules()
         {
-            _logger.LogInformation("Rules");
+            var user = HttpContext.User.Identity.IsAuthenticated;
+            if (user)
+            {
+
+                _logger.LogInformation("Rules - User Authenticated");
+            }
+
             return View();
         }
         [OutputCache(Duration = 1440)]
         public IActionResult ResidentOwner()
         {
-            _logger.LogInformation("ResidentOwner");
+            var user = HttpContext.User.Identity.IsAuthenticated;
+            if (user)
+                _logger.LogInformation("ResidentOwner - User Authenticated");
+
             return View();
         }
 
@@ -217,7 +239,10 @@ namespace W1.Controllers
         // public IActionResult Homes()
         public async Task<IActionResult> Homes()
         {
-            _logger.LogInformation("Homes");
+            var user = HttpContext.User.Identity.IsAuthenticated;
+            if (user)
+                _logger.LogInformation("Homes - User Authenticated");
+
             //List<Member> member = _context.Members.ToList();
             List<Member> member = await _context.Members.ToListAsync();
             // <a id=\"abcd0\"  class=\"example-image-link\" href=\"/Images/platmap.jpg\" width='388px' height='339px' data-lightbox=\"example-1\"
@@ -437,11 +462,29 @@ namespace W1.Controllers
             return View();
         }
 
+        /*
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        */
+
+        [Route("/StatusCodeError/{statusCode}")]
+        public IActionResult Error(int statusCode)
+        {
+            if (statusCode == 404)
+            {
+                ViewBag.ErrorMessage = "Sorry, the resource you requested could not be found";
+            }
+            ErrorViewModel ev = new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+
+            };
+            return View(ev);
+        }
+
 
 
 

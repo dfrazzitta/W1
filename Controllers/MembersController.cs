@@ -64,7 +64,7 @@ namespace W1.Controllers
             //public async Task<ActionResult> FileUpload1(IFormFile file, int LotNo, string Price, string AgentLastName, string AgentFirstName, string Email,
             string OfficePhone, string CellPhone, string AgentUrl)
         {
-
+            // check for a empty value on lot and filename extension 
             #region junk
             // return StatusCode(400, "some text, json, etc.");
             //return BadRequest("Validation failed."); // 400 Bad Request
@@ -199,12 +199,16 @@ namespace W1.Controllers
 
             var member = await _context.Members
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (member == null)
+
+            if (member != null)
             {
-                return NotFound();
+                // _context.Members.Remove(member);
+
+                await _context.SaveChangesAsync();
             }
-            //PlacidSingleton.Instance.SetPlacid(false);
-            return View(member);
+            return RedirectToAction(nameof(Index), "Members");
+
+
         }
 
         // GET: Members/Create
@@ -344,6 +348,11 @@ namespace W1.Controllers
                 return NotFound();
             }
 
+
+            // _context.Members.Remove(member);
+            // await _context.SaveChangesAsync();
+            //  return RedirectToAction(nameof(Index), "Members");
+
             return View(member);
         }
 
@@ -383,7 +392,22 @@ namespace W1.Controllers
             //return true;
         }
 
+        /*
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        */
 
+        public IActionResult Error(int statusCode)
+        {
+            if (statusCode == 404)
+            {
+                return View("Error");
+            }
+            return View("Error");
+        }
 
 
         // POST: Members/Delete/5
@@ -419,11 +443,11 @@ namespace W1.Controllers
 
                             // change file attributes on Linux
                             // ChangeLinuxFilePermissions(linuxPath);
-                            System.IO.File.Delete(linuxPath);
+                            // System.IO.File.Delete(linuxPath);
                         }
                         else
                         {
-                            System.IO.File.Delete(imagepath);
+                            // System.IO.File.Delete(imagepath);
                         }
 
 
