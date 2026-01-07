@@ -10,10 +10,14 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\css\site.css" />
+    <Content Remove="wwwroot\info.db" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\css\site.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\info.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
